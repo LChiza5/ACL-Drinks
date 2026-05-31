@@ -1,0 +1,74 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff, UserPlus, Gift } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { registerSchema, type RegisterInput } from "@/validations/auth";
+
+export default function RegisterPage() {
+  const router = useRouter();
+  const [showPass, setShowPass] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
+
+  const onSubmit = async (data: RegisterInput) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/users/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      const result = await res.json();
+      if (!result.success) { toast.error(result.error); return; }
+      toast.success("¡Cuenta creada! ₡1.000 de bienvenida 🎉");
+      await signIn("credentials", { email: data.email, password: data.password, redirect: false });
+      router.push("/");
+      router.refresh();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #1a0a2e 0%, #08060f 70%)" }}>
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link href="/" className="text-3xl font-black gradient-text">🍾 BrandName</Link>
+          <h1 className="text-2xl font-bold text-white mt-4">Crear Cuenta</h1>
+          <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full bg-neon-amber/10 border border-neon-amber/30 text-sm text-neon-amber">
+            <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
+          </div>
+        </div>
+        <div className="glass-card rounded-2xl p-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2"><Label>Nombre completo</Label><Input placeholder="Tu nombre" {...register("name")} />{errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}</div>
+            <div className="space-y-2"><Label>Email</Label><Input type="email" placeholder="tu@email.com" {...register("email")} />{errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}</div>
+            <div className="space-y-2"><Label>Teléfono (opcional)</Label><Input type="tel" placeholder="+506 8888-8888" {...register("phone")} /></div>
+            <div className="space-y-2">
+              <Label>Contraseña</Label>
+              <div className="relative">
+                <Input type={showPass ? "text" : "password"} placeholder="Mín. 8 caracteres" {...register("password")} className="pr-10" />
+                <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors">
+                  {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
+            </div>
+            <div className="space-y-2"><Label>Confirmar contraseña</Label><Input type="password" placeholder="Repite la contraseña" {...register("confirmPassword")} />{errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>}</div>
+            <Button type="submit" className="w-full btn-neon gap-2 font-bold" size="lg" disabled={isLoading}>
+              <UserPlus className="h-4 w-4" />{isLoading ? "Creando cuenta..." : "Crear Cuenta Gratis"}
+            </Button>
+          </form>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground">¿Ya tienes cuenta? <Link href="/login" className="text-neon-purple hover:underline font-medium">Inicia sesión</Link></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,26 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { KitCard } from "./KitCard";
+import type { Kit } from "@/types";
+
+export function KitsPreview({ kits }: { kits: Kit[] }) {
+  if (!kits.length) return null;
+  return (
+    <section className="section-padding">
+      <div className="container-max">
+        <div className="flex items-end justify-between mb-10">
+          <div className="space-y-2">
+            <span className="text-sm font-semibold text-neon-pink uppercase tracking-widest">Todo en uno</span>
+            <h2 className="text-4xl font-black text-white">Kits para la <span className="gradient-text">Fiesta</span> 🎉</h2>
+            <p className="text-muted-foreground">Combos armados para que solo pienses en pasarla bien.</p>
+          </div>
+          <Link href="/kits"><Button variant="outline" className="gap-2 hidden sm:flex">Ver kits <ArrowRight className="h-4 w-4" /></Button></Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {kits.map((kit, i) => <KitCard key={kit.id} kit={kit} index={i} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
