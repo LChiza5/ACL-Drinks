@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -50,7 +50,11 @@ export default function CheckoutPage() {
     finally { setIsLoading(false); }
   };
 
-  if (items.length === 0) { router.push("/products"); return null; }
+  useEffect(() => {
+    if (items.length === 0) router.push("/products");
+  }, [items.length, router]);
+
+  if (items.length === 0) return null;
 
   return (
     <div className="section-padding container-max">
