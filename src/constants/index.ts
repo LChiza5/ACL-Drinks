@@ -1,21 +1,21 @@
-export const SITE_NAME = process.env.NEXT_PUBLIC_APP_NAME || "BrandName";
+export const SITE_NAME = process.env.NEXT_PUBLIC_APP_NAME || "ACL Drinks";
 export const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 export const DELIVERY_ZONE = process.env.NEXT_PUBLIC_DELIVERY_ZONE || "Tilarán, Guanacaste";
 
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+50688888888";
-export const WHATSAPP_MESSAGE = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "Hola! Quiero hacer un pedido 🍾";
-export const INSTAGRAM_URL = process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/brandname";
+export const WHATSAPP_MESSAGE = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "Hola! Quiero hacer un pedido";
+export const INSTAGRAM_URL = process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/acldrinks";
 
 export const DELIVERY_FEE_LOCAL = 0;
 export const DELIVERY_FEE_NATIONAL = 3500;
 export const FREE_DELIVERY_THRESHOLD = 30000;
 export const SINPE_PHONE = process.env.SINPE_PHONE || "+50688888888";
-export const SINPE_NAME = process.env.SINPE_NAME || "BrandName CR";
+export const SINPE_NAME = process.env.SINPE_NAME || "ACL Drinks CR";
 
 export const ORDER_STATUSES = {
   PENDING: { label: "Pendiente", color: "amber", emoji: "⏳" },
   CONFIRMED: { label: "Confirmado", color: "blue", emoji: "✅" },
-  PREPARING: { label: "Preparando", color: "purple", emoji: "🍾" },
+  PREPARING: { label: "Preparando", color: "amber", emoji: "🍾" },
   SHIPPED: { label: "Enviado", color: "cyan", emoji: "🚚" },
   OUT_FOR_DELIVERY: { label: "En camino", color: "orange", emoji: "🛵" },
   DELIVERED: { label: "Entregado", color: "green", emoji: "🎉" },
@@ -41,23 +41,23 @@ export const PROVINCES_CR = [
   "Limón",
 ];
 
-export const NEON_COLORS = {
-  purple: "#a855f7",
-  pink: "#ec4899",
-  blue: "#3b82f6",
-  amber: "#f59e0b",
-  green: "#10b981",
-  red: "#f43f5e",
+export const BRAND_COLORS = {
+  primary: "#A67C52",
+  accent: "#C9984A",
+  background: "#12110F",
+  surface: "#1E1A17",
+  light: "#F5F2EC",
+  muted: "#B8B1A7",
 } as const;
 
 export const ITEMS_PER_PAGE = 12;
 export const MAX_CART_QUANTITY = 20;
 
 export const SEO = {
-  title: `${SITE_NAME} - Licores a Domicilio en Costa Rica`,
+  title: `ACL Drinks - Licores a Domicilio en Costa Rica`,
   description:
-    "Compra licores online en Costa Rica. Entrega rápida en Tilarán y envíos nacionales.",
+    "Compra licores online en Costa Rica. Entrega rápida en Tilarán y envíos nacionales. Whisky, Ron, Vodka, Tequila, Cervezas y Combos Fiesteros.",
   keywords:
-    "licores costa rica, licorería online, guaro delivery, whisky, ron, vodka",
+    "licores costa rica, licorería online, delivery licores, whisky, ron, vodka, tequila, cervezas, combos fiesteros",
   ogImage: `${SITE_URL}/og-image.jpg`,
 } as const;

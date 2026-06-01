@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     default: SEO.title,
-    template: `%s | BrandName`,
+    template: `%s | ACL Drinks`,
   },
   description: SEO.description,
   keywords: SEO.keywords,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: "es_CR",
     title: SEO.title,
     description: SEO.description,
-    siteName: "BrandName",
+    siteName: "ACL Drinks",
   },
   twitter: {
     card: "summary_large_image",

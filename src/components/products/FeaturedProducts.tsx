@@ -11,8 +11,8 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
       <div className="container-max">
         <div className="flex items-end justify-between mb-10">
           <div className="space-y-2">
-            <span className="text-sm font-semibold text-neon-amber uppercase tracking-widest">Lo más pedido</span>
-            <h2 className="text-4xl font-black text-white">Productos <span className="gradient-text">Destacados</span> ⭐</h2>
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#C9984A" }}>Lo más pedido</span>
+            <h2 className="text-4xl font-black" style={{ color: "#F5F2EC" }}>Productos <span className="gradient-text">Destacados</span> ⭐</h2>
           </div>
           <Link href="/products"><Button variant="outline" className="gap-2 hidden sm:flex">Ver todos <ArrowRight className="h-4 w-4" /></Button></Link>
         </div>
