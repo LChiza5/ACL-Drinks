@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
@@ -10,10 +10,18 @@ import { InstagramButton } from "@/components/instagram/InstagramButton";
 import { Providers } from "@/components/layout/Providers";
 import { SEO } from "@/constants";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["300", "400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -48,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${dmSans.variable} ${cormorant.variable} font-sans antialiased`}>
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navbar />
@@ -64,9 +72,9 @@ export default function RootLayout({
             theme="dark"
             toastOptions={{
               style: {
-                background: "rgba(26, 10, 46, 0.95)",
-                border: "1px solid rgba(168, 85, 247, 0.3)",
-                color: "#f8f8f8",
+                background: "rgba(30, 26, 23, 0.97)",
+                border: "1px solid rgba(166, 124, 82, 0.35)",
+                color: "#F5F2EC",
               },
             }}
           />

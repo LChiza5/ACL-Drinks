@@ -3,7 +3,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:300
 export const DELIVERY_ZONE = process.env.NEXT_PUBLIC_DELIVERY_ZONE || "Tilarán, Guanacaste";
 
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+50688888888";
-export const WHATSAPP_MESSAGE = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "Hola! Quiero hacer un pedido";
+export const WHATSAPP_MESSAGE = process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE || "¡Hola! Quiero hacer un pedido";
 export const INSTAGRAM_URL = process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/acldrinks";
 
 export const DELIVERY_FEE_LOCAL = 0;
