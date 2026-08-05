@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { generateOrderNumber, generateTrackingCode } from "@/lib/utils";
 import { DELIVERY_FEE_NATIONAL, FREE_DELIVERY_THRESHOLD } from "@/constants";
+import { sendOrderConfirmation } from "@/lib/email";
 import type { ApiResponse, CartItem } from "@/types";
 
 export async function GET(req: NextRequest) {
@@ -128,6 +129,12 @@ export async function POST(req: NextRequest) {
         prisma.couponUsage.create({ data: { couponId: validCoupon.id, orderId: order.id, userId: session?.user.id ?? null } }),
       ] : []),
     ]);
+
+    // Fire-and-forget confirmation email
+    const emailTo = session?.user?.email || guestEmail;
+    if (emailTo) {
+      sendOrderConfirmation({ to: emailTo, orderNumber: order.orderNumber, total: order.total, items: order.orderItems }).catch(() => {});
+    }
 
     return NextResponse.json<ApiResponse>({ success: true, data: order }, { status: 201 });
   } catch (error) {

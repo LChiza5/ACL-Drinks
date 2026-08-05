@@ -4,7 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Star, Package, MapPin, ChevronRight } from "lucide-react";
+import { Star, MapPin, ChevronRight } from "lucide-react";
+import { ProfileEditForm } from "@/components/profile/ProfileEditForm";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,10 @@ export default async function ProfilePage() {
             <AvatarFallback className="text-2xl">{getInitials(user.name || "U")}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <h1 className="text-2xl font-black text-white">{user.name}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-black text-white">{user.name}</h1>
+              <ProfileEditForm defaultName={user.name ?? ""} defaultPhone={user.phone ?? ""} />
+            </div>
             <p className="text-muted-foreground">{user.email}</p>
             {user.phone && <p className="text-sm text-muted-foreground">{user.phone}</p>}
           </div>
