@@ -1,14 +1,20 @@
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { Users, Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { formatDate, getInitials } from "@/lib/utils";
+import { RoleSelect } from "@/components/dashboard/RoleSelect";
 
 export const metadata: Metadata = { title: "Usuarios - Dashboard" };
 export const dynamic = "force-dynamic";
 
 export default async function DashboardUsersPage() {
+  const session = await getServerSession(authOptions);
+  const isAdmin = session?.user.role === "ADMIN";
+
   const users = await prisma.user.findMany({
     include: { _count: { select: { orders: true } } },
     orderBy: { createdAt: "desc" },
@@ -42,7 +48,9 @@ export default async function DashboardUsersPage() {
                   </td>
                   <td className="p-4 hidden md:table-cell text-muted-foreground">{user.email}</td>
                   <td className="p-4 text-center">
-                    <Badge variant={user.role === "ADMIN" ? "neon" : user.role === "MANAGER" ? "neon-amber" : "outline"} className="text-xs">{user.role}</Badge>
+                    {isAdmin && user.id !== session?.user.id
+                      ? <RoleSelect userId={user.id} current={user.role} />
+                      : <Badge variant={user.role === "ADMIN" ? "neon" : user.role === "MANAGER" ? "neon-amber" : "outline"} className="text-xs">{user.role}</Badge>}
                   </td>
                   <td className="p-4 text-center hidden sm:table-cell font-bold text-white">{user._count.orders}</td>
                   <td className="p-4 text-center hidden lg:table-cell">

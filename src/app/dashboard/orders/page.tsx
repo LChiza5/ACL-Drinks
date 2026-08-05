@@ -60,7 +60,7 @@ export default async function DashboardOrdersPage({ searchParams }: Props) {
                       {order.payment && <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">{order.payment.status === "COMPLETED" ? "✅ Pagado" : "⏳ Pend."}</Badge>}
                     </td>
                     <td className="p-4 text-center">
-                      <Link href={`/orders/${order.id}`}><Button variant="ghost" size="icon" className="h-8 w-8"><Eye className="h-4 w-4" /></Button></Link>
+                      <Link href={`/dashboard/orders/${order.id}`}><Button variant="ghost" size="icon" className="h-8 w-8"><Eye className="h-4 w-4" /></Button></Link>
                     </td>
                   </tr>
                 );
