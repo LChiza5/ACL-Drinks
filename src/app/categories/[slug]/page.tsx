@@ -3,17 +3,19 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 
-interface Props { params: { slug: string } }
+interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const cat = await prisma.category.findUnique({ where: { slug: params.slug } });
+  const { slug } = await params;
+  const cat = await prisma.category.findUnique({ where: { slug } });
   return { title: cat ? `${cat.name} - Licores` : "Categoría" };
 }
 export const revalidate = 60;
 
 export default async function CategoryPage({ params }: Props) {
+  const { slug } = await params;
   const category = await prisma.category.findUnique({
-    where: { slug: params.slug, isActive: true },
+    where: { slug, isActive: true },
     include: { _count: { select: { products: true } } },
   });
   if (!category) notFound();
