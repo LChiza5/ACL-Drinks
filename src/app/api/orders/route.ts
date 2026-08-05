@@ -39,9 +39,9 @@ export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     const body = await req.json();
-    const { items, discount = 0, paymentMethod, deliveryAddress, notes, guestEmail, guestName, guestPhone } = body as {
+    const { items, couponCode, paymentMethod, deliveryAddress, notes, guestEmail, guestName, guestPhone } = body as {
       items: CartItem[];
-      discount?: number;
+      couponCode?: string;
       paymentMethod: string;
       deliveryAddress: Record<string, string>;
       notes?: string;
@@ -56,6 +56,26 @@ export async function POST(req: NextRequest) {
 
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE_NATIONAL;
+
+    // Validate coupon server-side — never trust the client discount
+    let discount = 0;
+    let validCoupon: Awaited<ReturnType<typeof prisma.coupon.findUnique>> | null = null;
+    if (couponCode) {
+      const coupon = await prisma.coupon.findUnique({ where: { code: String(couponCode).toUpperCase() } });
+      const valid = coupon &&
+        coupon.isActive &&
+        !(coupon.expiresAt && coupon.expiresAt < new Date()) &&
+        !(coupon.maxUses && coupon.usedCount >= coupon.maxUses) &&
+        !(coupon.minOrder && subtotal < coupon.minOrder);
+      if (valid && coupon) {
+        validCoupon = coupon;
+        discount =
+          coupon.type === "PERCENTAGE" ? Math.round(subtotal * (coupon.value / 100)) :
+          coupon.type === "FIXED_AMOUNT" ? coupon.value :
+          deliveryFee; // FREE_SHIPPING: discount equals delivery fee
+      }
+    }
+
     const total = subtotal - discount + deliveryFee;
 
     const order = await prisma.order.create({
@@ -93,6 +113,21 @@ export async function POST(req: NextRequest) {
       },
       include: { orderItems: true, payment: true, shipment: true },
     });
+
+    // Decrement stock + register coupon usage (fire-and-forget style, non-blocking)
+    const productItems = items.filter((i) => i.type === "product");
+    await Promise.all([
+      ...productItems.map((item) =>
+        prisma.inventory.updateMany({
+          where: { productId: item.id, stock: { gte: item.quantity } },
+          data: { stock: { decrement: item.quantity }, sold: { increment: item.quantity } },
+        })
+      ),
+      ...(validCoupon ? [
+        prisma.coupon.update({ where: { id: validCoupon.id }, data: { usedCount: { increment: 1 } } }),
+        prisma.couponUsage.create({ data: { couponId: validCoupon.id, orderId: order.id, userId: session?.user.id ?? null } }),
+      ] : []),
+    ]);
 
     return NextResponse.json<ApiResponse>({ success: true, data: order }, { status: 201 });
   } catch (error) {

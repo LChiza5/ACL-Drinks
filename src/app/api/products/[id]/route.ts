@@ -26,7 +26,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       return NextResponse.json<ApiResponse>({ success: false, error: "No autorizado" }, { status: 401 });
     }
     const body = await req.json();
-    const product = await prisma.product.update({ where: { id }, data: body, include: { category: true, inventory: true } });
+    const { stock: _, ...updateData } = body; // stock lives in Inventory, not Product
+    const product = await prisma.product.update({ where: { id }, data: updateData, include: { category: true, inventory: true } });
     return NextResponse.json<ApiResponse<Product>>({ success: true, data: product as unknown as Product });
   } catch {
     return NextResponse.json<ApiResponse>({ success: false, error: "Error al actualizar producto" }, { status: 500 });

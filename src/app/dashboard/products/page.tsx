@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Plus, Edit, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +23,7 @@ export default async function DashboardProductsPage() {
           <h1 className="text-2xl font-black text-white flex items-center gap-2"><Package className="h-6 w-6 text-neon-purple" />Productos</h1>
           <p className="text-muted-foreground text-sm mt-1">{products.length} productos</p>
         </div>
-        <Button className="btn-neon gap-2"><Plus className="h-4 w-4" />Nuevo Producto</Button>
+        <Button asChild className="btn-neon gap-2"><Link href="/dashboard/products/new"><Plus className="h-4 w-4" />Nuevo Producto</Link></Button>
       </div>
 
       <div className="glass-card rounded-2xl overflow-hidden">
@@ -66,7 +67,7 @@ export default async function DashboardProductsPage() {
                       <Badge variant={product.isActive ? "neon-green" : "destructive"} className="text-xs">{product.isActive ? "Activo" : "Inactivo"}</Badge>
                     </td>
                     <td className="p-4 text-center">
-                      <Button variant="ghost" size="icon" className="h-8 w-8"><Edit className="h-4 w-4" /></Button>
+                      <Button asChild variant="ghost" size="icon" className="h-8 w-8"><Link href={`/dashboard/products/${product.id}/edit`}><Edit className="h-4 w-4" /></Link></Button>
                     </td>
                   </tr>
                 );

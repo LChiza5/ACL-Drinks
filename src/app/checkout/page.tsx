@@ -20,7 +20,7 @@ import { checkoutSchema, type CheckoutInput } from "@/validations/order";
 export default function CheckoutPage() {
   const router = useRouter();
   const { data: session } = useSession();
-  const { items, discount, clearCart } = useCartStore();
+  const { items, discount, couponCode, clearCart } = useCartStore();
   const { subtotal, total } = useCartTotals();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("SINPE");
@@ -39,7 +39,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, items, discount, paymentMethod }),
+        body: JSON.stringify({ ...data, items, couponCode, paymentMethod }),
       });
       const result = await res.json();
       if (!result.success) { toast.error(result.error); return; }
