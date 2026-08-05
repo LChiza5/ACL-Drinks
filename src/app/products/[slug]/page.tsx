@@ -8,9 +8,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
 import { Wine, Globe, Droplets, Package } from "lucide-react";
 
-interface Props { params: Promise<{ slug: string }> }
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = await prisma.product.findUnique({ where: { slug } });
   if (!product) return { title: "Producto no encontrado" };
@@ -19,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 60;
 
-export default async function ProductDetailPage({ params }: Props) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await prisma.product.findFirst({
     where: { slug, isActive: true },
