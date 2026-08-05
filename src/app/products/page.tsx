@@ -7,14 +7,13 @@ import Link from "next/link";
 export const metadata: Metadata = { title: "Productos" };
 export const revalidate = 60;
 
-interface Props { searchParams: { categoryId?: string; search?: string; page?: string } }
-
-export default async function ProductsPage({ searchParams }: Props) {
-  const page = parseInt(searchParams.page || "1");
+export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ categoryId?: string; search?: string; page?: string }> }) {
+  const { categoryId, search, page: pageStr } = await searchParams;
+  const page = parseInt(pageStr || "1");
   const where = {
     isActive: true,
-    ...(searchParams.categoryId && { categoryId: searchParams.categoryId }),
-    ...(searchParams.search && { OR: [{ name: { contains: searchParams.search, mode: "insensitive" as const } }] }),
+    ...(categoryId && { categoryId }),
+    ...(search && { OR: [{ name: { contains: search, mode: "insensitive" as const } }] }),
   };
 
   const [products, categories, total] = await Promise.all([
@@ -30,10 +29,10 @@ export default async function ProductsPage({ searchParams }: Props) {
         <p className="text-muted-foreground">{total} productos disponibles</p>
       </div>
       <div className="flex flex-wrap gap-2 mb-8">
-        <Link href="/products"><Badge variant={!searchParams.categoryId ? "neon" : "outline"} className="cursor-pointer px-4 py-2 text-sm">Todos</Badge></Link>
+        <Link href="/products"><Badge variant={!categoryId ? "neon" : "outline"} className="cursor-pointer px-4 py-2 text-sm">Todos</Badge></Link>
         {categories.map((cat) => (
           <Link key={cat.id} href={`/products?categoryId=${cat.id}`}>
-            <Badge variant={searchParams.categoryId === cat.id ? "neon" : "outline"} className="cursor-pointer px-4 py-2 text-sm gap-1">
+            <Badge variant={categoryId === cat.id ? "neon" : "outline"} className="cursor-pointer px-4 py-2 text-sm gap-1">
               <span>{cat.emoji}</span>{cat.name}
             </Badge>
           </Link>

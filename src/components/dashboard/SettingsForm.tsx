@@ -13,7 +13,7 @@ const FIELDS = [
   { key: "DELIVERY_ZONE", label: "Zona de entrega local", placeholder: "Tilaran, Guanacaste" },
   { key: "DELIVERY_FEE_NATIONAL", label: "Costo envio nacional (₡)", placeholder: "3500" },
   { key: "FREE_DELIVERY_THRESHOLD", label: "Minimo para envio gratis (₡)", placeholder: "30000" },
-] as const;
+] satisfies { key: string; label: string; placeholder: string; hint?: string }[];
 
 export function SettingsForm({ current }: { current: Record<string, string> }) {
   const [values, setValues] = useState<Record<string, string>>(current);
