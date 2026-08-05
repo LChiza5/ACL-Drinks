@@ -10,10 +10,9 @@ import { ORDER_STATUSES } from "@/constants";
 export const metadata: Metadata = { title: "Pedidos - Dashboard" };
 export const dynamic = "force-dynamic";
 
-interface Props { searchParams: { status?: string } }
-
-export default async function DashboardOrdersPage({ searchParams }: Props) {
-  const where = searchParams.status ? { status: searchParams.status as never } : {};
+export default async function DashboardOrdersPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
+  const { status } = await searchParams;
+  const where = status ? { status: status as never } : {};
   const [orders, total] = await Promise.all([
     prisma.order.findMany({ where, include: { orderItems: true, payment: true }, orderBy: { createdAt: "desc" }, take: 50 }),
     prisma.order.count({ where }),
@@ -27,10 +26,10 @@ export default async function DashboardOrdersPage({ searchParams }: Props) {
           <p className="text-muted-foreground text-sm mt-1">{total} pedidos</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Link href="/dashboard/orders"><Badge variant={!searchParams.status ? "neon" : "outline"} className="cursor-pointer px-3 py-1">Todos</Badge></Link>
+          <Link href="/dashboard/orders"><Badge variant={!status ? "neon" : "outline"} className="cursor-pointer px-3 py-1">Todos</Badge></Link>
           {(Object.entries(ORDER_STATUSES) as [string, typeof ORDER_STATUSES[keyof typeof ORDER_STATUSES]][]).map(([key, s]) => (
             <Link key={key} href={`/dashboard/orders?status=${key}`}>
-              <Badge variant={searchParams.status === key ? "neon" : "outline"} className="cursor-pointer px-3 py-1">{s.emoji} {s.label}</Badge>
+              <Badge variant={status === key ? "neon" : "outline"} className="cursor-pointer px-3 py-1">{s.emoji} {s.label}</Badge>
             </Link>
           ))}
         </div>
