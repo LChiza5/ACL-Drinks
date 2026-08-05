@@ -24,12 +24,6 @@ export type PaymentStatus =
   | "FAILED"
   | "REFUNDED";
 
-export type PromotionType =
-  | "PERCENTAGE"
-  | "FIXED_AMOUNT"
-  | "FREE_SHIPPING"
-  | "BUY_X_GET_Y";
-
 export type CouponType = "PERCENTAGE" | "FIXED_AMOUNT" | "FREE_SHIPPING";
 
 export type NotificationType =
@@ -209,20 +203,6 @@ export interface Address {
   isDefault: boolean;
 }
 
-export interface Promotion {
-  id: string;
-  name: string;
-  description?: string | null;
-  type: PromotionType;
-  value: number;
-  minOrder?: number | null;
-  maxDiscount?: number | null;
-  startDate: Date | string;
-  endDate: Date | string;
-  isActive: boolean;
-  image?: string | null;
-}
-
 export interface Coupon {
   id: string;
   code: string;
@@ -263,13 +243,3 @@ export interface ProductFilters {
   sortBy?: "price_asc" | "price_desc" | "newest" | "name_asc";
 }
 
-export interface DashboardStats {
-  totalRevenue: number;
-  totalOrders: number;
-  totalCustomers: number;
-  totalProducts: number;
-  revenueGrowth: number;
-  ordersGrowth: number;
-  pendingOrders: number;
-  lowStockProducts: number;
-}

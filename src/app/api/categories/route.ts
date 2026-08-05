@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { categorySchema } from "@/validations/product";
-import { slugify } from "@/lib/utils";
+import slugify from "slugify";
 import type { ApiResponse, Category } from "@/types";
 
 export async function GET() {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const validated = categorySchema.parse(body);
     const category = await prisma.category.create({
-      data: { ...validated, slug: validated.slug || slugify(validated.name) },
+      data: { ...validated, slug: validated.slug || slugify(validated.name, { lower: true, strict: true }) },
     });
     return NextResponse.json<ApiResponse<Category>>({ success: true, data: category as unknown as Category }, { status: 201 });
   } catch {

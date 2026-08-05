@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { productSchema } from "@/validations/product";
-import { slugify } from "@/lib/utils";
+import slugify from "slugify";
 import type { ApiResponse, PaginatedResponse, Product } from "@/types";
 
 export async function GET(req: NextRequest) {
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     }
     const body = await req.json();
     const validated = productSchema.parse(body);
-    const slug = validated.slug || slugify(validated.name);
+    const slug = validated.slug || slugify(validated.name, { lower: true, strict: true });
     const product = await prisma.product.create({
       data: { ...validated, slug, inventory: { create: { stock: validated.stock || 0 } } },
       include: { category: true, inventory: true },
