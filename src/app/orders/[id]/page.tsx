@@ -12,15 +12,16 @@ import { Separator } from "@/components/ui/separator";
 import { formatPrice, formatDateTime } from "@/lib/utils";
 import { ORDER_STATUSES, PAYMENT_METHODS } from "@/constants";
 
-interface Props { params: { id: string } }
+interface Props { params: Promise<{ id: string }> }
 export const metadata: Metadata = { title: "Detalle de Pedido" };
 
 export default async function OrderDetailPage({ params }: Props) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
+  const { id } = await params;
   const order = await prisma.order.findFirst({
-    where: { id: params.id, ...(session.user.role === "CUSTOMER" && { userId: session.user.id }) },
+    where: { id, ...(session.user.role === "CUSTOMER" && { userId: session.user.id }) },
     include: { orderItems: true, payment: true, shipment: { include: { trackings: { orderBy: { timestamp: "desc" } } } } },
   });
   if (!order) notFound();

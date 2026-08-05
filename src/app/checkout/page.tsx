@@ -24,6 +24,15 @@ export default function CheckoutPage() {
   const { subtotal, total } = useCartTotals();
   const [isLoading, setIsLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("SINPE");
+  const [sinpe, setSinpe] = useState({ phone: SINPE_PHONE, name: SINPE_NAME });
+
+  useEffect(() => {
+    fetch("/api/settings").then(r => r.json()).then(d => {
+      if (d.data?.SINPE_PHONE || d.data?.SINPE_NAME) {
+        setSinpe({ phone: d.data.SINPE_PHONE ?? SINPE_PHONE, name: d.data.SINPE_NAME ?? SINPE_NAME });
+      }
+    }).catch(() => {});
+  }, []);
 
   const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE_NATIONAL;
   const finalTotal = total + deliveryFee;
@@ -104,8 +113,8 @@ export default function CheckoutPage() {
               {paymentMethod === "SINPE" && (
                 <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 space-y-1">
                   <p className="text-sm font-semibold text-green-400">📱 SINPE Móvil</p>
-                  <p className="text-white font-mono font-bold">{SINPE_PHONE}</p>
-                  <p className="text-muted-foreground text-sm">{SINPE_NAME} — Monto: <strong className="text-white">{formatPrice(finalTotal)}</strong></p>
+                  <p className="text-white font-mono font-bold">{sinpe.phone}</p>
+                  <p className="text-muted-foreground text-sm">{sinpe.name} — Monto: <strong className="text-white">{formatPrice(finalTotal)}</strong></p>
                 </div>
               )}
             </div>

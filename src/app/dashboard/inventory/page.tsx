@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Archive, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { RestockInput } from "@/components/dashboard/RestockInput";
 
 export const metadata: Metadata = { title: "Inventario - Dashboard" };
 export const dynamic = "force-dynamic";
@@ -52,6 +53,7 @@ export default async function DashboardInventoryPage() {
               <th className="text-center p-4 text-muted-foreground font-medium hidden md:table-cell">Disponible</th>
               <th className="text-left p-4 text-muted-foreground font-medium hidden lg:table-cell">Nivel</th>
               <th className="text-center p-4 text-muted-foreground font-medium">Estado</th>
+              <th className="text-center p-4 text-muted-foreground font-medium">Ajustar Stock</th>
             </tr></thead>
             <tbody>
               {products.map((product) => {
@@ -83,6 +85,9 @@ export default async function DashboardInventoryPage() {
                       {isOut ? <Badge variant="destructive" className="text-xs">Sin Stock</Badge> :
                        isLow ? <Badge variant="neon-amber" className="text-xs">⚠️ Bajo</Badge> :
                        <Badge variant="neon-green" className="text-xs">OK</Badge>}
+                    </td>
+                    <td className="p-4">
+                      <RestockInput productId={product.id} current={inv?.stock ?? 0} />
                     </td>
                   </tr>
                 );
