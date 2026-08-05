@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
-import { LayoutDashboard, Package, Tag, ShoppingBag, Users, Archive, Percent, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Package, Tag, ShoppingBag, Users, Archive, Percent, Gift, Settings, ChevronRight } from "lucide-react";
 import { getInitials } from "@/lib/utils";
 
 const NAV = [
@@ -11,8 +11,10 @@ const NAV = [
   { href: "/dashboard/categories", label: "Categorías", icon: Tag },
   { href: "/dashboard/orders", label: "Pedidos", icon: ShoppingBag },
   { href: "/dashboard/inventory", label: "Inventario", icon: Archive },
+  { href: "/dashboard/kits", label: "Kits", icon: Gift },
   { href: "/dashboard/promotions", label: "Cupones", icon: Percent },
   { href: "/dashboard/users", label: "Usuarios", icon: Users, adminOnly: true },
+  { href: "/dashboard/settings", label: "Config.", icon: Settings, adminOnly: true },
 ];
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
