@@ -8,10 +8,11 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
 import { Wine, Globe, Droplets, Package } from "lucide-react";
 
-interface Props { params: { slug: string } }
+interface Props { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await prisma.product.findUnique({ where: { slug: params.slug } });
+  const { slug } = await params;
+  const product = await prisma.product.findUnique({ where: { slug } });
   if (!product) return { title: "Producto no encontrado" };
   return { title: product.name, description: product.description || `Compra ${product.name} en BrandName.`, openGraph: { images: product.images[0] ? [product.images[0]] : [] } };
 }
@@ -19,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60;
 
 export default async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params;
   const product = await prisma.product.findFirst({
-    where: { slug: params.slug, isActive: true },
+    where: { slug, isActive: true },
     include: { category: true, inventory: true },
   });
   if (!product) notFound();
