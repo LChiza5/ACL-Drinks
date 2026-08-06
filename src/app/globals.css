@@ -111,7 +111,7 @@
 
   .btn-primary {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, #A67C52, #C9984A);
+    background: linear-gradient(135deg, #8B6239, #A67C52);
     box-shadow: 0 4px 20px rgba(166, 124, 82, 0.35);
     transition: all 0.3s ease;
   }

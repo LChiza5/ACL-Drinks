@@ -10,7 +10,7 @@ export function InstagramButton() {
       href={INSTAGRAM_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-4 z-50 flex items-center gap-2 text-white rounded-full shadow-lg transition-colors group"
+      className="fixed bottom-24 right-4 z-50 flex items-center gap-2 text-white rounded-full shadow-lg transition-colors group"
       style={{ background: "linear-gradient(135deg, #f43f5e, #ec4899, #a855f7)" }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}

@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import { LayoutDashboard, Package, Tag, ShoppingBag, Users, Archive, Percent, Gift, Settings, ChevronRight } from "lucide-react";
 import { getInitials } from "@/lib/utils";
+import { Logo } from "@/components/layout/Logo";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -29,7 +30,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="flex min-h-screen">
       <aside className="hidden lg:flex flex-col w-64 border-r border-border bg-brand-dark/80 backdrop-blur-sm shrink-0">
         <div className="p-6 border-b border-border">
-          <Link href="/" className="text-xl font-black gradient-text">🍾 ACL Drinks</Link>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo className="h-7 w-7 shrink-0" />
+            <span className="text-xl font-black gradient-text">ACL Drinks</span>
+          </Link>
           <p className="text-xs text-muted-foreground mt-1">Panel Administrativo</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">
