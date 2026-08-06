@@ -20,11 +20,28 @@ export function CartSidebar() {
         <SheetHeader className="px-6 py-4 border-b border-border">
           <div className="flex items-center justify-between">
             <SheetTitle className="flex items-center gap-2 text-lg">
-              <ShoppingCart className="h-5 w-5 text-neon-purple" />
+              <motion.div
+                initial={{ rotate: -15, scale: 0.7 }}
+                animate={{ rotate: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 12 }}
+              >
+                <ShoppingCart className="h-5 w-5 text-neon-purple" />
+              </motion.div>
               Mi Carrito
-              {totalItems > 0 && (
-                <span className="ml-1 inline-flex items-center justify-center h-5 w-5 rounded-full bg-neon-purple text-white text-xs font-bold">{totalItems}</span>
-              )}
+              <AnimatePresence mode="popLayout">
+                {totalItems > 0 && (
+                  <motion.span
+                    key={totalItems}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                    className="ml-1 inline-flex items-center justify-center h-5 w-5 rounded-full bg-neon-purple text-white text-xs font-bold"
+                  >
+                    {totalItems}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </SheetTitle>
             {items.length > 0 && (
               <Button variant="ghost" size="sm" onClick={clearCart} className="text-xs text-muted-foreground hover:text-destructive gap-1">

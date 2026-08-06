@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL, DELIVERY_ZONE } from "@/constants";
+import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL, DELIVERY_ZONE, PAYMENT_METHODS } from "@/constants";
+import { Logo } from "./Logo";
 
 export function Footer() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -12,7 +13,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           <div className="space-y-4">
-            <Link href="/" className="block text-2xl font-black gradient-text">ACL DRINKS</Link>
+            <Link href="/" className="flex items-center gap-2">
+              <Logo className="h-8 w-8 shrink-0" />
+              <span className="text-2xl font-black gradient-text">ACL DRINKS</span>
+            </Link>
             <p className="text-sm leading-relaxed" style={{ color: "#B8B1A7" }}>
               Tu licorería online de confianza en Costa Rica. Entrega rápida, precios justos y la mejor selección.
             </p>
@@ -91,9 +95,20 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+        <div className="mt-10 pt-6 flex flex-wrap items-center gap-x-3 gap-y-2"
+          style={{ borderTop: "1px solid rgba(166,124,82,0.12)" }}>
+          <span className="text-xs font-semibold" style={{ color: "#F5F2EC" }}>Aceptamos:</span>
+          {Object.values(PAYMENT_METHODS).map((m) => (
+            <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs"
+              style={{ background: "rgba(166,124,82,0.1)", color: "#B8B1A7" }}>
+              <span>{m.icon}</span>{m.label}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-6 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
           style={{ borderTop: "1px solid rgba(166,124,82,0.12)", color: "#B8B1A7" }}>
-          <p>© 2025 ACL Drinks. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} ACL Drinks. Todos los derechos reservados.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacidad</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Términos</Link>

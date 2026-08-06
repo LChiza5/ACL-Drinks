@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginSchema, type LoginInput } from "@/validations/auth";
+import { Logo } from "@/components/layout/Logo";
 
 function LoginForm() {
   const router = useRouter();
@@ -42,7 +43,10 @@ function LoginForm() {
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #1a0a2e 0%, #08060f 70%)" }}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="text-3xl font-black gradient-text">🍾 BrandName</Link>
+          <Link href="/" className="inline-flex items-center gap-2">
+            <Logo className="h-10 w-10" />
+            <span className="text-3xl font-black gradient-text">ACL Drinks</span>
+          </Link>
           <h1 className="text-2xl font-bold text-white mt-4">Iniciar Sesión</h1>
           <p className="text-muted-foreground mt-1">¡Bienvenido de vuelta!</p>
         </div>

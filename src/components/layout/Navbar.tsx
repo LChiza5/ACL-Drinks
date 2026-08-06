@@ -12,6 +12,7 @@ import { useCartStore, useCartTotals } from "@/store/cart.store";
 import { useUIStore } from "@/store/ui.store";
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL } from "@/constants";
 import { getInitials } from "@/lib/utils";
+import { Logo } from "./Logo";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -34,8 +35,9 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between px-4 lg:px-6">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
-            <span className="text-2xl font-black gradient-text tracking-tight">ACL DRINKS</span>
+          <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeMobileMenu}>
+            <Logo className="h-8 w-8 sm:h-9 sm:w-9 shrink-0" />
+            <span className="text-lg sm:text-2xl font-black gradient-text tracking-tight">ACL DRINKS</span>
           </Link>
 
           {/* Nav desktop */}
@@ -55,17 +57,17 @@ export function Navbar() {
           {/* Acciones desktop */}
           <div className="hidden lg:flex items-center gap-2">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="text-green-400 hover:text-green-300 hover:bg-green-500/10">
-                <FaWhatsapp className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="h-11 w-11 text-green-400 hover:text-green-300 hover:bg-green-500/10">
+                <FaWhatsapp className="h-6 w-6" />
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="hover:bg-amber-500/10" style={{ color: "#C9984A" }}>
-                <FaInstagram className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-amber-500/10" style={{ color: "#C9984A" }}>
+                <FaInstagram className="h-6 w-6" />
               </Button>
             </a>
-            <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
-              <ShoppingCart className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="h-11 w-11 relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
+              <ShoppingCart className="h-6 w-6" />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#C9984A" }}>
                   {totalItems > 9 ? "9+" : totalItems}
@@ -75,8 +77,8 @@ export function Navbar() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Avatar className="h-8 w-8">
+                  <Button variant="ghost" size="icon" className="h-11 w-11">
+                    <Avatar className="h-9 w-9">
                       <AvatarImage src={session.user?.image || ""} />
                       <AvatarFallback className="text-xs font-bold" style={{ background: "#A67C52", color: "#F5F2EC" }}>
                         {getInitials(session.user?.name || "U")}
@@ -106,8 +108,8 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button variant="ghost" size="icon" style={{ color: "#F5F2EC" }}>
-                  <User className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="h-11 w-11" style={{ color: "#F5F2EC" }}>
+                  <User className="h-6 w-6" />
                 </Button>
               </Link>
             )}
@@ -167,13 +169,25 @@ export function Navbar() {
                           <User className="h-4 w-4" />Mi Perfil
                         </Button>
                       </Link>
+                      <Link href="/orders" onClick={closeMobileMenu}>
+                        <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#F5F2EC" }}>
+                          <Package className="h-4 w-4" />Mis Pedidos
+                        </Button>
+                      </Link>
+                      {(session.user?.role === "ADMIN" || session.user?.role === "MANAGER") && (
+                        <Link href="/dashboard" onClick={closeMobileMenu}>
+                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#C9984A" }}>
+                            <LayoutDashboard className="h-4 w-4" />Dashboard
+                          </Button>
+                        </Link>
+                      )}
                       <Button variant="ghost" className="w-full justify-start gap-2 text-destructive" onClick={() => { signOut(); closeMobileMenu(); }}>
                         <LogOut className="h-4 w-4" />Cerrar Sesión
                       </Button>
                     </>
                   ) : (
                     <Link href="/login" onClick={closeMobileMenu}>
-                      <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#F5F2EC" }}>
+                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(201,152,74,0.5)", color: "#F5F2EC" }}>
                         <User className="h-4 w-4" />Iniciar Sesión
                       </Button>
                     </Link>
