@@ -19,7 +19,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json<ApiResponse>({ success: true, data: user, message: "¡Cuenta creada! ₡1.000 de bienvenida 🎉" }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Register error:", error);
     return NextResponse.json<ApiResponse>({ success: false, error: "Error al crear cuenta" }, { status: 500 });
   }
 }
