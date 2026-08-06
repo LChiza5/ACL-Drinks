@@ -37,7 +37,8 @@ export default withAuth(
           pathname.startsWith("/api/products") ||
           pathname.startsWith("/api/categories") ||
           pathname.startsWith("/api/kits") ||
-          pathname.startsWith("/api/tracking");
+          pathname.startsWith("/api/tracking") ||
+          pathname === "/api/users/register";
 
         if (isPublic || isPublicApi) return true;
 
