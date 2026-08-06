@@ -58,6 +58,10 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = (user as { role?: string }).role;
+      } else if (token.id) {
+        // ponytail: re-fetches role every session refresh so DB role changes (e.g. promoting to admin) take effect without re-login. Fine at this scale; add caching if traffic grows.
+        const dbUser = await prisma.user.findUnique({ where: { id: token.id as string }, select: { role: true } });
+        if (dbUser) token.role = dbUser.role;
       }
       return token;
     },
