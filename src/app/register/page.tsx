@@ -36,14 +36,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #1a0a2e 0%, #08060f 70%)" }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 70%)" }}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2">
             <Logo className="h-10 w-10" />
             <span className="text-3xl font-black gradient-text">ACL Drinks</span>
           </Link>
-          <h1 className="text-2xl font-bold text-white mt-4">Crear Cuenta</h1>
+          <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Crear Cuenta</h1>
           <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full bg-neon-amber/10 border border-neon-amber/30 text-sm text-neon-amber">
             <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
           </div>

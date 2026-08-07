@@ -4,23 +4,20 @@
 
 @layer base {
   :root {
-    --primary: #A67C52;
-    --background: #12110F;
-    --surface: #1E1A17;
-    --light: #F5F2EC;
-    --muted: #B8B1A7;
-    --accent: #C9984A;
-
-    /* shadcn/ui HSL tokens */
+    /* reference hexes: bg #12110F, surface #1E1A17, primary #A67C52, accent #C9984A, text #F5F2EC, muted #B8B1A7 */
+    --background: 30 12% 5%;
     --foreground: 40 30% 95%;
-    --card: 30 12% 11%;
+    --card: 26 13% 10%;
     --card-foreground: 40 30% 95%;
-    --popover: 30 12% 11%;
+    --popover: 26 13% 10%;
     --popover-foreground: 40 30% 95%;
+    --primary: 30 34% 49%;
     --primary-foreground: 40 30% 95%;
     --secondary: 30 10% 16%;
     --secondary-foreground: 40 30% 95%;
+    --muted: 30 10% 14%;
     --muted-foreground: 30 10% 60%;
+    --accent: 37 54% 54%;
     --accent-foreground: 30 14% 7%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 40 30% 95%;
@@ -51,10 +48,10 @@
   }
 
   h1, h2, h3 {
-    font-family: var(--font-cormorant), Georgia, serif;
-    line-height: 1.15;
-    letter-spacing: 0.01em;
-    font-weight: 600;
+    font-family: var(--font-display), system-ui, sans-serif;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-weight: 700;
   }
 
   h4, h5, h6 {
@@ -109,17 +106,17 @@
     transform: translateY(-2px);
   }
 
-  .btn-primary {
+  .btn-primary, .btn-neon {
     @apply relative overflow-hidden;
     background: linear-gradient(135deg, #8B6239, #A67C52);
     box-shadow: 0 4px 20px rgba(166, 124, 82, 0.35);
     transition: all 0.3s ease;
   }
-  .btn-primary:hover {
+  .btn-primary:hover, .btn-neon:hover {
     box-shadow: 0 6px 28px rgba(201, 152, 74, 0.55);
     transform: scale(1.02);
   }
-  .btn-primary::before {
+  .btn-primary::before, .btn-neon::before {
     content: "";
     position: absolute;
     top: 0;
@@ -129,7 +126,7 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
     transition: 0.5s;
   }
-  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover::before, .btn-neon:hover::before { left: 100%; }
 
   .shimmer {
     background: linear-gradient(90deg, rgba(30,26,23,0.4) 25%, rgba(166,124,82,0.08) 50%, rgba(30,26,23,0.4) 75%);
@@ -138,6 +135,15 @@
   }
 
   .shadow-card-hover { box-shadow: 0 8px 32px rgba(166, 124, 82, 0.2); }
+
+  .text-shimmer {
+    background: linear-gradient(90deg, #C9984A 0%, #F5F2EC 50%, #C9984A 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: text-shimmer 3s linear infinite;
+  }
 
   .section-padding { @apply py-16 px-4 sm:px-6 lg:px-8; }
   .container-max { @apply max-w-7xl mx-auto; }
@@ -154,6 +160,11 @@
   100% { background-position: 200% 0; }
 }
 
+@keyframes text-shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
@@ -166,3 +177,10 @@
 
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-spin-slow { animation: spin-slow 18s linear infinite; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 28s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }

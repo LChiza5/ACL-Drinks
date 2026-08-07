@@ -30,14 +30,14 @@ export async function sendOrderConfirmation({
     to,
     subject: `Pedido ${orderNumber} confirmado 🍾`,
     html: `
-      <div style="font-family:sans-serif;max-width:520px;margin:auto;background:#12110F;color:#F5F2EC;padding:32px;border-radius:12px">
-        <h2 style="color:#C9984A;margin-top:0">¡Tu pedido está confirmado!</h2>
+      <div style="font-family:sans-serif;max-width:520px;margin:auto;background:#FFF8E7;color:#F5F2EC;padding:32px;border-radius:12px">
+        <h2 style="color:#A67C52;margin-top:0">¡Tu pedido está confirmado!</h2>
         <p>Pedido: <strong style="font-family:monospace">${orderNumber}</strong></p>
         <table style="width:100%;border-collapse:collapse;margin:16px 0">
           ${rows}
-          <tr style="border-top:1px solid #2A1F14">
+          <tr style="border-top:1px solid #3A2015">
             <td style="padding:10px 0;font-weight:700">Total</td>
-            <td style="padding:10px 0;text-align:right;font-weight:700;color:#C9984A">${formatPrice(total)}</td>
+            <td style="padding:10px 0;text-align:right;font-weight:700;color:#A67C52">${formatPrice(total)}</td>
           </tr>
         </table>
         <p style="color:#B8B1A7;font-size:14px">Te avisaremos cuando tu pedido esté en camino. ¡Salud! 🥂</p>

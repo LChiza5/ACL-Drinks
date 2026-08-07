@@ -33,7 +33,7 @@ export default async function OrderDetailPage({ params }: Props) {
 
   return (
     <div className="section-padding container-max max-w-2xl">
-      <Link href="/orders" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-white mb-6 transition-colors">
+      <Link href="/orders" className="inline-flex items-center gap-2 text-sm text-[#B8B1A7] hover:text-white mb-6 transition-colors">
         <ArrowLeft className="h-4 w-4" />Mis pedidos
       </Link>
 

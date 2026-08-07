@@ -38,10 +38,10 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-            style={{ border: "1px solid rgba(201,152,74,0.35)", background: "rgba(201,152,74,0.1)", color: "#C9984A" }}
+            style={{ border: "1px solid rgba(201,152,74,0.35)", background: "rgba(201,152,74,0.1)" }}
           >
             <span>🥃</span>
-            <span>Entrega Rápida en Costa Rica</span>
+            <span className="text-shimmer font-semibold">Entrega Rápida en Costa Rica</span>
           </motion.div>
 
           <motion.h1
@@ -84,7 +84,7 @@ export function Hero() {
               size="lg"
               variant="outline"
               className="gap-3 w-full sm:w-auto font-semibold px-8 py-4 rounded-xl"
-              style={{ borderColor: "rgba(166,124,82,0.4)", color: "#F5F2EC" }}
+              style={{ borderColor: "rgba(166, 124, 82,0.5)", color: "#F5F2EC" }}
               onClick={() => { window.location.href = "/tracking"; }}
             >
               <MapPin className="h-5 w-5" /> Rastrear Pedido

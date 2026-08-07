@@ -62,7 +62,7 @@ export function CategoryForm({ category }: { category?: Category }) {
           </div>
           <div className="space-y-2">
             <Label>Color (hex)</Label>
-            <Input {...register("color")} placeholder="#A67C52" />
+            <Input {...register("color")} placeholder="#C9984A" />
           </div>
         </div>
         <div className="space-y-2">

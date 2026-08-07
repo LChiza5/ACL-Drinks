@@ -40,15 +40,15 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #1a0a2e 0%, #08060f 70%)" }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 70%)" }}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2">
             <Logo className="h-10 w-10" />
             <span className="text-3xl font-black gradient-text">ACL Drinks</span>
           </Link>
-          <h1 className="text-2xl font-bold text-white mt-4">Iniciar Sesión</h1>
-          <p className="text-muted-foreground mt-1">¡Bienvenido de vuelta!</p>
+          <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
+          <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

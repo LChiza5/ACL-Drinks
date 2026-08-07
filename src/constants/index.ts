@@ -42,7 +42,7 @@ export const PROVINCES_CR = [
 ];
 
 export const BRAND_COLORS = {
-  primary: "#A67C52",
+  primary: "#C9984A",
   accent: "#C9984A",
   background: "#12110F",
   surface: "#1E1A17",

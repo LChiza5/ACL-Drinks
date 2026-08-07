@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
 import type { Product } from "@/types";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -33,11 +34,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       className="group"
     >
       <Link href={`/products/${product.slug}`}>
-        <div
+        <SpotlightCard
           className="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-card-hover"
-          style={{ border: "1px solid rgba(166,124,82,0.12)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(201,152,74,0.4)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166,124,82,0.12)"; }}
+          style={{ border: "1px solid rgba(166, 124, 82,0.12)" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.4)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.12)"; }}
         >
           <div className="relative aspect-square overflow-hidden" style={{ background: "#1E1A17" }}>
             {product.images[0] ? (
@@ -46,8 +47,8 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <div className="absolute inset-0 flex items-center justify-center text-6xl">🥃</div>
             )}
             <div className="absolute top-2 left-2 flex flex-col gap-1">
-              {product.isNew && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#A67C52" }}>NUEVO</Badge>}
-              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#C9984A" }}>-{discount}%</Badge>}
+              {product.isNew && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#C9984A" }}>NUEVO</Badge>}
+              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#A67C52" }}>-{discount}%</Badge>}
               {isOutOfStock && <Badge variant="destructive" className="text-xs">AGOTADO</Badge>}
             </div>
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -57,13 +58,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             </div>
           </div>
           <div className="p-4 space-y-2">
-            {product.category && <span className="text-xs font-semibold" style={{ color: "#A67C52" }}>{product.category.name}</span>}
-            <h3 className="font-bold text-sm leading-tight line-clamp-2 group-hover:text-amber-300 transition-colors" style={{ color: "#F5F2EC" }}>
+            {product.category && <span className="text-xs font-semibold" style={{ color: "#C9984A" }}>{product.category.name}</span>}
+            <h3 className="font-bold text-sm leading-tight line-clamp-2 transition-colors group-hover:text-[#C9984A]" style={{ color: "#F5F2EC" }}>
               {product.name}
             </h3>
             {product.volume && <p className="text-xs" style={{ color: "#B8B1A7" }}>{product.volume} • {product.alcoholContent}% Alc.</p>}
             <div className="flex items-baseline gap-2">
-              <span className="text-lg font-black" style={{ color: "#C9984A" }}>{formatPrice(product.price)}</span>
+              <span className="text-lg font-black" style={{ color: "#A67C52" }}>{formatPrice(product.price)}</span>
               {product.comparePrice && <span className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(product.comparePrice)}</span>}
             </div>
             <Button size="sm" className="w-full btn-primary gap-2 text-xs text-white" onClick={handleAddToCart} disabled={!!isOutOfStock}>
@@ -71,7 +72,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               {isOutOfStock ? "Sin Stock" : "Agregar al Carrito"}
             </Button>
           </div>
-        </div>
+        </SpotlightCard>
       </Link>
     </motion.div>
   );

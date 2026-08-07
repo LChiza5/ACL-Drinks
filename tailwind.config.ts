@@ -76,8 +76,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-cormorant)", "Georgia", "serif"],
-        serif: ["var(--font-cormorant)", "Georgia", "serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        serif: ["var(--font-display)", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -159,15 +159,15 @@ const config: Config = {
       },
       boxShadow: {
         "neon-purple":
-          "0 0 20px rgba(166, 124, 82, 0.4), 0 0 40px rgba(166, 124, 82, 0.2)",
+          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
         "neon-pink":
-          "0 0 20px rgba(201, 152, 74, 0.4), 0 0 40px rgba(201, 152, 74, 0.2)",
+          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
         "neon-blue":
-          "0 0 20px rgba(166, 124, 82, 0.4), 0 0 40px rgba(166, 124, 82, 0.2)",
+          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
         "neon-amber":
-          "0 0 20px rgba(201, 152, 74, 0.5), 0 0 40px rgba(201, 152, 74, 0.25)",
-        "card-hover": "0 8px 32px rgba(166, 124, 82, 0.2)",
-        "card-glow": "0 0 40px rgba(166, 124, 82, 0.15)",
+          "0 0 20px rgba(212, 161, 57, 0.5), 0 0 40px rgba(212, 161, 57, 0.25)",
+        "card-hover": "0 8px 32px rgba(212, 161, 57, 0.2)",
+        "card-glow": "0 0 40px rgba(212, 161, 57, 0.15)",
       },
     },
   },
