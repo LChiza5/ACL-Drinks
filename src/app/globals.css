@@ -136,6 +136,90 @@
 
   .shadow-card-hover { box-shadow: 0 8px 32px rgba(166, 124, 82, 0.2); }
 
+  .glare-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .glare-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: linear-gradient(
+      var(--gh-angle),
+      hsla(0, 0%, 0%, 0) 60%,
+      var(--gh-rgba) 70%,
+      hsla(0, 0%, 0%, 0),
+      hsla(0, 0%, 0%, 0) 100%
+    );
+    transition: var(--gh-duration) ease;
+    background-size: var(--gh-size) var(--gh-size), 100% 100%;
+    background-repeat: no-repeat;
+    background-position: -100% -100%, 0 0;
+  }
+  .glare-hover:hover::before {
+    background-position: 100% 100%, 0 0;
+  }
+
+  .star-border-container {
+    display: inline-block;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 1px;
+  }
+  .border-gradient-bottom {
+    position: absolute;
+    width: 300%;
+    height: 50%;
+    opacity: 0.7;
+    bottom: -12px;
+    right: -250%;
+    border-radius: 50%;
+    animation: star-movement-bottom linear infinite alternate;
+    z-index: 0;
+  }
+  .border-gradient-top {
+    position: absolute;
+    opacity: 0.7;
+    width: 300%;
+    height: 50%;
+    top: -12px;
+    left: -250%;
+    border-radius: 50%;
+    animation: star-movement-top linear infinite alternate;
+    z-index: 0;
+  }
+  @keyframes star-movement-bottom {
+    0% { transform: translate(0%, 0%); opacity: 1; }
+    100% { transform: translate(-100%, 0%); opacity: 0; }
+  }
+  @keyframes star-movement-top {
+    0% { transform: translate(0%, 0%); opacity: 1; }
+    100% { transform: translate(100%, 0%); opacity: 0; }
+  }
+
+  /* pill-style hover fill for nav links, inspired by react-bits' PillNav */
+  .nav-pill {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .nav-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #8B6239, #A67C52);
+    border-radius: inherit;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+  .nav-pill:hover::before {
+    transform: translateY(0);
+  }
+
   .text-shimmer {
     background: linear-gradient(90deg, #C9984A 0%, #F5F2EC 50%, #C9984A 100%);
     background-size: 200% auto;

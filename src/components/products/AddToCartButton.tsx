@@ -5,6 +5,7 @@ import { ShoppingCart, Minus, Plus, Check } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart.store";
+import { ClickSpark } from "@/components/ui/click-spark";
 import type { Product } from "@/types";
 
 export function AddToCartButton({ product, inStock }: { product: Product; inStock: boolean }) {
@@ -30,10 +31,12 @@ export function AddToCartButton({ product, inStock }: { product: Product; inStoc
           <Button variant="outline" size="icon" className="h-9 w-9 rounded-full" onClick={() => setQty(Math.min(20, qty + 1))} disabled={qty >= 20}><Plus className="h-3.5 w-3.5" /></Button>
         </div>
       </div>
-      <Button size="xl" className="w-full btn-neon gap-3 font-black text-base" onClick={handleAdd} disabled={!inStock}>
-        {added ? <Check className="h-5 w-5" /> : <ShoppingCart className="h-5 w-5" />}
-        {inStock ? (added ? "¡Agregado!" : "Agregar al Carrito") : "Sin Stock"}
-      </Button>
+      <ClickSpark>
+        <Button size="xl" className="w-full btn-neon gap-3 font-black text-base" onClick={handleAdd} disabled={!inStock}>
+          {added ? <Check className="h-5 w-5" /> : <ShoppingCart className="h-5 w-5" />}
+          {inStock ? (added ? "¡Agregado!" : "Agregar al Carrito") : "Sin Stock"}
+        </Button>
+      </ClickSpark>
     </div>
   );
 }

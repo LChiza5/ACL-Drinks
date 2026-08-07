@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Gift, Star, History, Tag, Shield, Truck } from "lucide-react";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { TiltCard } from "@/components/ui/tilt-card";
 
 const benefits = [
   { icon: Gift, title: "₡1.000 de Bienvenida", desc: "Crédito gratis en tu primera compra al registrarte." },
@@ -41,15 +42,17 @@ export function BenefitsSection() {
               transition={{ delay: i * 0.08 }}
               className="group cursor-pointer"
             >
-              <SpotlightCard className="glass-card-hover rounded-xl p-6 space-y-4">
-                <div className="inline-flex p-3 rounded-xl transition-all duration-300 group-hover:scale-110" style={{ background: "linear-gradient(135deg, #A67C52, #C9984A)" }}>
-                  <b.icon className="h-6 w-6" style={{ color: "#F5F2EC" }} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg" style={{ color: "#F5F2EC" }}>{b.title}</h3>
-                  <p className="text-sm mt-1" style={{ color: "#B8B1A7" }}>{b.desc}</p>
-                </div>
-              </SpotlightCard>
+              <TiltCard rotateAmplitude={6}>
+                <SpotlightCard className="glass-card-hover rounded-xl p-6 space-y-4">
+                  <div className="inline-flex p-3 rounded-xl transition-all duration-300 group-hover:scale-110" style={{ background: "linear-gradient(135deg, #A67C52, #C9984A)" }}>
+                    <b.icon className="h-6 w-6" style={{ color: "#F5F2EC" }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: "#F5F2EC" }}>{b.title}</h3>
+                    <p className="text-sm mt-1" style={{ color: "#B8B1A7" }}>{b.desc}</p>
+                  </div>
+                </SpotlightCard>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
