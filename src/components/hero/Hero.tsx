@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Zap, Package, HeadphonesIcon, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
+import { Aurora } from "@/components/ui/aurora";
+import { StarBorder } from "@/components/ui/star-border";
 
 const stats = [
   { icon: Zap, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", color: "#C9984A" },
@@ -24,9 +26,8 @@ export function Hero() {
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
+      <Aurora colorStops={["#8B6239", "#C9984A", "#A67C52"]} amplitude={0.8} blend={0.45} className="opacity-60" />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-spin-slow" style={{ background: "rgba(166,124,82,0.08)" }} />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl animate-spin-slow" style={{ background: "rgba(201,152,74,0.06)", animationDirection: "reverse", animationDuration: "14s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(166,124,82,0.04)" }} />
       </div>
 
@@ -73,13 +74,15 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button
-              size="lg"
-              className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
-              onClick={handleScrollToCatalog}
-            >
-              🛒 COMPRAR AHORA
-            </Button>
+            <StarBorder className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
+                onClick={handleScrollToCatalog}
+              >
+                🛒 COMPRAR AHORA
+              </Button>
+            </StarBorder>
             <Button
               size="lg"
               variant="outline"

@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { GlareHover } from "@/components/ui/glare-hover";
+import { ClickSpark } from "@/components/ui/click-spark";
 import type { Kit } from "@/types";
 
 export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
@@ -38,7 +40,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(166, 124, 82,0.25)"; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.2)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
         >
-          <div className="relative aspect-[4/3] overflow-hidden" style={{ background: "linear-gradient(135deg, #1E1A17, rgba(166, 124, 82,0.15))" }}>
+          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "linear-gradient(135deg, #1E1A17, rgba(166, 124, 82,0.15))" }}>
             {kit.image ? (
               <Image src={kit.image} alt={kit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
             ) : (
@@ -54,7 +56,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
                 <Badge className="font-black text-white border-0" style={{ background: "#A67C52" }}>AHORRÁ {discount}%</Badge>
               </div>
             )}
-          </div>
+          </GlareHover>
           <div className="p-5 space-y-3">
             <div className="flex items-start gap-2">
               <Package className="h-5 w-5 shrink-0 mt-0.5" style={{ color: "#C9984A" }} />
@@ -77,9 +79,11 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
                 <p className="text-2xl font-black" style={{ color: "#A67C52" }}>{formatPrice(kit.price)}</p>
                 {kit.comparePrice && <p className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(kit.comparePrice)}</p>}
               </div>
-              <Button size="sm" className="btn-primary gap-2 shrink-0 text-white" onClick={handleAddToCart}>
-                <ShoppingCart className="h-4 w-4" />Agregar
-              </Button>
+              <ClickSpark className="shrink-0">
+                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white" onClick={handleAddToCart}>
+                  <ShoppingCart className="h-4 w-4" />Agregar
+                </Button>
+              </ClickSpark>
             </div>
           </div>
         </SpotlightCard>

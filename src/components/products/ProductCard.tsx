@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { GlareHover } from "@/components/ui/glare-hover";
+import { ClickSpark } from "@/components/ui/click-spark";
 import type { Product } from "@/types";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -40,7 +42,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.4)"; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(166, 124, 82,0.12)"; }}
         >
-          <div className="relative aspect-square overflow-hidden" style={{ background: "#1E1A17" }}>
+          <GlareHover className="relative aspect-square overflow-hidden block" style={{ background: "#1E1A17" }}>
             {product.images[0] ? (
               <Image src={product.images[0]} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 25vw" />
             ) : (
@@ -56,7 +58,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
                 <ShoppingCart className="h-4 w-4" />Agregar
               </Button>
             </div>
-          </div>
+          </GlareHover>
           <div className="p-4 space-y-2">
             {product.category && <span className="text-xs font-semibold" style={{ color: "#C9984A" }}>{product.category.name}</span>}
             <h3 className="font-bold text-sm leading-tight line-clamp-2 transition-colors group-hover:text-[#C9984A]" style={{ color: "#F5F2EC" }}>
@@ -67,10 +69,12 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <span className="text-lg font-black" style={{ color: "#A67C52" }}>{formatPrice(product.price)}</span>
               {product.comparePrice && <span className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(product.comparePrice)}</span>}
             </div>
-            <Button size="sm" className="w-full btn-primary gap-2 text-xs text-white" onClick={handleAddToCart} disabled={!!isOutOfStock}>
-              <ShoppingCart className="h-3.5 w-3.5" />
-              {isOutOfStock ? "Sin Stock" : "Agregar al Carrito"}
-            </Button>
+            <ClickSpark className="block">
+              <Button size="sm" className="w-full btn-primary gap-2 text-xs text-white" onClick={handleAddToCart} disabled={!!isOutOfStock}>
+                <ShoppingCart className="h-3.5 w-3.5" />
+                {isOutOfStock ? "Sin Stock" : "Agregar al Carrito"}
+              </Button>
+            </ClickSpark>
           </div>
         </SpotlightCard>
       </Link>

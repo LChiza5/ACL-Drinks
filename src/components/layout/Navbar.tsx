@@ -46,7 +46,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 hover:text-white hover:bg-white/5"
+                className="nav-pill px-4 py-2.5 text-sm font-semibold rounded-lg transition-colors duration-200 hover:text-white"
                 style={{ color: "#B8B1A7" }}
               >
                 {link.label}
