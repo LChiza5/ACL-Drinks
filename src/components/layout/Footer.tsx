@@ -28,12 +28,12 @@ export function Footer() {
               </a>
               <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
                 className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(201,152,74,0.1)", color: "#C9984A" }}>
+                style={{ background: "rgba(166, 124, 82,0.1)", color: "#C9984A" }}>
                 <FaInstagram className="h-5 w-5" />
               </a>
               <a href="#"
                 className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(166,124,82,0.1)", color: "#A67C52" }}>
+                style={{ background: "rgba(166, 124, 82,0.1)", color: "#C9984A" }}>
                 <FaFacebook className="h-5 w-5" />
               </a>
             </div>
@@ -76,7 +76,7 @@ export function Footer() {
             <h3 className="font-semibold" style={{ color: "#F5F2EC" }}>Contacto</h3>
             <ul className="space-y-3 text-sm" style={{ color: "#B8B1A7" }}>
               <li className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#A67C52" }} />
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#C9984A" }} />
                 <span>{DELIVERY_ZONE}, Costa Rica</span>
               </li>
               <li className="flex items-center gap-2">
@@ -84,7 +84,7 @@ export function Footer() {
                 <a href={`tel:${WHATSAPP_NUMBER}`} className="hover:text-white transition-colors">{WHATSAPP_NUMBER}</a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 shrink-0" style={{ color: "#A67C52" }} />
+                <Mail className="h-4 w-4 shrink-0" style={{ color: "#C9984A" }} />
                 <a href="mailto:info@acldrinks.cr" className="hover:text-white transition-colors">info@acldrinks.cr</a>
               </li>
               <li className="flex items-start gap-2">
@@ -96,18 +96,18 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 flex flex-wrap items-center gap-x-3 gap-y-2"
-          style={{ borderTop: "1px solid rgba(166,124,82,0.12)" }}>
+          style={{ borderTop: "1px solid rgba(166, 124, 82,0.12)" }}>
           <span className="text-xs font-semibold" style={{ color: "#F5F2EC" }}>Aceptamos:</span>
           {Object.values(PAYMENT_METHODS).map((m) => (
             <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs"
-              style={{ background: "rgba(166,124,82,0.1)", color: "#B8B1A7" }}>
+              style={{ background: "rgba(166, 124, 82,0.1)", color: "#B8B1A7" }}>
               <span>{m.icon}</span>{m.label}
             </span>
           ))}
         </div>
 
         <div className="mt-6 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
-          style={{ borderTop: "1px solid rgba(166,124,82,0.12)", color: "#B8B1A7" }}>
+          style={{ borderTop: "1px solid rgba(166, 124, 82,0.12)", color: "#B8B1A7" }}>
           <p>© {new Date().getFullYear()} ACL Drinks. Todos los derechos reservados.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacidad</Link>

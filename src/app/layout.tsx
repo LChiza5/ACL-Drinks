@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
@@ -17,11 +17,11 @@ const dmSans = DM_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const cormorant = Cormorant_Garamond({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-cormorant",
+  variable: "--font-display",
   display: "swap",
-  weight: ["300", "400", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${cormorant.variable} font-sans antialiased`}>
+      <body className={`${dmSans.variable} ${bricolage.variable} font-sans antialiased`}>
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navbar />
@@ -72,7 +72,7 @@ export default function RootLayout({
             theme="dark"
             toastOptions={{
               style: {
-                background: "rgba(30, 26, 23, 0.97)",
+                background: "rgba(255, 255, 255, 0.97)",
                 border: "1px solid rgba(166, 124, 82, 0.35)",
                 color: "#F5F2EC",
               },

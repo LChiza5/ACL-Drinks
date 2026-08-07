@@ -30,7 +30,7 @@ export function Navbar() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-card" style={{ borderBottom: "1px solid rgba(166,124,82,0.2)" }}>
+    <header className="sticky top-0 z-40 w-full glass-card" style={{ borderBottom: "1px solid rgba(166, 124, 82,0.2)" }}>
       <div className="container-max">
         <div className="flex h-16 items-center justify-between px-4 lg:px-6">
 
@@ -62,14 +62,14 @@ export function Navbar() {
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-amber-500/10" style={{ color: "#C9984A" }}>
+              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-amber-500/10" style={{ color: "#A67C52" }}>
                 <FaInstagram className="h-6 w-6" />
               </Button>
             </a>
             <Button variant="ghost" size="icon" className="h-11 w-11 relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
               <ShoppingCart className="h-6 w-6" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#C9984A" }}>
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#A67C52" }}>
                   {totalItems > 9 ? "9+" : totalItems}
                 </span>
               )}
@@ -80,7 +80,7 @@ export function Navbar() {
                   <Button variant="ghost" size="icon" className="h-11 w-11">
                     <Avatar className="h-9 w-9">
                       <AvatarImage src={session.user?.image || ""} />
-                      <AvatarFallback className="text-xs font-bold" style={{ background: "#A67C52", color: "#F5F2EC" }}>
+                      <AvatarFallback className="text-xs font-bold" style={{ background: "#C9984A", color: "#F5F2EC" }}>
                         {getInitials(session.user?.name || "U")}
                       </AvatarFallback>
                     </Avatar>
@@ -125,7 +125,7 @@ export function Navbar() {
             <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#C9984A" }}>
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#A67C52" }}>
                   {totalItems}
                 </span>
               )}
@@ -144,7 +144,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="lg:hidden overflow-hidden"
-              style={{ borderTop: "1px solid rgba(166,124,82,0.15)" }}
+              style={{ borderTop: "1px solid rgba(166, 124, 82,0.15)" }}
             >
               <nav className="flex flex-col p-4 gap-1">
                 {navLinks.map((link) => (
@@ -176,7 +176,7 @@ export function Navbar() {
                       </Link>
                       {(session.user?.role === "ADMIN" || session.user?.role === "MANAGER") && (
                         <Link href="/dashboard" onClick={closeMobileMenu}>
-                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#C9984A" }}>
+                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#A67C52" }}>
                             <LayoutDashboard className="h-4 w-4" />Dashboard
                           </Button>
                         </Link>
@@ -187,7 +187,7 @@ export function Navbar() {
                     </>
                   ) : (
                     <Link href="/login" onClick={closeMobileMenu}>
-                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(201,152,74,0.5)", color: "#F5F2EC" }}>
+                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(166, 124, 82,0.5)", color: "#F5F2EC" }}>
                         <User className="h-4 w-4" />Iniciar Sesión
                       </Button>
                     </Link>

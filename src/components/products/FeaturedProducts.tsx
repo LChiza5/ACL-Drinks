@@ -7,7 +7,7 @@ import type { Product } from "@/types";
 export function FeaturedProducts({ products }: { products: Product[] }) {
   if (!products.length) return null;
   return (
-    <section className="section-padding bg-brand-mid/20">
+    <section className="section-padding" style={{ background: "#12110F" }}>
       <div className="container-max">
         <div className="flex items-end justify-between mb-10">
           <div className="space-y-2">

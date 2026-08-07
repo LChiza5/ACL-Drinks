@@ -35,7 +35,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
   return (
     <div className="p-6 space-y-6 max-w-3xl">
       <div className="flex items-center gap-3">
-        <Link href="/dashboard/orders" className="text-muted-foreground hover:text-white transition-colors">
+        <Link href="/dashboard/orders" className="text-[#B8B1A7] hover:text-white transition-colors">
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <h1 className="text-xl font-black text-white font-mono">{order.orderNumber}</h1>
