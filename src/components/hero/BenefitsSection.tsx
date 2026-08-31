@@ -16,8 +16,12 @@ const benefits = [
 
 export function BenefitsSection() {
   return (
-    <section className="section-padding" style={{ background: "#12110F" }}>
-      <div className="container-max">
+    <section className="section-padding relative overflow-hidden" style={{ background: "#12110F" }}>
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl" style={{ background: "rgba(166,124,82,0.06)" }} />
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(201,152,74,0.05)" }} />
+      </div>
+      <div className="container-max relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +43,7 @@ export function BenefitsSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ type: "spring", stiffness: 140, damping: 15, delay: i * 0.08 }}
               className="group cursor-pointer"
             >
               <TiltCard rotateAmplitude={6}>
