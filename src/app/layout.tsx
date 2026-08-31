@@ -23,7 +23,6 @@ const fraunces = Fraunces({
   display: "swap",
   weight: ["500", "600", "700", "900"],
   style: ["normal", "italic"],
-  axes: ["opsz", "SOFT", "WONK"],
 });
 
 export const metadata: Metadata = {
