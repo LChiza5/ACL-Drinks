@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import type { ApiResponse } from "@/types";
+
+const updateOrderSchema = z.object({
+  status: z.enum(["PENDING", "CONFIRMED", "PREPARING", "SHIPPED", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED", "REFUNDED"]).optional(),
+  paymentStatus: z.enum(["PENDING", "PROCESSING", "COMPLETED", "FAILED", "REFUNDED"]).optional(),
+});
 
 const STATUS_MESSAGES: Partial<Record<string, string>> = {
   CONFIRMED: "Pedido confirmado ✅",
@@ -21,7 +27,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       return NextResponse.json<ApiResponse>({ success: false, error: "No autorizado" }, { status: 401 });
     }
 
-    const { status, paymentStatus } = await req.json();
+    const body = await req.json();
+    const { status, paymentStatus } = updateOrderSchema.parse(body);
 
     const order = await prisma.order.update({
       where: { id },

@@ -55,7 +55,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json<ApiResponse>({ success: false, error: "El carrito está vacío" }, { status: 400 });
     }
 
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    // Re-fetch real prices server-side — never trust item.price from the client body.
+    const productIds = items.filter((i) => i.type === "product").map((i) => i.id);
+    const kitIds = items.filter((i) => i.type === "kit").map((i) => i.id);
+    const [dbProducts, dbKits] = await Promise.all([
+      productIds.length ? prisma.product.findMany({ where: { id: { in: productIds }, isActive: true }, select: { id: true, price: true } }) : [],
+      kitIds.length ? prisma.kit.findMany({ where: { id: { in: kitIds }, isActive: true }, select: { id: true, price: true } }) : [],
+    ]);
+    const priceById = new Map([...dbProducts, ...dbKits].map((p) => [p.id, p.price]));
+
+    const verifiedItems = items.map((item) => {
+      const realPrice = priceById.get(item.id);
+      if (realPrice === undefined) throw new Error(`Producto no disponible: ${item.name}`);
+      return { ...item, price: realPrice };
+    });
+
+    const subtotal = verifiedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const deliveryFee = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE_NATIONAL;
 
     // Validate coupon server-side — never trust the client discount
@@ -94,7 +109,7 @@ export async function POST(req: NextRequest) {
         notes,
         deliveryAddress,
         orderItems: {
-          create: items.map((item) => ({
+          create: verifiedItems.map((item) => ({
             productId: item.type === "product" ? item.id : null,
             kitId: item.type === "kit" ? item.id : null,
             name: item.name,
@@ -116,7 +131,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Decrement stock + register coupon usage (fire-and-forget style, non-blocking)
-    const productItems = items.filter((i) => i.type === "product");
+    const productItems = verifiedItems.filter((i) => i.type === "product");
     await Promise.all([
       ...productItems.map((item) =>
         prisma.inventory.updateMany({

@@ -1,7 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+
+const settingsSchema = z
+  .object({
+    SINPE_PHONE: z.string().max(50).optional(),
+    SINPE_NAME: z.string().max(100).optional(),
+    WHATSAPP_NUMBER: z.string().max(50).optional(),
+    DELIVERY_ZONE: z.string().max(100).optional(),
+    DELIVERY_FEE_NATIONAL: z.string().max(20).optional(),
+    FREE_DELIVERY_THRESHOLD: z.string().max(20).optional(),
+  })
+  .strict();
 
 export async function GET() {
   try {
@@ -18,7 +30,8 @@ export async function PATCH(req: NextRequest) {
     if (session?.user.role !== "ADMIN") {
       return NextResponse.json({ success: false, error: "No autorizado" }, { status: 401 });
     }
-    const updates: Record<string, string> = await req.json();
+    const body = await req.json();
+    const updates = settingsSchema.parse(body);
     await prisma.$transaction(
       Object.entries(updates).map(([key, value]) =>
         prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } })
