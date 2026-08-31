@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
 import { Aurora } from "@/components/ui/aurora";
 import { StarBorder } from "@/components/ui/star-border";
+import { HeroDepthLayer } from "@/components/hero/HeroDepthLayer";
 
 const stats = [
   { icon: Zap, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", color: "#C9984A" },
@@ -27,6 +28,7 @@ export function Hero() {
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
       <Aurora colorStops={["#8B6239", "#C9984A", "#A67C52"]} amplitude={0.8} blend={0.45} className="opacity-60" />
+      <HeroDepthLayer />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(166,124,82,0.04)" }} />
       </div>
@@ -37,7 +39,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ type: "spring", stiffness: 120, damping: 16 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
             style={{ border: "1px solid rgba(201,152,74,0.35)", background: "rgba(201,152,74,0.1)" }}
           >
@@ -48,7 +50,7 @@ export function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.1 }}
             className="text-5xl md:text-7xl font-black tracking-tight leading-tight"
           >
             <span className="gradient-text glow-amber">Lo Mejor</span>
@@ -60,7 +62,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.2 }}
             className="text-lg md:text-xl max-w-2xl mx-auto"
             style={{ color: "#B8B1A7" }}
           >
@@ -71,7 +73,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <StarBorder className="w-full sm:w-auto">
@@ -97,7 +99,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ type: "spring", stiffness: 110, damping: 16, delay: 0.4 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
           >
             {stats.map((stat, i) => (
