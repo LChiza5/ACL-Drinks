@@ -12,7 +12,7 @@ const INK = {
   tail: "#8B6239",
 };
 
-interface PisoteMascotProps {
+interface PizoteMascotProps {
   /** true = cubrirse los ojos con las patas (campo de contraseña enfocado y con contenido) */
   covering: boolean;
   /** true = entreabrir un ojo (el usuario activó "mostrar contraseña") */
@@ -20,7 +20,7 @@ interface PisoteMascotProps {
   className?: string;
 }
 
-export function PisoteMascot({ covering, peeking = false, className = "" }: PisoteMascotProps) {
+export function PizoteMascot({ covering, peeking = false, className = "" }: PizoteMascotProps) {
   const leftPaw = covering ? { cx: 66, cy: 55 } : { cx: 60, cy: 87 };
   const rightPaw = covering ? { cx: 94, cy: 55 } : { cx: 100, cy: 87 };
 

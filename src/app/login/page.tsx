@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginSchema, type LoginInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
-import { PisoteMascot } from "@/components/ui/pisote-mascot";
+import { PizoteMascot } from "@/components/ui/pizote-mascot";
 
 function LoginForm() {
   const router = useRouter();
@@ -55,7 +55,7 @@ function LoginForm() {
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
           <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
-        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
+        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
