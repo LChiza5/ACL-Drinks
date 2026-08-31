@@ -30,10 +30,10 @@ export function Hero() {
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
-      <Aurora colorStops={["#0E8259", "#D4A72C", "#E3B94D"]} amplitude={0.8} blend={0.45} className="opacity-60" />
+      <Aurora colorStops={["#178A38", "#F2A900", "#FFC94D"]} amplitude={0.8} blend={0.45} className="opacity-60" />
       <HeroDepthLayer />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(22,166,115,0.05)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(34,177,76,0.05)" }} />
       </div>
 
       <div className="container-max section-padding relative z-10 w-full">
@@ -44,7 +44,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 16 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-            style={{ border: "1px solid rgba(212,167,44,0.35)", background: "rgba(212,167,44,0.1)" }}
+            style={{ border: "1px solid rgba(242,169,0,0.35)", background: "rgba(242,169,0,0.1)" }}
           >
             <BrandGlassIcon className="h-4 w-4" />
             <span className="text-shimmer font-semibold">Entrega Rápida en Costa Rica</span>
@@ -79,7 +79,7 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <StarBorder className="w-full sm:w-auto" color="#D4A72C">
+            <StarBorder className="w-full sm:w-auto" color="#F2A900">
               <Button
                 size="lg"
                 className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
@@ -92,7 +92,7 @@ export function Hero() {
               size="lg"
               variant="outline"
               className="gap-3 w-full sm:w-auto font-semibold px-8 py-4 rounded-xl"
-              style={{ borderColor: "rgba(212,167,44,0.5)", color: "#F5F2EC" }}
+              style={{ borderColor: "rgba(242,169,0,0.5)", color: "#F5F2EC" }}
               onClick={() => { window.location.href = "/tracking"; }}
             >
               <MapPin className="h-5 w-5" /> Rastrear Pedido

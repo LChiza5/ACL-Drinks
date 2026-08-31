@@ -45,7 +45,7 @@ export function Navbar() {
     <header
       className="sticky top-0 z-40 w-full glass-card transition-shadow duration-300"
       style={{
-        borderBottom: `1px solid rgba(212,167,44,${scrolled ? 0.28 : 0.15})`,
+        borderBottom: `1px solid rgba(242,169,0,${scrolled ? 0.28 : 0.15})`,
         boxShadow: scrolled ? "0 8px 24px rgba(0,0,0,0.35)" : "none",
       }}
     >
@@ -72,14 +72,14 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className="nav-pill relative px-4 py-2.5 text-sm font-semibold rounded-lg transition-colors duration-200 hover:text-white"
-                  style={{ color: isActive ? "#7EE0B8" : "#B8B1A7" }}
+                  style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                 >
                   {link.label}
                   {isActive && (
                     <motion.span
                       layoutId="navbar-active-dot"
                       className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 h-1 w-1 rounded-full"
-                      style={{ background: "#16A673" }}
+                      style={{ background: "#22B14C" }}
                       transition={springs.snappy}
                     />
                   )}
@@ -96,7 +96,7 @@ export function Navbar() {
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#F0356E" }}>
+              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
                 <FaInstagram className="h-6 w-6" />
               </Button>
             </a>
@@ -111,7 +111,7 @@ export function Navbar() {
                     exit={{ scale: 0.4, opacity: 0 }}
                     transition={springs.bouncy}
                     className="absolute -top-1 -right-1 h-5 w-5 rounded-full text-white text-xs font-bold flex items-center justify-center"
-                    style={{ background: "#F0356E" }}
+                    style={{ background: "#FF3D8A" }}
                   >
                     {totalItems > 9 ? "9+" : totalItems}
                   </motion.span>
@@ -124,7 +124,7 @@ export function Navbar() {
                   <Button variant="ghost" size="icon" className="h-11 w-11">
                     <Avatar className="h-9 w-9">
                       <AvatarImage src={session.user?.image || ""} />
-                      <AvatarFallback className="text-xs font-bold" style={{ background: "#D4A72C", color: "#2A1F0C" }}>
+                      <AvatarFallback className="text-xs font-bold" style={{ background: "#F2A900", color: "#2A1F0C" }}>
                         {getInitials(session.user?.name || "U")}
                       </AvatarFallback>
                     </Avatar>
@@ -169,7 +169,7 @@ export function Navbar() {
             <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#F0356E" }}>
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#FF3D8A" }}>
                   {totalItems}
                 </span>
               )}
@@ -189,7 +189,7 @@ export function Navbar() {
               exit={{ opacity: 0, height: 0 }}
               transition={springs.gentle}
               className="lg:hidden overflow-hidden"
-              style={{ borderTop: "1px solid rgba(212,167,44,0.15)" }}
+              style={{ borderTop: "1px solid rgba(242,169,0,0.15)" }}
             >
               <nav className="flex flex-col p-4 gap-1">
                 {navLinks.map((link, i) => {
@@ -205,7 +205,7 @@ export function Navbar() {
                         href={link.href}
                         onClick={closeMobileMenu}
                         className="block px-4 py-3 text-sm font-semibold rounded-lg transition-all hover:text-white hover:bg-white/5"
-                        style={{ color: isActive ? "#7EE0B8" : "#B8B1A7" }}
+                        style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                       >
                         {link.label}
                       </Link>
@@ -230,7 +230,7 @@ export function Navbar() {
                       </Link>
                       {(session.user?.role === "ADMIN" || session.user?.role === "MANAGER") && (
                         <Link href="/dashboard" onClick={closeMobileMenu}>
-                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#D4A72C" }}>
+                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#F2A900" }}>
                             <LayoutDashboard className="h-4 w-4" />Dashboard
                           </Button>
                         </Link>
@@ -241,7 +241,7 @@ export function Navbar() {
                     </>
                   ) : (
                     <Link href="/login" onClick={closeMobileMenu}>
-                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(212,167,44,0.5)", color: "#F5F2EC" }}>
+                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(242,169,0,0.5)", color: "#F5F2EC" }}>
                         <User className="h-4 w-4" />Iniciar Sesión
                       </Button>
                     </Link>

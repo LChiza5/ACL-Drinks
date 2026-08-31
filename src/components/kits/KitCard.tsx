@@ -37,11 +37,11 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
       <Link href={`/combos-fiesteros/${kit.slug}`}>
         <SpotlightCard
           className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
-          style={{ border: "2px solid rgba(240,53,110,0.2)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(240,53,110,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(240,53,110,0.25)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(240,53,110,0.2)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+          style={{ border: "2px solid rgba(255,61,138,0.2)" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(255,61,138,0.25)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.2)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
         >
-          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "linear-gradient(135deg, #1E1A17, rgba(22,166,115,0.18))" }}>
+          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "linear-gradient(135deg, #1E1A17, rgba(34,177,76,0.18))" }}>
             {kit.image ? (
               <Image src={kit.image} alt={kit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
             ) : (
@@ -49,18 +49,18 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             )}
             {kit.badge && (
               <div className="absolute top-3 right-3">
-                <Badge className="font-black text-xs border-0 text-white" style={{ background: "linear-gradient(135deg, #D4A72C, #B8860F)" }}>{kit.badge}</Badge>
+                <Badge className="font-black text-xs border-0 text-white" style={{ background: "linear-gradient(135deg, #F2A900, #C98700)" }}>{kit.badge}</Badge>
               </div>
             )}
             {discount > 0 && (
               <div className="absolute top-3 left-3">
-                <Badge className="font-black text-white border-0" style={{ background: "#F0356E" }}>AHORRÁ {discount}%</Badge>
+                <Badge className="font-black text-white border-0" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
               </div>
             )}
           </GlareHover>
           <div className="p-5 space-y-3">
             <div className="flex items-start gap-2">
-              <Package className="h-5 w-5 shrink-0 mt-0.5" style={{ color: "#F0356E" }} />
+              <Package className="h-5 w-5 shrink-0 mt-0.5" style={{ color: "#FF3D8A" }} />
               <div>
                 <h3 className="font-black text-lg leading-tight" style={{ color: "#F5F2EC" }}>{kit.name}</h3>
                 {kit.description && <p className="text-xs mt-1 line-clamp-2" style={{ color: "#B8B1A7" }}>{kit.description}</p>}
@@ -69,7 +69,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             {kit.kitProducts && kit.kitProducts.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {kit.kitProducts.slice(0, 3).map((kp) => (
-                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(22,166,115,0.12)", color: "#2FBE87", border: "1px solid rgba(22,166,115,0.25)" }}>
+                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
                     {kp.quantity}x {kp.product?.name?.split(" ").slice(0, 2).join(" ")}
                   </span>
                 ))}
@@ -77,7 +77,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             )}
             <div className="flex items-end justify-between gap-2">
               <div>
-                <p className="text-2xl font-black" style={{ color: "#2FBE87" }}>{formatPrice(kit.price)}</p>
+                <p className="text-2xl font-black" style={{ color: "#4CD671" }}>{formatPrice(kit.price)}</p>
                 {kit.comparePrice && <p className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(kit.comparePrice)}</p>}
               </div>
               <ClickSpark className="shrink-0">

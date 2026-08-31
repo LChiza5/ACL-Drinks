@@ -39,9 +39,9 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       <Link href={`/products/${product.slug}`}>
         <SpotlightCard
           className="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-card-hover"
-          style={{ border: "1px solid rgba(22,166,115,0.14)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(22,166,115,0.45)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(22,166,115,0.14)"; }}
+          style={{ border: "1px solid rgba(34,177,76,0.14)" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,177,76,0.45)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,177,76,0.14)"; }}
         >
           <GlareHover className="relative aspect-square overflow-hidden block" style={{ background: "#1E1A17" }}>
             {product.images[0] ? (
@@ -50,8 +50,8 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <div className="absolute inset-0 flex items-center justify-center text-6xl">🥃</div>
             )}
             <div className="absolute top-2 left-2 flex flex-col gap-1">
-              {product.isNew && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#D4A72C" }}>NUEVO</Badge>}
-              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#F0356E" }}>-{discount}%</Badge>}
+              {product.isNew && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#F2A900" }}>NUEVO</Badge>}
+              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#FF3D8A" }}>-{discount}%</Badge>}
               {isOutOfStock && <Badge variant="destructive" className="text-xs">AGOTADO</Badge>}
             </div>
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -61,13 +61,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             </div>
           </GlareHover>
           <div className="p-4 space-y-2">
-            {product.category && <span className="text-xs font-semibold" style={{ color: "#D4A72C" }}>{product.category.name}</span>}
-            <h3 className="font-bold text-sm leading-tight line-clamp-2 transition-colors group-hover:text-[#16A673]" style={{ color: "#F5F2EC" }}>
+            {product.category && <span className="text-xs font-semibold" style={{ color: "#F2A900" }}>{product.category.name}</span>}
+            <h3 className="font-bold text-sm leading-tight line-clamp-2 transition-colors group-hover:text-[#22B14C]" style={{ color: "#F5F2EC" }}>
               {product.name}
             </h3>
             {product.volume && <p className="text-xs" style={{ color: "#B8B1A7" }}>{product.volume} • {product.alcoholContent}% Alc.</p>}
             <div className="flex items-baseline gap-2">
-              <span className="text-lg font-black" style={{ color: "#2FBE87" }}>{formatPrice(product.price)}</span>
+              <span className="text-lg font-black" style={{ color: "#4CD671" }}>{formatPrice(product.price)}</span>
               {product.comparePrice && <span className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(product.comparePrice)}</span>}
             </div>
             <ClickSpark className="block">

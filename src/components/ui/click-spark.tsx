@@ -7,7 +7,7 @@ type Spark = { x: number; y: number; angle: number; startTime: number };
 
 export function ClickSpark({
   children,
-  sparkColor = "#16A673",
+  sparkColor = "#22B14C",
   sparkSize = 10,
   sparkRadius = 18,
   sparkCount = 8,

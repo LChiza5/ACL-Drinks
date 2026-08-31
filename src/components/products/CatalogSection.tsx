@@ -38,7 +38,7 @@ export function CatalogSection({ categories, allProducts }: Props) {
     <section id="catalogo" className="section-padding">
       <div className="container-max">
         <div className="text-center space-y-2 mb-8">
-          <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#D4A72C" }}>
+          <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F2A900" }}>
             Catálogo
           </span>
           <h2 className="text-4xl font-display font-semibold" style={{ color: "#F5F2EC" }}>
@@ -58,14 +58,14 @@ export function CatalogSection({ categories, allProducts }: Props) {
                 style={
                   isActive
                     ? {
-                        background: "linear-gradient(135deg, #0E8259, #16A673)",
+                        background: "linear-gradient(135deg, #178A38, #22B14C)",
                         color: "#F5F2EC",
-                        boxShadow: "0 4px 16px rgba(22,166,115,0.4)",
+                        boxShadow: "0 4px 16px rgba(34,177,76,0.4)",
                       }
                     : {
                         background: "rgba(255, 255, 255,0.05)",
                         color: "#B8B1A7",
-                        border: "1px solid rgba(212,167,44,0.2)",
+                        border: "1px solid rgba(242,169,0,0.2)",
                       }
                 }
               >

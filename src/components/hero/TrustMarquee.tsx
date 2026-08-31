@@ -11,7 +11,7 @@ export function TrustMarquee() {
   const track = [...items, ...items];
 
   return (
-    <div className="overflow-hidden py-4" style={{ background: "#1E1A17", borderTop: "1px solid rgba(212,167,44,0.14)", borderBottom: "1px solid rgba(212,167,44,0.14)" }}>
+    <div className="overflow-hidden py-4" style={{ background: "#1E1A17", borderTop: "1px solid rgba(242,169,0,0.14)", borderBottom: "1px solid rgba(242,169,0,0.14)" }}>
       <div className="flex w-max animate-marquee gap-10">
         {track.map((item, i) => (
           <span key={i} className="text-sm font-semibold whitespace-nowrap" style={{ color: "#B8B1A7" }}>

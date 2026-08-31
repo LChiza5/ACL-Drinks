@@ -19,8 +19,8 @@ export function BenefitsSection() {
   return (
     <section className="section-padding relative overflow-hidden" style={{ background: "#12110F" }}>
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl" style={{ background: "rgba(22,166,115,0.07)" }} />
-        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(212,167,44,0.06)" }} />
+        <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl" style={{ background: "rgba(34,177,76,0.07)" }} />
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full blur-3xl" style={{ background: "rgba(242,169,0,0.06)" }} />
       </div>
       <div className="container-max relative z-10">
         <motion.div
@@ -29,7 +29,7 @@ export function BenefitsSection() {
           viewport={{ once: true }}
           className="text-center space-y-3 mb-12"
         >
-          <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#D4A72C" }}>¿Por qué elegirnos?</span>
+          <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F2A900" }}>¿Por qué elegirnos?</span>
           <h2 className="text-4xl font-display font-semibold" style={{ color: "#F5F2EC" }}>
             Beneficios <span className="italic gradient-text-primary">Exclusivos</span> 🎁
           </h2>
