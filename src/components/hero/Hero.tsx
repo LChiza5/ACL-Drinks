@@ -33,7 +33,7 @@ export function Hero() {
       <Aurora colorStops={["#0E8259", "#D4A72C", "#E3B94D"]} amplitude={0.8} blend={0.45} className="opacity-60" />
       <HeroDepthLayer />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(166,124,82,0.04)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(22,166,115,0.05)" }} />
       </div>
 
       <div className="container-max section-padding relative z-10 w-full">

@@ -3,7 +3,7 @@
 // Adapted from react-bits' StarBorder (https://reactbits.dev) — zero dependencies.
 export function StarBorder({
   children,
-  color = "#C9984A",
+  color = "#D4A72C",
   speed = "5s",
   className = "",
 }: {
