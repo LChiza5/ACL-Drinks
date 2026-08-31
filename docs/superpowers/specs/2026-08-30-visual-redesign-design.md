@@ -34,13 +34,13 @@ Logo real (`ACL Drinks/Logo.jpg` del usuario) reemplaza el placeholder SVG gené
   vía `next/image`, que se propaga automáticamente a los 5 usos existentes (Navbar,
   Footer, login, register, dashboard layout) sin tocar cada sitio por separado.
 
-## 2. Mascota Pisote
+## 2. Mascota Pizote
 
 Pieza central y firma del sitio. Componente SVG propio y autocontenido (sin assets
 externos, mismo espíritu que `aurora.tsx`), coloreado con la paleta ámbar/marrón del
-sitio — no un pisote "realista" sino uno que se sienta parte de la marca.
+sitio — no un pizote "realista" sino uno que se sienta parte de la marca.
 
-**Ubicación:** `src/components/ui/pisote-mascot.tsx`. Se engancha en `LoginForm`
+**Ubicación:** `src/components/ui/pizote-mascot.tsx`. Se engancha en `LoginForm`
 (`src/app/login/page.tsx`) y `RegisterPage` (`src/app/register/page.tsx`) — ambos ya
 usan `react-hook-form`; el estado de "cubriendo" se deriva con `watch()` sobre el campo
 `password` (y `confirmPassword` en registro) combinado con el estado de foco del input.
@@ -53,7 +53,7 @@ usan `react-hook-form`; el estado de "cubriendo" se deriva con `watch()` sobre e
   destaparse) para que no se sienta estático.
 - **Destapando** — al perder foco el campo sensible, o al vaciarse.
 - **Peek** — si el usuario usa el toggle de mostrar/ocultar contraseña que ya existe en
-  ambos forms (ícono `Eye`/`EyeOff`), el Pisote entreabre un ojo mientras `showPass` es
+  ambos forms (ícono `Eye`/`EyeOff`), el Pizote entreabre un ojo mientras `showPass` es
   `true`.
 
 Esto resuelve dos pedidos en uno: la mascota animada del password Y el "animalito
@@ -97,7 +97,7 @@ keys es churn innecesario para el alcance de este trabajo.
 ## Commits de este sub-proyecto
 
 1. ✅ Logo real (favicon + Logo.tsx) — `56cc1e6`
-2. Mascota Pisote + integración en login/register
+2. Mascota Pizote + integración en login/register
 3. Hero: capa de profundidad + scroll reveals con spring + fondo nuevo en Beneficios
 4. Limpieza de tokens neon sin uso + auditoría/pulido de microinteracciones (cards, nav,
    botones)

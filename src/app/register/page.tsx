@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { registerSchema, type RegisterInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
-import { PisoteMascot } from "@/components/ui/pisote-mascot";
+import { PizoteMascot } from "@/components/ui/pizote-mascot";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -56,7 +56,7 @@ export default function RegisterPage() {
             <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
           </div>
         </div>
-        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
+        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2"><Label>Nombre completo</Label><Input placeholder="Tu nombre" {...register("name")} />{errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}</div>

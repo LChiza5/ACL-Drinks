@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Dar identidad propia al sitio (mascota Pisote animada en login/register, profundidad de movimiento en Hero/Beneficios, limpieza de tokens muertos) conservando la paleta ámbar existente.
+**Goal:** Dar identidad propia al sitio (mascota Pizote animada en login/register, profundidad de movimiento en Hero/Beneficios, limpieza de tokens muertos) conservando la paleta ámbar existente.
 
 **Architecture:** Componentes nuevos autocontenidos (SVG + framer-motion, sin deps nuevas) que se enganchan a patrones ya existentes en el código (react-hook-form `watch`, `whileInView`, `glass-card`).
 
@@ -14,10 +14,10 @@
 
 ---
 
-### Task 1: Mascota Pisote — componente
+### Task 1: Mascota Pizote — componente
 
 **Files:**
-- Create: `src/components/ui/pisote-mascot.tsx`
+- Create: `src/components/ui/pizote-mascot.tsx`
 
 - [ ] **Step 1: Crear el componente**
 
@@ -38,7 +38,7 @@ const INK = {
   tail: "#8B6239",
 };
 
-interface PisoteMascotProps {
+interface PizoteMascotProps {
   /** true = cubrirse los ojos con las patas (campo de contraseña enfocado y con contenido) */
   covering: boolean;
   /** true = entreabrir un ojo (el usuario activó "mostrar contraseña") */
@@ -46,7 +46,7 @@ interface PisoteMascotProps {
   className?: string;
 }
 
-export function PisoteMascot({ covering, peeking = false, className = "" }: PisoteMascotProps) {
+export function PizoteMascot({ covering, peeking = false, className = "" }: PizoteMascotProps) {
   const leftPaw = covering ? { x: 0, y: 0, rotate: -14 } : { x: -6, y: 32, rotate: -10 };
   const rightPaw = covering ? { x: 0, y: 0, rotate: 14 } : { x: 6, y: 32, rotate: 10 };
 
@@ -107,18 +107,18 @@ export function PisoteMascot({ covering, peeking = false, className = "" }: Piso
 - [ ] **Step 2: Verificar tipos**
 
 Run: `npx tsc --noEmit`
-Expected: sin errores nuevos relacionados a `pisote-mascot.tsx`.
+Expected: sin errores nuevos relacionados a `pizote-mascot.tsx`.
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add src/components/ui/pisote-mascot.tsx
-git commit -m "Componente mascota Pisote (SVG + framer-motion, autocontenido)"
+git add src/components/ui/pizote-mascot.tsx
+git commit -m "Componente mascota Pizote (SVG + framer-motion, autocontenido)"
 ```
 
 ---
 
-### Task 2: Pisote en Login
+### Task 2: Pizote en Login
 
 **Files:**
 - Modify: `src/app/login/page.tsx`
@@ -144,7 +144,7 @@ por:
 Y agregar el import al inicio del archivo:
 
 ```tsx
-import { PisoteMascot } from "@/components/ui/pisote-mascot";
+import { PizoteMascot } from "@/components/ui/pizote-mascot";
 ```
 
 - [ ] **Step 2: Renderizar la mascota y enganchar el campo**
@@ -163,7 +163,7 @@ por:
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
           <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
-        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
+        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
 ```
 
 Reemplazar el campo de contraseña:
@@ -200,12 +200,12 @@ Y agregar el import de `useState` (ya existe `useState` importado desde `"react"
 
 ```bash
 git add src/app/login/page.tsx
-git commit -m "Mascota Pisote en el login: tapa los ojos al escribir la contraseña"
+git commit -m "Mascota Pizote en el login: tapa los ojos al escribir la contraseña"
 ```
 
 ---
 
-### Task 3: Pisote en Registro
+### Task 3: Pizote en Registro
 
 **Files:**
 - Modify: `src/app/register/page.tsx`
@@ -234,7 +234,7 @@ por:
 Agregar import:
 
 ```tsx
-import { PisoteMascot } from "@/components/ui/pisote-mascot";
+import { PizoteMascot } from "@/components/ui/pizote-mascot";
 ```
 
 - [ ] **Step 2: Renderizar la mascota**
@@ -255,7 +255,7 @@ por:
             <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
           </div>
         </div>
-        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
+        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
 ```
 
 - [ ] **Step 3: Enganchar ambos campos**
@@ -309,7 +309,7 @@ Mismo flujo que Task 2 pero en `/register`, probando también el campo "Confirma
 
 ```bash
 git add src/app/register/page.tsx
-git commit -m "Mascota Pisote en registro: cubre ojos en password y confirmar password"
+git commit -m "Mascota Pizote en registro: cubre ojos en password y confirmar password"
 git push origin main
 ```
 
@@ -520,8 +520,8 @@ git push origin main
 
 ## Self-Review
 
-**Cobertura del spec:** Identidad de marca → ya implementado antes de este plan (commits `56cc1e6`/`a408d75`). Mascota Pisote → Tasks 1-3. Profundidad/ritmo Hero+Beneficios → Task 4. Limpieza → Task 5. Auditoría de TiltCard/SpotlightCard/GlareHover del spec original: se verificó por lectura directa de `BenefitsSection.tsx` (ya usa `TiltCard`+`SpotlightCard` correctamente) y por el reporte de exploración previo (ProductCard/KitCard ya las usan) — no generó una tarea propia porque no hay nada que corregir.
+**Cobertura del spec:** Identidad de marca → ya implementado antes de este plan (commits `56cc1e6`/`a408d75`). Mascota Pizote → Tasks 1-3. Profundidad/ritmo Hero+Beneficios → Task 4. Limpieza → Task 5. Auditoría de TiltCard/SpotlightCard/GlareHover del spec original: se verificó por lectura directa de `BenefitsSection.tsx` (ya usa `TiltCard`+`SpotlightCard` correctamente) y por el reporte de exploración previo (ProductCard/KitCard ya las usan) — no generó una tarea propia porque no hay nada que corregir.
 
 **Placeholders:** ninguno — cada step tiene el código completo a aplicar.
 
-**Consistencia de tipos:** `PisoteMascotProps` (`covering`, `peeking?`, `className?`) se usa idéntico en Tasks 2 y 3. `HeroDepthLayer` no recibe props, coincide entre Step 1 y Step 2 de Task 4.
+**Consistencia de tipos:** `PizoteMascotProps` (`covering`, `peeking?`, `className?`) se usa idéntico en Tasks 2 y 3. `HeroDepthLayer` no recibe props, coincide entre Step 1 y Step 2 de Task 4.
