@@ -7,8 +7,8 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
     <section className="section-padding">
       <div className="container-max">
         <div className="text-center space-y-3 mb-10">
-          <span className="text-sm font-semibold text-neon-purple uppercase tracking-widest">Navega por</span>
-          <h2 className="text-4xl font-black text-white">Nuestras <span className="gradient-text">Categorías</span> 🏷️</h2>
+          <span className="text-sm font-semibold text-emerald-500 uppercase tracking-widest">Navega por</span>
+          <h2 className="text-4xl font-display font-semibold text-white">Nuestras <span className="italic gradient-text-primary">Categorías</span> 🏷️</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {categories.map((cat, i) => <CategoryCard key={cat.id} category={cat} index={i} />)}
