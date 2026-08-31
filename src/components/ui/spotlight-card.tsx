@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function SpotlightCard({
   children,
   radius = 260,
-  color = "rgba(212,167,44,0.18)",
+  color = "rgba(242,169,0,0.18)",
   className,
   ...props
 }: {

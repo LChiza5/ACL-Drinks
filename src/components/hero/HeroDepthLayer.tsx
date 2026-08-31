@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 const dots = [
-  { top: "18%", left: "12%", size: 10, delay: 0, rgb: "212,167,44" },
-  { top: "30%", left: "82%", size: 14, delay: 0.6, rgb: "22,166,115" },
-  { top: "62%", left: "8%", size: 8, delay: 1.1, rgb: "240,53,110" },
-  { top: "72%", left: "88%", size: 12, delay: 0.3, rgb: "212,167,44" },
-  { top: "12%", left: "48%", size: 6, delay: 1.6, rgb: "22,166,115" },
-  { top: "85%", left: "45%", size: 9, delay: 0.9, rgb: "240,53,110" },
+  { top: "18%", left: "12%", size: 10, delay: 0, rgb: "242,169,0" },
+  { top: "30%", left: "82%", size: 14, delay: 0.6, rgb: "34,177,76" },
+  { top: "62%", left: "8%", size: 8, delay: 1.1, rgb: "255,61,138" },
+  { top: "72%", left: "88%", size: 12, delay: 0.3, rgb: "242,169,0" },
+  { top: "12%", left: "48%", size: 6, delay: 1.6, rgb: "34,177,76" },
+  { top: "85%", left: "45%", size: 9, delay: 0.9, rgb: "255,61,138" },
 ];
 
 export function HeroDepthLayer() {

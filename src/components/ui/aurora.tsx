@@ -112,7 +112,7 @@ void main() {
 `;
 
 export function Aurora({
-  colorStops = ["#0E8259", "#D4A72C", "#E3B94D"],
+  colorStops = ["#178A38", "#F2A900", "#FFC94D"],
   amplitude = 0.9,
   blend = 0.5,
   className = "",

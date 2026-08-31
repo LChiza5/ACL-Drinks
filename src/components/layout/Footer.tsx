@@ -9,10 +9,10 @@ import { fadeUp } from "@/lib/motion";
 import { Logo } from "./Logo";
 
 const contactItems = [
-  { icon: MapPin, text: `${DELIVERY_ZONE}, Costa Rica`, color: "#D4A72C" },
-  { icon: Phone, text: WHATSAPP_NUMBER, href: `tel:${WHATSAPP_NUMBER}`, color: "#16A673" },
-  { icon: Mail, text: "info@acldrinks.cr", href: "mailto:info@acldrinks.cr", color: "#F0356E" },
-  { icon: Clock, text: "Lun–Dom: 8am–11pm", color: "#D4A72C" },
+  { icon: MapPin, text: `${DELIVERY_ZONE}, Costa Rica`, color: "#F2A900" },
+  { icon: Phone, text: WHATSAPP_NUMBER, href: `tel:${WHATSAPP_NUMBER}`, color: "#22B14C" },
+  { icon: Mail, text: "info@acldrinks.cr", href: "mailto:info@acldrinks.cr", color: "#FF3D8A" },
+  { icon: Clock, text: "Lun–Dom: 8am–11pm", color: "#F2A900" },
 ];
 
 const shopLinks = [
@@ -45,7 +45,7 @@ export function Footer() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   return (
-    <footer style={{ background: "#1E1A17", borderTop: "1px solid rgba(212,167,44,0.15)" }}>
+    <footer style={{ background: "#1E1A17", borderTop: "1px solid rgba(242,169,0,0.15)" }}>
       <div className="container-max section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
@@ -67,12 +67,12 @@ export function Footer() {
               </motion.a>
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
                 className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(240,53,110,0.1)", color: "#F0356E" }}>
+                style={{ background: "rgba(255,61,138,0.1)", color: "#FF3D8A" }}>
                 <FaInstagram className="h-5 w-5" />
               </motion.a>
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href="#"
                 className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(22,166,115,0.1)", color: "#16A673" }}>
+                style={{ background: "rgba(34,177,76,0.1)", color: "#22B14C" }}>
                 <FaFacebook className="h-5 w-5" />
               </motion.a>
             </div>
@@ -110,18 +110,18 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 flex flex-wrap items-center gap-x-3 gap-y-2"
-          style={{ borderTop: "1px solid rgba(212,167,44,0.12)" }}>
+          style={{ borderTop: "1px solid rgba(242,169,0,0.12)" }}>
           <span className="text-xs font-semibold" style={{ color: "#F5F2EC" }}>Aceptamos:</span>
           {Object.values(PAYMENT_METHODS).map((m) => (
             <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs"
-              style={{ background: "rgba(212,167,44,0.1)", color: "#B8B1A7" }}>
+              style={{ background: "rgba(242,169,0,0.1)", color: "#B8B1A7" }}>
               <span>{m.icon}</span>{m.label}
             </span>
           ))}
         </div>
 
         <div className="mt-6 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
-          style={{ borderTop: "1px solid rgba(212,167,44,0.12)", color: "#B8B1A7" }}>
+          style={{ borderTop: "1px solid rgba(242,169,0,0.12)", color: "#B8B1A7" }}>
           <p>© {new Date().getFullYear()} ACL Drinks. Todos los derechos reservados.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacidad</Link>
