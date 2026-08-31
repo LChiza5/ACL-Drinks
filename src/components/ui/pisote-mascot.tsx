@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 
-const spring = { type: "spring" as const, stiffness: 320, damping: 22 };
-
 const INK = {
   bodyLight: "#D4A855",
   body: "#C9984A",
@@ -23,8 +21,8 @@ interface PisoteMascotProps {
 }
 
 export function PisoteMascot({ covering, peeking = false, className = "" }: PisoteMascotProps) {
-  const leftPaw = covering ? { x: 0, y: 0, rotate: -14 } : { x: -6, y: 32, rotate: -10 };
-  const rightPaw = covering ? { x: 0, y: 0, rotate: 14 } : { x: 6, y: 32, rotate: 10 };
+  const leftPaw = covering ? { cx: 66, cy: 55 } : { cx: 60, cy: 87 };
+  const rightPaw = covering ? { cx: 94, cy: 55 } : { cx: 100, cy: 87 };
 
   return (
     <svg viewBox="0 0 160 160" className={className} aria-hidden="true">
@@ -56,24 +54,21 @@ export function PisoteMascot({ covering, peeking = false, className = "" }: Piso
       <circle cx="66" cy="55" r="5" fill={INK.eye} />
       <circle cx="94" cy="55" r="5" fill={INK.eye} />
 
-      {/* patas */}
-      <motion.ellipse
-        cx="66" cy="55" rx="13" ry="16"
+      {/* patas (CSS transitions: framer-motion no aplicaba cx/cy de forma confiable en este stack) */}
+      <ellipse
+        cx={leftPaw.cx} cy={leftPaw.cy} rx="13" ry="16"
         fill={INK.bodyLight}
         stroke={INK.bodyDark}
         strokeWidth="1.5"
-        animate={{ x: leftPaw.x, y: leftPaw.y, rotate: leftPaw.rotate, opacity: covering && peeking ? 0.35 : 1 }}
-        transition={spring}
-        style={{ transformOrigin: "66px 55px" }}
+        opacity={covering && peeking ? 0.35 : 1}
+        style={{ transition: "cx 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), cy 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease" }}
       />
-      <motion.ellipse
-        cx="94" cy="55" rx="13" ry="16"
+      <ellipse
+        cx={rightPaw.cx} cy={rightPaw.cy} rx="13" ry="16"
         fill={INK.bodyLight}
         stroke={INK.bodyDark}
         strokeWidth="1.5"
-        animate={{ x: rightPaw.x, y: rightPaw.y, rotate: rightPaw.rotate }}
-        transition={spring}
-        style={{ transformOrigin: "94px 55px" }}
+        style={{ transition: "cx 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), cy 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)" }}
       />
     </svg>
   );
