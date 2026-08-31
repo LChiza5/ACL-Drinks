@@ -50,23 +50,47 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        neon: {
-          purple: "#A67C52",
-          "purple-dark": "#8B6340",
-          pink: "#C9984A",
-          "pink-bright": "#D4A855",
-          blue: "#A67C52",
-          "blue-bright": "#B8916A",
-          amber: "#C9984A",
-          gold: "#A67C52",
-          green: "#10b981",
+        gold: {
+          300: "#F0D48A",
+          400: "#E3B94D",
+          500: "#D4A72C",
+          600: "#B8860F",
+          700: "#8C6508",
+        },
+        emerald: {
+          300: "#7EE0B8",
+          400: "#2FBE87",
+          500: "#16A673",
+          600: "#0E8259",
+          900: "#0B4D3A",
+        },
+        hibiscus: {
+          300: "#FF9EBB",
+          400: "#FF6B96",
+          500: "#F0356E",
+          600: "#C41F56",
         },
         brand: {
-          deep: "#12110F",
+          deep: "#0F0D0B",
           dark: "#12110F",
           mid: "#1E1A17",
           wine: "#2A1F14",
-          "wine-dark": "#12110F",
+        },
+        // Compat layer: pre-redesign code (dashboard, checkout, cart, shadcn
+        // primitives) references these `neon-*` utility names throughout.
+        // Mapped onto the new palette so that code keeps its original color
+        // *role* (purple = primary accent, amber = secondary, pink = tertiary,
+        // blue = quaternary, green = success) without a site-wide rename.
+        neon: {
+          purple: "#16A673",
+          "purple-dark": "#0E8259",
+          pink: "#F0356E",
+          "pink-bright": "#FF6B96",
+          blue: "#3AB0E0",
+          "blue-bright": "#6BC7EA",
+          amber: "#D4A72C",
+          gold: "#D4A72C",
+          green: "#2FBE87",
         },
       },
       borderRadius: {
@@ -134,14 +158,15 @@ const config: Config = {
         "bounce-subtle": "bounce-subtle 1.5s ease-in-out infinite",
       },
       boxShadow: {
-        "neon-purple":
-          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
-        "neon-pink":
-          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
-        "neon-amber":
-          "0 0 20px rgba(212, 161, 57, 0.5), 0 0 40px rgba(212, 161, 57, 0.25)",
-        "card-hover": "0 8px 32px rgba(212, 161, 57, 0.2)",
-        "card-glow": "0 0 40px rgba(212, 161, 57, 0.15)",
+        "glow-gold": "0 0 20px rgba(212, 167, 44, 0.45), 0 0 40px rgba(212, 167, 44, 0.2)",
+        "glow-emerald": "0 0 20px rgba(22, 166, 115, 0.45), 0 0 40px rgba(22, 166, 115, 0.2)",
+        "glow-hibiscus": "0 0 20px rgba(240, 53, 110, 0.45), 0 0 40px rgba(240, 53, 110, 0.2)",
+        "card-hover": "0 8px 32px rgba(212, 167, 44, 0.2)",
+        "card-glow": "0 0 40px rgba(212, 167, 44, 0.15)",
+        // Compat aliases for pre-redesign code, mirrors the `neon.*` color map above.
+        "neon-purple": "0 0 20px rgba(22, 166, 115, 0.45), 0 0 40px rgba(22, 166, 115, 0.2)",
+        "neon-pink": "0 0 20px rgba(240, 53, 110, 0.45), 0 0 40px rgba(240, 53, 110, 0.2)",
+        "neon-amber": "0 0 20px rgba(212, 167, 44, 0.45), 0 0 40px rgba(212, 167, 44, 0.2)",
       },
     },
   },
