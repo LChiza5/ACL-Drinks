@@ -13,12 +13,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { registerSchema, type RegisterInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
+import { PisoteMascot } from "@/components/ui/pisote-mascot";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
+  const [pwFocused, setPwFocused] = useState(false);
+  const [confirmFocused, setConfirmFocused] = useState(false);
+  const pwValue = watch("password");
+  const confirmValue = watch("confirmPassword");
+  const covering = (pwFocused && !!pwValue) || (confirmFocused && !!confirmValue);
+  const passwordReg = register("password");
+  const confirmPasswordReg = register("confirmPassword");
 
   const onSubmit = async (data: RegisterInput) => {
     setIsLoading(true);
@@ -48,6 +56,7 @@ export default function RegisterPage() {
             <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
           </div>
         </div>
+        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2"><Label>Nombre completo</Label><Input placeholder="Tu nombre" {...register("name")} />{errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}</div>
@@ -56,14 +65,31 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <Label>Contraseña</Label>
               <div className="relative">
-                <Input type={showPass ? "text" : "password"} placeholder="Mín. 8 caracteres" {...register("password")} className="pr-10" />
+                <Input
+                  type={showPass ? "text" : "password"}
+                  placeholder="Mín. 8 caracteres"
+                  {...passwordReg}
+                  onFocus={() => setPwFocused(true)}
+                  onBlur={(e) => { passwordReg.onBlur(e); setPwFocused(false); }}
+                  className="pr-10"
+                />
                 <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors">
                   {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
               {errors.password && <p className="text-xs text-destructive">{errors.password.message}</p>}
             </div>
-            <div className="space-y-2"><Label>Confirmar contraseña</Label><Input type="password" placeholder="Repite la contraseña" {...register("confirmPassword")} />{errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>}</div>
+            <div className="space-y-2">
+              <Label>Confirmar contraseña</Label>
+              <Input
+                type="password"
+                placeholder="Repite la contraseña"
+                {...confirmPasswordReg}
+                onFocus={() => setConfirmFocused(true)}
+                onBlur={(e) => { confirmPasswordReg.onBlur(e); setConfirmFocused(false); }}
+              />
+              {errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>}
+            </div>
             <Button type="submit" className="w-full btn-neon gap-2 font-bold" size="lg" disabled={isLoading}>
               <UserPlus className="h-4 w-4" />{isLoading ? "Creando cuenta..." : "Crear Cuenta Gratis"}
             </Button>
