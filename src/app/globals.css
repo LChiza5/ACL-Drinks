@@ -4,26 +4,27 @@
 
 @layer base {
   :root {
-    /* reference hexes: bg #12110F, surface #1E1A17, primary #A67C52, accent #C9984A, text #F5F2EC, muted #B8B1A7 */
+    /* reference hexes: bg #12110F, surface #1E1A17, primary(emerald) #16A673,
+       accent(gold) #D4A72C, pop(hibiscus) #F0356E, text #F5F2EC, muted #B8B1A7 */
     --background: 30 12% 5%;
     --foreground: 40 30% 95%;
     --card: 26 13% 10%;
     --card-foreground: 40 30% 95%;
     --popover: 26 13% 10%;
     --popover-foreground: 40 30% 95%;
-    --primary: 30 34% 49%;
+    --primary: 159 77% 37%;
     --primary-foreground: 40 30% 95%;
     --secondary: 30 10% 16%;
     --secondary-foreground: 40 30% 95%;
     --muted: 30 10% 14%;
     --muted-foreground: 30 10% 60%;
-    --accent: 37 54% 54%;
+    --accent: 44 66% 50%;
     --accent-foreground: 30 14% 7%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 40 30% 95%;
     --border: 30 10% 20%;
     --input: 30 10% 18%;
-    --ring: 30 33% 49%;
+    --ring: 159 60% 40%;
     --radius: 0.75rem;
   }
 
@@ -72,18 +73,28 @@
 }
 
 @layer components {
-  .glow-amber { text-shadow: 0 0 12px rgba(201,152,74,0.6), 0 0 24px rgba(201,152,74,0.3); }
-  .glow-primary { text-shadow: 0 0 12px rgba(166,124,82,0.5), 0 0 24px rgba(166,124,82,0.25); }
+  .glow-amber { text-shadow: 0 0 12px rgba(212,167,44,0.6), 0 0 24px rgba(212,167,44,0.3); }
+  .glow-primary { text-shadow: 0 0 12px rgba(22,166,115,0.55), 0 0 24px rgba(22,166,115,0.28); }
+  .glow-pop { text-shadow: 0 0 12px rgba(240,53,110,0.55), 0 0 24px rgba(240,53,110,0.28); }
 
+  /* Gold stays the identity color: logo, wordmark, decorative emphasis. */
   .gradient-text {
-    background: linear-gradient(135deg, #C9984A 0%, #A67C52 50%, #F5F2EC 100%);
+    background: linear-gradient(135deg, #F0D48A 0%, #D4A72C 45%, #B8860F 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-warm {
-    background: linear-gradient(135deg, #F5F2EC 0%, #C9984A 100%);
+    background: linear-gradient(135deg, #F5F2EC 0%, #D4A72C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Emerald is the new primary/interactive color; used for the main CTA emphasis. */
+  .gradient-text-primary {
+    background: linear-gradient(135deg, #7EE0B8 0%, #16A673 55%, #0E8259 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -108,13 +119,16 @@
 
   .btn-primary, .btn-neon {
     @apply relative overflow-hidden;
-    background: linear-gradient(135deg, #8B6239, #A67C52);
-    box-shadow: 0 4px 20px rgba(166, 124, 82, 0.35);
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #0E8259, #16A673);
+    box-shadow: 0 4px 20px rgba(22, 166, 115, 0.35);
+    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .btn-primary:hover, .btn-neon:hover {
-    box-shadow: 0 6px 28px rgba(201, 152, 74, 0.55);
+    box-shadow: 0 6px 28px rgba(47, 190, 135, 0.55);
     transform: scale(1.02);
+  }
+  .btn-primary:active, .btn-neon:active {
+    transform: scale(0.97);
   }
   .btn-primary::before, .btn-neon::before {
     content: "";
@@ -210,7 +224,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #8B6239, #A67C52);
+    background: linear-gradient(135deg, #0E8259, #16A673);
     border-radius: inherit;
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -221,7 +235,7 @@
   }
 
   .text-shimmer {
-    background: linear-gradient(90deg, #C9984A 0%, #F5F2EC 50%, #C9984A 100%);
+    background: linear-gradient(90deg, #D4A72C 0%, #F5F2EC 50%, #D4A72C 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -231,6 +245,32 @@
 
   .section-padding { @apply py-16 px-4 sm:px-6 lg:px-8; }
   .container-max { @apply max-w-7xl mx-auto; }
+
+  /* IconBadge shine sweep — same mechanism as .btn-primary::before, generalized. */
+  .icon-badge {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .icon-badge::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+  }
+  .group:hover .icon-badge::before {
+    left: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .icon-badge::before { display: none; }
+    .animate-float, .animate-spin-slow, .animate-marquee { animation: none !important; }
+  }
 }
 
 @layer utilities {
