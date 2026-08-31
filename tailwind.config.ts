@@ -88,16 +88,6 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "neon-pulse": {
-          "0%, 100%": {
-            boxShadow:
-              "0 0 5px #a855f7, 0 0 20px #a855f7, 0 0 40px #a855f7",
-          },
-          "50%": {
-            boxShadow:
-              "0 0 10px #ec4899, 0 0 30px #ec4899, 0 0 60px #ec4899",
-          },
-        },
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
@@ -134,7 +124,6 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "neon-pulse": "neon-pulse 2s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
         "slide-in-right": "slide-in-right 0.3s ease-out",
         "slide-out-right": "slide-out-right 0.3s ease-in",
@@ -144,25 +133,10 @@ const config: Config = {
         "spin-slow": "spin-slow 8s linear infinite",
         "bounce-subtle": "bounce-subtle 1.5s ease-in-out infinite",
       },
-      backgroundImage: {
-        "neon-gradient":
-          "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #3b82f6 100%)",
-        "dark-gradient":
-          "linear-gradient(135deg, #08060f 0%, #1a0a2e 50%, #08060f 100%)",
-        "card-gradient": "linear-gradient(145deg, #1a0a2e 0%, #0f0a1e 100%)",
-        "hero-gradient":
-          "radial-gradient(ellipse at top, #1a0a2e 0%, #08060f 70%)",
-        "amber-gradient": "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-        "pink-gradient": "linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)",
-        "purple-gradient":
-          "linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)",
-      },
       boxShadow: {
         "neon-purple":
           "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
         "neon-pink":
-          "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
-        "neon-blue":
           "0 0 20px rgba(212, 161, 57, 0.4), 0 0 40px rgba(212, 161, 57, 0.2)",
         "neon-amber":
           "0 0 20px rgba(212, 161, 57, 0.5), 0 0 40px rgba(212, 161, 57, 0.25)",
