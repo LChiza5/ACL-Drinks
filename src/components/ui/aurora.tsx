@@ -3,7 +3,7 @@
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 
-// Adapted from react-bits' Aurora (https://reactbits.dev), recolored to the site's amber palette.
+// Adapted from react-bits' Aurora (https://reactbits.dev), recolored to the site's palette.
 const VERT = `#version 300 es
 in vec2 position;
 void main() {
@@ -112,7 +112,7 @@ void main() {
 `;
 
 export function Aurora({
-  colorStops = ["#8B6239", "#C9984A", "#A67C52"],
+  colorStops = ["#0E8259", "#D4A72C", "#E3B94D"],
   amplitude = 0.9,
   blend = 0.5,
   className = "",
