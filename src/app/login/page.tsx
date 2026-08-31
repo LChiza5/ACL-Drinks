@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginSchema, type LoginInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
+import { PisoteMascot } from "@/components/ui/pisote-mascot";
 
 function LoginForm() {
   const router = useRouter();
@@ -21,7 +22,11 @@ function LoginForm() {
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const passwordValue = watch("password");
+  const covering = passwordFocused && !!passwordValue;
+  const passwordReg = register("password");
 
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
@@ -50,6 +55,7 @@ function LoginForm() {
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
           <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
+        <PisoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
@@ -60,7 +66,14 @@ function LoginForm() {
             <div className="space-y-2">
               <Label>Contraseña</Label>
               <div className="relative">
-                <Input type={showPass ? "text" : "password"} placeholder="••••••••" {...register("password")} className="pr-10" />
+                <Input
+                  type={showPass ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...passwordReg}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={(e) => { passwordReg.onBlur(e); setPasswordFocused(false); }}
+                  className="pr-10"
+                />
                 <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors">
                   {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
