@@ -11,14 +11,14 @@ export function KitsPreview({ kits }: { kits: Kit[] }) {
       <div className="container-max">
         <div className="flex items-end justify-between mb-10">
           <div className="space-y-2">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#C9984A" }}>Todo en uno</span>
-            <h2 className="text-4xl font-black" style={{ color: "#F5F2EC" }}>
-              Combos <span className="gradient-text">Fiesteros</span> 🎉
+            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F0356E" }}>Todo en uno</span>
+            <h2 className="text-4xl font-display font-semibold" style={{ color: "#F5F2EC" }}>
+              Combos <span className="italic" style={{ color: "#F0356E" }}>Fiesteros</span> 🎉
             </h2>
             <p style={{ color: "#B8B1A7" }}>Combos armados para que solo pienses en pasarla bien.</p>
           </div>
           <Link href="/combos-fiesteros">
-            <Button variant="outline" className="gap-2 hidden sm:flex" style={{ borderColor: "rgba(166, 124, 82,0.4)", color: "#F5F2EC" }}>
+            <Button variant="outline" className="gap-2 hidden sm:flex" style={{ borderColor: "rgba(240,53,110,0.4)", color: "#F5F2EC" }}>
               Ver combos <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

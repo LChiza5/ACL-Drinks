@@ -9,7 +9,7 @@ export function CategoryCard({ category, index = 0 }: { category: Category; inde
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} whileHover={{ scale: 1.03, y: -4 }}>
       <Link href={`/categories/${category.slug}`} className="group block">
-        <div className="relative overflow-hidden rounded-2xl glass-card border-2 border-transparent hover:border-neon-purple/50 transition-all duration-300 aspect-[4/3]">
+        <div className="relative overflow-hidden rounded-2xl glass-card border-2 border-transparent hover:border-emerald-500/50 transition-all duration-300 aspect-[4/3]">
           {category.image ? (
             <Image src={category.image} alt={category.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 20vw" />
           ) : (

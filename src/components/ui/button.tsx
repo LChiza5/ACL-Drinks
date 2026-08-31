@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:active:scale-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -15,8 +15,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent/10 hover:text-accent",
         link: "text-primary underline-offset-4 hover:underline",
         neon: "btn-neon text-white",
-        "neon-pink": "relative overflow-hidden bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-neon-pink hover:scale-105 transition-all",
-        "neon-amber": "relative overflow-hidden bg-gradient-to-r from-amber-500 to-yellow-500 text-black font-bold shadow-neon-amber hover:scale-105 transition-all",
+        "neon-pink": "relative overflow-hidden bg-gradient-to-r from-hibiscus-600 to-hibiscus-400 text-white shadow-neon-pink hover:scale-105 transition-all",
+        "neon-amber": "relative overflow-hidden bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold shadow-neon-amber hover:scale-105 transition-all",
         glass: "glass-card text-white hover:border-neon-purple/50 transition-all",
       },
       size: {
