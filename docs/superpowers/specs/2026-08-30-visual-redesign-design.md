@@ -1,103 +1,133 @@
 # Rediseño visual/UX — ACL Drinks
 
 **Fecha:** 2026-08-30
-**Estado:** Aprobado, en implementación
+**Estado:** v2 implementada (reemplaza la v1 de este mismo documento)
 **Sub-proyecto:** 1 de 2 (el segundo es "Endurecimiento de seguridad", spec separado)
 
-## Contexto
+## Por qué hay una v2
 
-El sitio ya tiene una base ámbar/tropical decente (Aurora WebGL en el Hero, `glass-card`,
-`glow-amber`, `shimmer`, cards con tilt/spotlight/glare tomadas de react-bits en un pase
-anterior). El pedido es que deje de sentirse "genérico" y gane una identidad propia y
-memorable, conservando la paleta ámbar existente, con un guiño fuerte a Costa Rica.
+La v1 (mascota Pizote, una capa de profundidad en el Hero, limpieza de tokens
+muertos) se implementó conservando la paleta ámbar existente casi sin tocarla,
+bajo la premisa de "capas sobre lo existente, no rediseño desde cero". El
+dueño del proyecto la rechazó explícitamente:
 
-Fuentes de inspiración revisadas: reactbits.dev (catálogo de 170+ componentes animados,
-ya parcialmente adoptado), 21st.dev (vía MCP, patrones de hero modernos: glass/gradient
-blobs, reveals escalonados), awwwards.com/websites/e-commerce (nivel de pulido esperado:
-motion con propósito, tipografía editorial, microinteracciones).
+> "la página está igual a como se veía [...] colores muy apagados, íconos
+> horribles [...] es totalmente lógico que la hizo una inteligencia artificial"
 
-## Enfoque
+El diagnóstico real: la paleta era efectivamente **un solo tono** — todas las
+variables (`--primary`, `--accent`, `colors.neon.*`, los grises de fondo)
+resolvían a variaciones del mismo ámbar/marrón. Eso es lo que se lee como
+"apagado" y "genérico", más que cualquier problema de mascota o motion. Esta
+v2 sí cambia la identidad visual de fondo.
 
-**Capas sobre lo existente**, no un rediseño desde cero. Se evaluaron y descartaron:
-overhaul completo (alto riesgo, contradice "conservar colores") y swap componente-por-
-componente sin narrativa unificadora (cae en "muestrario de efectos", el efecto genérico
-que se quiere evitar). La diferenciación viene de piezas con intención — la mascota,
-profundidad de movimiento dirigida, ritmo visual entre secciones — no de acumular shaders.
+## Referencia principal: fundaca.vercel.app
 
-## 1. Identidad de marca (✅ implementado, commit `56cc1e6`)
+Sitio hecho por el mismo equipo del dueño, señalado explícitamente como
+referencia de lo que sí funciona. Análisis (vía DOM/CSS computado, no solo
+apariencia):
 
-Logo real (`ACL Drinks/Logo.jpg` del usuario) reemplaza el placeholder SVG genérico:
-- `src/app/icon.png` + `apple-icon.png` — favicon (convención de archivo de Next.js,
-  sin tocar metadata manualmente), 512×512, fondo `rgb(18,17,15)` (mismo tono que
-  `--background` del sitio) para que el padding sea invisible.
-- `public/logo-mark.png` — mismo asset, usado por `src/components/layout/Logo.tsx`
-  vía `next/image`, que se propaga automáticamente a los 5 usos existentes (Navbar,
-  Footer, login, register, dashboard layout) sin tocar cada sitio por separado.
+- Tipografía: **Fraunces** (serif editorial, alto contraste) para títulos +
+  **Inter** para cuerpo. H1 a 96px/600 con letter-spacing negativo.
+- Paleta real de 4 tonos, no uno: crema/marfil de fondo (`#FBF7EE`), verde
+  bosque casi negro para texto/hero (`#072019`/`#0E3B2E`), naranja quemado
+  como acento primario (`#D98A2B`), y un teal vívido como sorpresa puntual en
+  stats (`#7FCDD8`) — cada color con un rol distinto, no intercambiables.
+- Fondos cálidos no planos, bordes con tinte de color a baja opacidad en vez
+  de gris genérico, secciones numeradas (01/02/03), motion con propósito.
 
-## 2. Mascota Pizote
+21st.dev (vía MCP) se revisó también, pero sus componentes de "hero premium"
+son en su mayoría plantillas SaaS genéricas (glassmorphism, blobs de
+gradiente, shimmer buttons) — el mismo lenguaje visual que ya se quiere dejar
+atrás. No se usó como fuente de diseño, solo confirmó qué evitar.
 
-Pieza central y firma del sitio. Componente SVG propio y autocontenido (sin assets
-externos, mismo espíritu que `aurora.tsx`), coloreado con la paleta ámbar/marrón del
-sitio — no un pizote "realista" sino uno que se sienta parte de la marca.
+## Paleta nueva
 
-**Ubicación:** `src/components/ui/pizote-mascot.tsx`. Se engancha en `LoginForm`
-(`src/app/login/page.tsx`) y `RegisterPage` (`src/app/register/page.tsx`) — ambos ya
-usan `react-hook-form`; el estado de "cubriendo" se deriva con `watch()` sobre el campo
-`password` (y `confirmPassword` en registro) combinado con el estado de foco del input.
+Se mantiene el fondo casi negro (identidad "licorería nocturna") pero se
+reemplaza el ámbar-monocromo por tres acentos con roles distintos:
 
-**Estados y transiciones (via `framer-motion`, springs cortos ~250-350ms):**
-- **Idle** — patas abajo, ojos abiertos, pulso de escala sutil (respiración).
-- **Cubriendo** — al enfocar contraseña/confirmar-contraseña con contenido: patas suben
-  y tapan los ojos.
-- **Reacción al tipeo** — mientras está tapado, un pequeño "flinch" por tecla (sin
-  destaparse) para que no se sienta estático.
-- **Destapando** — al perder foco el campo sensible, o al vaciarse.
-- **Peek** — si el usuario usa el toggle de mostrar/ocultar contraseña que ya existe en
-  ambos forms (ícono `Eye`/`EyeOff`), el Pizote entreabre un ojo mientras `showPass` es
-  `true`.
+| Rol | Color | Uso |
+|---|---|---|
+| **Oro** (`gold.*`, #D4A72C) | identidad de marca | logo, wordmark (`.gradient-text`), detalles decorativos — es lo que queda de la paleta ámbar original |
+| **Esmeralda** (`emerald.*`, #16A673) | primario/interactivo nuevo | botón principal (`.btn-primary`/`.btn-neon`), `--primary`, bordes de hover en ProductCard, nav-pill |
+| **Hibisco** (`hibiscus.*`, #F0356E) | acento puntual | badges de descuento/oferta, Combos Fiesteros (dominante ahí, a propósito, para diferenciar esa sección), contador del carrito |
 
-Esto resuelve dos pedidos en uno: la mascota animada del password Y el "animalito
-escondido de Costa Rica" — no se necesita un segundo easter egg separado.
+`tailwind.config.ts` mantiene un mapa de compatibilidad (`colors.neon.*`,
+`boxShadow["neon-*"]`) que redirige el código pre-existente (dashboard,
+checkout, carrito, primitivas shadcn — no tocado en este rediseño) a estos
+mismos tres tonos, conservando el rol semántico original de cada clase
+(morado=primario→esmeralda, ámbar=secundario→oro, rosa=terciario→hibisco,
+azul=cuarto tono→celeste nuevo, verde=éxito→esmeralda claro) en vez de dejarlo
+en amarillo-marrón para todo.
 
-## 3. Profundidad y movimiento
+## Tipografía
 
-- **Hero** (`src/components/hero/Hero.tsx`): Aurora se conserva tal cual (color/identidad
-  intactos). Se agrega **una sola** capa adicional de textura/profundidad inspirada en
-  reactbits (candidata: `Beams` o `DotField` a opacidad baja) — deliberadamente una sola
-  pieza nueva, no varias, para no caer en "muestrario".
-- **Scroll reveals**: las entradas `framer-motion` existentes (fade/slide genéricos) pasan
-  a spring physics con timing escalonado — mismo mecanismo, más vivo.
-- **Ritmo entre secciones**: `BenefitsSection` (o la sección de "¿Por qué elegirnos?")
-  recibe un fondo sutil distinto al de Hero, para que el scroll tenga variación en vez de
-  repetir el mismo efecto.
-- **Auditoría de cards**: confirmar que `ProductCard`/`KitCard` usan consistentemente
-  `TiltCard`/`SpotlightCard`/`GlareHover` (ya existen, revisar cobertura real).
+`Bricolage_Grotesque` (geométrica, se repite en muchísimos sitios generados
+por IA) se reemplaza por **Fraunces** para `--font-display` — la misma
+familia que usa fundaca. DM Sans se mantiene para cuerpo de texto.
 
-## 4. Limpieza
+## Íconos
 
-`tailwind.config.ts` tiene tokens de un tema "neon" morado/rosa/azul pre-rebrand sin usar
-(`boxShadow.neon-*`, `backgroundImage.neon-gradient/dark-gradient/purple-gradient`, hex
-crudos `#a855f7`/`#ec4899`/`#3b82f6`). Se eliminan tras confirmar por grep que ninguna
-clase (`shadow-neon-*`, `bg-neon-gradient`, `bg-purple-gradient`) se usa en `src/`.
+Los lucide-react planos coloreados directo (`<Zap style={{color:"#..."}}/>`)
+se reemplazan por `IconBadge` (`src/components/ui/icon-badge.tsx`): medallón
+con gradiente por tono, glow (`shadow-glow-*`), y un shine sweep al hover del
+contenedor `.group`. Se aplica en Hero (stats) y Beneficios.
 
-Nota: `colors.neon.*` (purple/pink/blue/amber/gold) **se conserva** — esos nombres de
-clave son confusos pero los valores hex ya están recoloreados a ámbar y están en uso
-activo (`text-neon-purple`, `bg-neon-amber/10`, etc. en login/register). Renombrar las
-keys es churn innecesario para el alcance de este trabajo.
+Se agrega `BrandGlassIcon` (`src/components/ui/brand-glass-icon.tsx`): un
+ícono de línea propio (vaso + diamante) que retoma el glifo del logo real en
+vez de depender de un emoji (🥃) o un ícono genérico de librería.
 
-## Fuera de alcance
+## Motion
 
-- Seguridad (headers, rate limiting, validación de inputs, CVEs de dependencias) — spec
-  separado, sub-proyecto 2, se hace después de este.
-- Reescritura de historial de git — no aplica, se confirmó que nunca hubo secrets reales
-  commiteados (ver conversación).
-- Migración a Supabase RLS/anon-key — no aplica a esta arquitectura (Prisma corre 100%
-  server-side); se documenta en el spec de seguridad en vez de aquí.
+`src/lib/motion.ts` centraliza springs (`snappy`/`gentle`/`bouncy`) y un
+helper `fadeUp` para scroll-reveals, para que el motion nuevo comparta el
+mismo "peso físico" en vez de valores ad-hoc por archivo. Se sigue usando
+`framer-motion` (ya instalado y usado en todo el proyecto) — no se migró a
+`motion/react` porque hubiera sido un cambio de dependencia fuera de alcance
+sin beneficio visual.
 
-## Commits de este sub-proyecto
+Motion con propósito agregado más allá de Hero/Beneficios (el alcance de la
+v1):
 
-1. ✅ Logo real (favicon + Logo.tsx) — `56cc1e6`
-2. Mascota Pizote + integración en login/register
-3. Hero: capa de profundidad + scroll reveals con spring + fondo nuevo en Beneficios
-4. Limpieza de tokens neon sin uso + auditoría/pulido de microinteracciones (cards, nav,
-   botones)
+- **Navbar:** estado activo real por ruta (antes solo hover), la barra se
+  comprime y gana sombra al hacer scroll, el contador del carrito hace un pop
+  animado en cada cambio.
+- **Footer:** columnas con reveal escalonado al entrar en viewport, links con
+  subrayado animado, iconos sociales con microinteracción al hover.
+- **ProductCard/KitCard:** hover más vivo (lift + scale con spring
+  compartido), colores de marca en vez de ámbar plano.
+- **Botones (global):** `active:scale-[0.97]` en la primitiva `Button` —
+  feedback de presión en todos los botones del sitio, no solo los nuevos.
+
+## Alcance de este rediseño
+
+Se tocó a fondo: tokens globales (`globals.css`, `tailwind.config.ts`,
+tipografía en `layout.tsx`), Navbar, Footer, Hero, BenefitsSection,
+ProductCard, KitCard, y el resto de secciones del home (CatalogSection,
+FeaturedProducts, KitsPreview, CategoryCard/Grid, TrustMarquee).
+
+Deliberadamente fuera de alcance (quedan con la paleta vieja resuelta vía el
+mapa de compatibilidad, pero sin rediseño de layout/motion): dashboard/admin,
+checkout, carrito, perfil, pedidos, tracking. Son páginas utilitarias, no
+donde vive la identidad de marca — mismo criterio que ya aplicaba la v1 para
+separar "sitio público" de "herramientas internas".
+
+## Mascota Pizote (de la v1, sin cambios de diseño)
+
+Sigue tal cual se implementó: SVG propio, estados idle/cubriendo/peek en
+login y registro. Solo cambió el nombre del archivo/componente
+(`pisote-mascot.tsx` → `pizote-mascot.tsx`, `PisoteMascot` → `PizoteMascot`)
+porque el nombre correcto del animal en Costa Rica lleva Z, no S.
+
+## Logo / favicon
+
+El crop anterior (`56cc1e6`) metía el lockup completo (monograma + wordmark)
+en un canvas cuadrado con mucho margen negro. Se recorta ahora solo al
+monograma, tomado directo de la imagen fuente (mismo fondo/viñeta original,
+sin padding sintético) para que favicon y logo del navbar/footer se vean
+llenos en vez de flotando en un cuadro.
+
+## Fuera de alcance (sin cambios respecto a la v1)
+
+- Seguridad — spec separado, sub-proyecto 2.
+- Reescritura de historial de git.
+- Migración a Supabase RLS/anon-key.
