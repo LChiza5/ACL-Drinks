@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { registerSchema } from "@/validations/auth";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
 import type { ApiResponse } from "@/types";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!checkRateLimit(`register:${getClientIp(req)}`, 5, 60 * 60 * 1000)) {
+      return rateLimitResponse();
+    }
+
     const body = await req.json();
     const validated = registerSchema.parse(body);
 

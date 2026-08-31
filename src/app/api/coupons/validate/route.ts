@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, getClientIp, rateLimitResponse } from "@/lib/rate-limit";
 import type { ApiResponse } from "@/types";
 
 export async function GET(req: NextRequest) {
   try {
+    if (!checkRateLimit(`coupon:${getClientIp(req)}`, 20, 5 * 60 * 1000)) {
+      return rateLimitResponse();
+    }
+
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
     const subtotal = parseFloat(searchParams.get("subtotal") || "0");

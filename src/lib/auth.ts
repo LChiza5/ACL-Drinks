@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -24,6 +25,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Credenciales requeridas");
+        }
+
+        if (!checkRateLimit(`login:${credentials.email.toLowerCase()}`, 5, 15 * 60 * 1000)) {
+          throw new Error("Demasiados intentos. Esperá unos minutos antes de volver a intentar.");
         }
 
         const user = await prisma.user.findUnique({
