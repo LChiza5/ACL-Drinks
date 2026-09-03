@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { Hero } from "@/components/hero/Hero";
+import { TropicalStrip } from "@/components/hero/TropicalStrip";
 import { TrustMarquee } from "@/components/hero/TrustMarquee";
 import { FeaturedProducts } from "@/components/products/FeaturedProducts";
 import { KitsPreview } from "@/components/kits/KitsPreview";
@@ -69,6 +70,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <TropicalStrip />
       <TrustMarquee />
       <Suspense fallback={<SectionSkeleton rows={5} />}>
         <CatalogSectionData />
