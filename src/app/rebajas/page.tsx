@@ -53,11 +53,11 @@ export default function RebajasPage() {
   return (
     <div className="section-padding container-max">
       <div className="text-center mb-10">
-        <span className="text-sm font-semibold uppercase tracking-widest text-neon-amber">
+        <span className="text-sm font-semibold uppercase tracking-widest text-hibiscus-400">
           ¡No te las pierdas!
         </span>
         <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
-          <span className="gradient-text">Rebajas</span> Especiales <Tag className="h-8 w-8 text-gold-500" />
+          <span className="gradient-text-vivid">Rebajas</span> Especiales <Tag className="h-8 w-8 text-hibiscus-500" />
         </h1>
       </div>
       <Suspense fallback={<RebajasGridSkeleton />}>

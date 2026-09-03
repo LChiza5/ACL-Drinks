@@ -77,7 +77,7 @@
   .glow-primary { text-shadow: 0 0 12px rgba(34,177,76,0.55), 0 0 24px rgba(34,177,76,0.28); }
   .glow-pop { text-shadow: 0 0 12px rgba(255,61,138,0.55), 0 0 24px rgba(255,61,138,0.28); }
 
-  /* Gold stays the identity color: logo, wordmark, decorative emphasis. */
+  /* Gold is reserved for the logo/wordmark only - kept narrow on purpose. */
   .gradient-text {
     background: linear-gradient(135deg, #FFE29A 0%, #F2A900 45%, #C98700 100%);
     -webkit-background-clip: text;
@@ -95,6 +95,14 @@
   /* Emerald is the new primary/interactive color; used for the main CTA emphasis. */
   .gradient-text-primary {
     background: linear-gradient(135deg, #8FE8A8 0%, #22B14C 55%, #178A38 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Storefront page-title emphasis outside the wordmark - hibiscus into sky, not gold. */
+  .gradient-text-vivid {
+    background: linear-gradient(135deg, #FF75AC 0%, #FF3D8A 50%, #3AB0E0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
