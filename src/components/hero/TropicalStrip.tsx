@@ -7,15 +7,16 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { springs } from "@/lib/motion";
 
 /**
- * Illustrations: Noto Emoji (Google), Apache License 2.0.
- * https://github.com/googlefonts/noto-emoji
+ * Real wildlife photography, not icons/illustrations - sourced from Wikimedia
+ * Commons (CC BY-SA 3.0/4.0), credited below. Same species fundaca.vercel.app
+ * uses for their own species showcase (frog + toucan match exactly).
  */
 const critters = [
   { kind: "mascot" as const, name: "El Pizote", blurb: "Curioso, atrevido y el primero en llegar a la fiesta.", ring: "#F2A900" },
-  { kind: "img" as const, src: "/tropical/sloth.svg", name: "El Perezoso", blurb: "Tranquilo... pero tu pedido no tarda como él.", ring: "#22B14C" },
-  { kind: "img" as const, src: "/tropical/parrot.svg", name: "La Lora", blurb: "Habladora, colorida y la que pone el ambiente.", ring: "#FF3D8A" },
-  { kind: "img" as const, src: "/tropical/monkey.svg", name: "El Mono Congo", blurb: "El alma de la fiesta, de rama en rama.", ring: "#F2A900" },
-  { kind: "img" as const, src: "/tropical/frog.svg", name: "La Rana", blurb: "Chiquita, pero con un color que no pasa desapercibido.", ring: "#22B14C" },
+  { kind: "img" as const, src: "/tropical/sloth.jpg", name: "El Perezoso", blurb: "Tranquilo... pero tu pedido no tarda como él.", ring: "#22B14C" },
+  { kind: "img" as const, src: "/tropical/toucan.jpg", name: "El Tucán", blurb: "El más colorido del vecindario, sin esforzarse.", ring: "#FFC94D" },
+  { kind: "img" as const, src: "/tropical/macaw.jpg", name: "La Lapa Roja", blurb: "Llama la atención en cualquier fiesta, literal.", ring: "#FF3D8A" },
+  { kind: "img" as const, src: "/tropical/frog.jpg", name: "La Rana", blurb: "Chiquita, pero con un color que no pasa desapercibido.", ring: "#22B14C" },
 ];
 
 export function TropicalStrip() {
@@ -43,21 +44,20 @@ export function TropicalStrip() {
               initial={{ opacity: 0, y: 28, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
-              whileHover={{ y: -8, rotate: i % 2 === 0 ? -3 : 3 }}
+              whileHover={{ y: -8 }}
               transition={{ ...springs.bouncy, delay: i * 0.08 }}
               className="flex flex-col items-center text-center gap-4"
             >
               <div
-                className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full flex items-center justify-center p-4 transition-shadow duration-300"
-                style={{
-                  background: "radial-gradient(circle at 35% 30%, #1E1A17, #12110F 75%)",
-                  boxShadow: `inset 0 0 0 2px ${c.ring}40, 0 8px 28px -8px ${c.ring}66`,
-                }}
+                className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full overflow-hidden transition-shadow duration-300"
+                style={{ boxShadow: `0 0 0 3px ${c.ring}, 0 8px 28px -8px ${c.ring}99` }}
               >
                 {c.kind === "mascot" ? (
-                  <PizoteMascot covering={false} className="h-full w-full" />
+                  <div className="h-full w-full flex items-center justify-center p-4" style={{ background: "radial-gradient(circle at 35% 30%, #1E1A17, #12110F 75%)" }}>
+                    <PizoteMascot covering={false} className="h-full w-full" />
+                  </div>
                 ) : (
-                  <Image src={c.src} alt={c.name} width={96} height={96} className="h-full w-full object-contain" />
+                  <Image src={c.src} alt={c.name} fill sizes="128px" className="object-cover" />
                 )}
               </div>
               <div>
@@ -67,6 +67,10 @@ export function TropicalStrip() {
             </motion.div>
           ))}
         </div>
+
+        <p className="text-center text-[11px] mt-10" style={{ color: "#5C564C" }}>
+          Fotos: Wikimedia Commons (CC BY-SA 3.0/4.0) — Agalychnis callidryas, Ramphastos sulfuratus, Bradypus variegatus, Ara macao.
+        </p>
       </div>
     </section>
   );
