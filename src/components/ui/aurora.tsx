@@ -180,17 +180,42 @@ export function Aurora({
     const mesh = new Mesh(gl, { geometry, program });
     ctn.appendChild(gl.canvas);
 
+    // Respect prefers-reduced-motion: render one static frame and never loop.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
       program.uniforms.uTime.value = t * 0.0001;
       renderer.render({ scene: mesh });
     };
-    animateId = requestAnimationFrame(update);
+    const startLoop = () => {
+      if (animateId || reduceMotion) return;
+      animateId = requestAnimationFrame(update);
+    };
+    const stopLoop = () => {
+      cancelAnimationFrame(animateId);
+      animateId = 0;
+    };
+
     resize();
+    if (reduceMotion) {
+      renderer.render({ scene: mesh });
+    } else {
+      startLoop();
+    }
+
+    // The rAF loop otherwise runs forever once mounted, even while the Hero
+    // is scrolled far out of view — pause it off-screen, resume on return.
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) startLoop(); else stopLoop(); },
+      { threshold: 0 }
+    );
+    io.observe(ctn);
 
     return () => {
-      cancelAnimationFrame(animateId);
+      io.disconnect();
+      stopLoop();
       window.removeEventListener("resize", resize);
       if (ctn && gl.canvas.parentNode === ctn) ctn.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
