@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Zap, Package, HeadphonesIcon, MapPin, ShoppingCart } from "lucide-react";
+import { Lightning, Package, Headset, MapPin, ShoppingCartSimple } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
 import { IconBadge } from "@/components/ui/icon-badge";
@@ -16,10 +16,10 @@ import { springs } from "@/lib/motion";
 const Aurora = dynamic(() => import("@/components/ui/aurora").then((m) => m.Aurora), { ssr: false });
 
 const stats = [
-  { icon: Zap, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "gold" as const },
+  { icon: Lightning, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "gold" as const },
   { icon: Package, label: "Envíos Nacionales", value: "2-4 días", tone: "emerald" as const },
   { icon: MapPin, label: "Productos disponibles", value: "25+", tone: "hibiscus" as const },
-  { icon: HeadphonesIcon, label: "Soporte", value: "24/7", tone: "emerald" as const },
+  { icon: Headset, label: "Soporte", value: "24/7", tone: "emerald" as const },
 ];
 
 export function Hero() {
@@ -84,7 +84,7 @@ export function Hero() {
               className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
               onClick={handleScrollToCatalog}
             >
-              <ShoppingCart className="h-5 w-5" />COMPRAR AHORA
+              <ShoppingCartSimple size={20} weight="bold" />COMPRAR AHORA
             </Button>
             <Button
               size="lg"
@@ -93,7 +93,7 @@ export function Hero() {
               style={{ borderColor: "rgba(242,169,0,0.5)", color: "#F5F2EC" }}
               onClick={() => { window.location.href = "/tracking"; }}
             >
-              <MapPin className="h-5 w-5" /> Rastrear Pedido
+              <MapPin size={20} weight="bold" /> Rastrear Pedido
             </Button>
           </motion.div>
 

@@ -1,49 +1,40 @@
 "use client";
 
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
-import type { LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { springs } from "@/lib/motion";
 
-// Flat, single-tone, organic blob — not a gradient square with a shine
-// sweep. That pattern is the single most recognizable "generated SaaS
-// landing page" tell, which is exactly what this brand is trying to avoid.
+// Phosphor's duotone weight bakes a two-tone fill into the glyph itself, so
+// unlike the old lucide icons this doesn't need a container to look designed
+// rather than borrowed off a component library's default export. No badge
+// shape, no gradient, no shine sweep — just a bold icon with a soft color
+// glow under it.
 const TONES = {
-  gold: { bg: "#3A2D12", fg: "#FFE29A" },
-  emerald: { bg: "#132A20", fg: "#4CC95F" },
-  hibiscus: { bg: "#301621", fg: "#FF6FA0" },
+  gold: "#F2A900",
+  emerald: "#22B14C",
+  hibiscus: "#FF3D8A",
 } as const;
 
-const SIZES = {
-  sm: { box: "h-11 w-11", icon: "h-5 w-5" },
-  md: { box: "h-14 w-14", icon: "h-6 w-6" },
-  lg: { box: "h-16 w-16", icon: "h-7 w-7" },
-} as const;
-
-// Organic blob radius, same idea as an emoji/sticker backdrop rather than a
-// perfect rounded square.
-const BLOB = "63% 37% 54% 46% / 55% 48% 52% 45%";
+const SIZES = { sm: 30, md: 42, lg: 54 } as const;
 
 interface IconBadgeProps {
-  icon: LucideIcon;
+  icon: PhosphorIcon;
   tone?: keyof typeof TONES;
   size?: keyof typeof SIZES;
   className?: string;
 }
 
-export function IconBadge({ icon: Icon, tone = "emerald", size = "md", className }: IconBadgeProps) {
-  const t = TONES[tone];
-  const s = SIZES[size];
-
+export function IconBadge({ icon: Icon, tone = "emerald", size = "md", className = "" }: IconBadgeProps) {
+  const color = TONES[tone];
   return (
     <motion.div
-      className={cn("flex items-center justify-center shrink-0", s.box, className)}
-      style={{ background: t.bg, borderRadius: BLOB }}
-      whileHover={{ scale: 1.06, rotate: -4, borderRadius: "48% 52% 40% 60% / 55% 45% 55% 45%" }}
-      whileTap={{ scale: 0.94 }}
+      className={`inline-flex ${className}`}
+      style={{ filter: `drop-shadow(0 6px 14px ${color}4D)` }}
+      whileHover={{ scale: 1.12, rotate: -6 }}
+      whileTap={{ scale: 0.92 }}
       transition={springs.snappy}
     >
-      <Icon className={s.icon} style={{ color: t.fg }} strokeWidth={2} />
+      <Icon size={SIZES[size]} weight="duotone" color={color} />
     </motion.div>
   );
 }
