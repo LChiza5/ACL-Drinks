@@ -120,7 +120,9 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-6 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+        {/* pb-24 clears the fixed WhatsApp/Instagram buttons stacked bottom-right on mobile,
+            where this row stacks full-width instead of sharing the line with sm:flex-row */}
+        <div className="mt-6 pt-6 pb-24 sm:pb-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
           style={{ borderTop: "1px solid rgba(242,169,0,0.12)", color: "#B8B1A7" }}>
           <p>© {new Date().getFullYear()} ACL Drinks. Todos los derechos reservados.</p>
           <div className="flex gap-4">
