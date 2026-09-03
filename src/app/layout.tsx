@@ -58,6 +58,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${fraunces.variable} font-sans antialiased`}>
+        <div className="grain-overlay" aria-hidden="true" />
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navbar />
