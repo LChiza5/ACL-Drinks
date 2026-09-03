@@ -1,13 +1,19 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Zap, Package, HeadphonesIcon, MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
-import { Aurora } from "@/components/ui/aurora";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { BrandGlassIcon } from "@/components/ui/brand-glass-icon";
 import { springs } from "@/lib/motion";
+
+// ogl (WebGL) is only needed for this decorative background — deferring it to
+// a client-only chunk keeps it off the critical path for the Hero's actual
+// content (headline, CTA), which renders immediately either way since Aurora
+// is a pure position:absolute overlay with no effect on surrounding layout.
+const Aurora = dynamic(() => import("@/components/ui/aurora").then((m) => m.Aurora), { ssr: false });
 
 const stats = [
   { icon: Zap, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "gold" as const },
