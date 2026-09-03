@@ -1,12 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Package, HeadphonesIcon, MapPin } from "lucide-react";
+import { Zap, Package, HeadphonesIcon, MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
 import { Aurora } from "@/components/ui/aurora";
-import { StarBorder } from "@/components/ui/star-border";
-import { HeroDepthLayer } from "@/components/hero/HeroDepthLayer";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { BrandGlassIcon } from "@/components/ui/brand-glass-icon";
 import { springs } from "@/lib/motion";
@@ -31,10 +29,6 @@ export function Hero() {
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
       <Aurora colorStops={["#178A38", "#F2A900", "#FFC94D"]} amplitude={0.8} blend={0.45} className="opacity-60" />
-      <HeroDepthLayer />
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl animate-float" style={{ background: "rgba(34,177,76,0.05)" }} />
-      </div>
 
       <div className="container-max section-padding relative z-10 w-full">
         <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -46,8 +40,8 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
             style={{ border: "1px solid rgba(242,169,0,0.35)", background: "rgba(242,169,0,0.1)" }}
           >
-            <BrandGlassIcon className="h-4 w-4" />
-            <span className="text-shimmer font-semibold">Entrega Rápida en Costa Rica</span>
+            <BrandGlassIcon className="h-4 w-4 text-gold-500" />
+            <span className="font-semibold" style={{ color: "#FFE29A" }}>Entrega Rápida en Costa Rica</span>
           </motion.div>
 
           <motion.h1
@@ -58,8 +52,8 @@ export function Hero() {
           >
             <span className="italic gradient-text-primary glow-primary">Lo Mejor</span>
             <br />
-            <span style={{ color: "#F5F2EC" }}>para tu Fiesta </span>
-            <span className="gradient-text">🥂</span>
+            <span style={{ color: "#F5F2EC" }}>para tu Fiesta</span>{" "}
+            <BrandGlassIcon className="inline-block h-10 w-10 md:h-14 md:w-14 align-middle text-gold-400" />
           </motion.h1>
 
           <motion.p
@@ -79,15 +73,13 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <StarBorder className="w-full sm:w-auto" color="#F2A900">
-              <Button
-                size="lg"
-                className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
-                onClick={handleScrollToCatalog}
-              >
-                🛒 COMPRAR AHORA
-              </Button>
-            </StarBorder>
+            <Button
+              size="lg"
+              className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
+              onClick={handleScrollToCatalog}
+            >
+              <ShoppingCart className="h-5 w-5" />COMPRAR AHORA
+            </Button>
             <Button
               size="lg"
               variant="outline"
