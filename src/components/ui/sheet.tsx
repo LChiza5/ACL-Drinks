@@ -27,8 +27,8 @@ const SheetContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Con
       <SheetOverlay />
       <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), "border-border", className)} {...props}>
         {children}
-        <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring">
-          <X className="h-5 w-5" /><span className="sr-only">Close</span>
+        <SheetPrimitive.Close aria-label="Cerrar" className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring">
+          <X className="h-5 w-5" /><span className="sr-only">Cerrar</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPortal>
