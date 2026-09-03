@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Package, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/constants";
 
@@ -30,11 +31,14 @@ export default async function OrdersPage() {
         <Link href="/tracking"><Button variant="outline" size="sm" className="gap-2"><Package className="h-4 w-4" />Rastrear</Button></Link>
       </div>
       {orders.length === 0 ? (
-        <div className="text-center py-20 glass-card rounded-2xl">
-          <div className="text-6xl mb-4">📦</div>
-          <h3 className="text-xl font-bold text-white">Sin pedidos todavía</h3>
-          <p className="text-muted-foreground mt-2 mb-6">¡Haz tu primera compra ahora!</p>
-          <Link href="/products"><Button className="btn-neon">Ver Productos 🍾</Button></Link>
+        <div className="glass-card rounded-2xl">
+          <EmptyState
+            icon={Package}
+            title="Sin pedidos todavía"
+            description="¡Hacé tu primera compra y va a aparecer acá!"
+            actionLabel="Ver productos"
+            actionHref="/products"
+          />
         </div>
       ) : (
         <div className="space-y-4">

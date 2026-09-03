@@ -13,18 +13,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { registerSchema, type RegisterInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
-import { PizoteMascot } from "@/components/ui/pizote-mascot";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
-  const [pwFocused, setPwFocused] = useState(false);
-  const [confirmFocused, setConfirmFocused] = useState(false);
-  const pwValue = watch("password");
-  const confirmValue = watch("confirmPassword");
-  const covering = (pwFocused && !!pwValue) || (confirmFocused && !!confirmValue);
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterInput>({ resolver: zodResolver(registerSchema) });
   const passwordReg = register("password");
   const confirmPasswordReg = register("confirmPassword");
 
@@ -46,7 +40,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 70%)" }}>
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-2">
             <Logo className="h-10 w-10" />
             <span className="text-3xl font-black gradient-text">ACL Drinks</span>
@@ -56,7 +50,6 @@ export default function RegisterPage() {
             <Gift className="h-4 w-4" />¡₡1.000 de bienvenida gratis!
           </div>
         </div>
-        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2"><Label>Nombre completo</Label><Input placeholder="Tu nombre" {...register("name")} />{errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}</div>
@@ -69,11 +62,14 @@ export default function RegisterPage() {
                   type={showPass ? "text" : "password"}
                   placeholder="Mín. 8 caracteres"
                   {...passwordReg}
-                  onFocus={() => setPwFocused(true)}
-                  onBlur={(e) => { passwordReg.onBlur(e); setPwFocused(false); }}
                   className="pr-10"
                 />
-                <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors">
+                <button
+                  type="button"
+                  onClick={() => setShowPass(!showPass)}
+                  aria-label={showPass ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors"
+                >
                   {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
@@ -85,8 +81,6 @@ export default function RegisterPage() {
                 type="password"
                 placeholder="Repite la contraseña"
                 {...confirmPasswordReg}
-                onFocus={() => setConfirmFocused(true)}
-                onBlur={(e) => { confirmPasswordReg.onBlur(e); setConfirmFocused(false); }}
               />
               {errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>}
             </div>

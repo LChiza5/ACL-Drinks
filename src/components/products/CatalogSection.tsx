@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { PackageSearch } from "lucide-react";
 import { ProductCard } from "./ProductCard";
+import { EmptyState } from "@/components/ui/empty-state";
 import type { Product } from "@/types";
 
 type Category = {
@@ -83,23 +84,11 @@ export function CatalogSection({ categories, allProducts }: Props) {
             ))}
           </div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20 space-y-3"
-          >
-            <p className="text-5xl">🎁</p>
-            <p className="text-lg font-semibold" style={{ color: "#F5F2EC" }}>
-              {activeFilter === "combos-fiesteros"
-                ? "Los Combos Fiesteros están más abajo"
-                : "Sin productos en esta categoría"}
-            </p>
-            <p className="text-sm" style={{ color: "#B8B1A7" }}>
-              {activeFilter === "combos-fiesteros"
-                ? "Desplázate hacia abajo para verlos"
-                : "Pronto agregaremos más productos"}
-            </p>
-          </motion.div>
+          <EmptyState
+            icon={PackageSearch}
+            title={activeFilter === "combos-fiesteros" ? "Los Combos Fiesteros están más abajo" : "Sin productos en esta categoría"}
+            description={activeFilter === "combos-fiesteros" ? "Desplázate hacia abajo para verlos" : "Pronto agregaremos más productos"}
+          />
         )}
       </div>
     </section>

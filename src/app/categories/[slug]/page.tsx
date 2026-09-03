@@ -1,8 +1,10 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PackageSearch } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -36,7 +38,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
       </div>
       {products.length === 0 ? (
-        <div className="text-center py-20"><div className="text-6xl mb-4">😕</div><h3 className="text-xl font-bold text-white">Sin productos en esta categoría</h3></div>
+        <EmptyState
+          icon={PackageSearch}
+          title="Sin productos en esta categoría"
+          description="Pronto vamos a sumar más opciones acá."
+          actionLabel="Ver todo el catálogo"
+          actionHref="/products"
+        />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {products.map((p, i) => <ProductCard key={p.id} product={p as never} index={i} />)}
