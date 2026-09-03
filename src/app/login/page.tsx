@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { loginSchema, type LoginInput } from "@/validations/auth";
 import { Logo } from "@/components/layout/Logo";
+import { PizoteMascot } from "@/components/ui/pizote-mascot";
 
 function LoginForm() {
   const router = useRouter();
@@ -20,9 +21,12 @@ function LoginForm() {
   const from = searchParams.get("from") || "/";
   const [showPass, setShowPass] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<LoginInput>({ resolver: zodResolver(loginSchema) });
   const passwordReg = register("password");
+  const passwordValue = watch("password");
+  const covering = passwordFocused && !!passwordValue;
 
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
@@ -51,6 +55,7 @@ function LoginForm() {
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
           <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
+        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
         <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
@@ -65,6 +70,8 @@ function LoginForm() {
                   type={showPass ? "text" : "password"}
                   placeholder="••••••••"
                   {...passwordReg}
+                  onFocus={() => setPasswordFocused(true)}
+                  onBlur={(e) => { passwordReg.onBlur(e); setPasswordFocused(false); }}
                   className="pr-10"
                 />
                 <button
