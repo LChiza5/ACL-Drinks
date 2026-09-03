@@ -1,6 +1,5 @@
 export const dynamic = "force-dynamic";
 import { Hero } from "@/components/hero/Hero";
-import { TropicalStrip } from "@/components/hero/TropicalStrip";
 import { TrustMarquee } from "@/components/hero/TrustMarquee";
 import { FeaturedProducts } from "@/components/products/FeaturedProducts";
 import { KitsPreview } from "@/components/kits/KitsPreview";
@@ -44,7 +43,6 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <TropicalStrip />
       <TrustMarquee />
       <CatalogSection categories={categories} allProducts={allProducts} />
       <FeaturedProducts products={featuredProducts} />
