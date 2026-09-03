@@ -21,8 +21,8 @@ export default async function RebajasPage() {
         <span className="text-sm font-semibold uppercase tracking-widest text-neon-amber">
           ¡No te las pierdas!
         </span>
-        <h1 className="text-4xl font-black mt-2 text-white">
-          <span className="gradient-text">Rebajas</span> Especiales 🏷️
+        <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
+          <span className="gradient-text">Rebajas</span> Especiales <Tag className="h-8 w-8 text-gold-500" />
         </h1>
         <p className="mt-2 text-muted-foreground">{products.length} productos con descuento</p>
       </div>

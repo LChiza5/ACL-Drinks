@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
-import { Gift } from "lucide-react";
+import { Gift, PartyPopper } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { KitCard } from "@/components/kits/KitCard";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -21,8 +21,8 @@ export default async function CombosFiesterosPage() {
         <span className="text-sm font-semibold uppercase tracking-widest text-neon-amber">
           Todo en uno
         </span>
-        <h1 className="text-4xl font-black mt-2 text-white">
-          Combos <span className="gradient-text">Fiesteros</span> 🎉
+        <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
+          Combos <span className="gradient-text">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
         </h1>
         <p className="mt-2 max-w-xl mx-auto text-muted-foreground">
           Combos armados para que solo pienses en pasarla bien.

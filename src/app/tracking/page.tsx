@@ -32,7 +32,7 @@ export default function TrackingPage() {
   return (
     <div className="section-padding container-max max-w-2xl">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-black text-white mb-2">Rastrear <span className="gradient-text">Pedido</span> 📦</h1>
+        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Rastrear <span className="gradient-text">Pedido</span> <Package className="h-8 w-8 text-gold-500" /></h1>
         <p className="text-muted-foreground">Ingresa tu número de pedido o código de rastreo</p>
       </div>
       <div className="glass-card rounded-2xl p-6 mb-6">

@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, CheckCircle2, Truck, MapPin } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Truck, MapPin, User, CreditCard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { formatPrice, formatDateTime } from "@/lib/utils";
@@ -87,7 +87,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
 
         {/* Customer */}
         <div className="glass-card rounded-2xl p-5 space-y-2">
-          <h2 className="font-bold text-white text-sm mb-3">👤 Cliente</h2>
+          <h2 className="font-bold text-white text-sm mb-3 flex items-center gap-2"><User className="h-4 w-4" />Cliente</h2>
           <p className="text-white font-medium">{customer.name || "—"}</p>
           <p className="text-sm text-muted-foreground">{customer.email}</p>
           {customer.phone && <p className="text-sm text-muted-foreground">{customer.phone}</p>}
@@ -107,7 +107,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
           )}
           {order.payment && (
             <div className="glass-card rounded-2xl p-5 space-y-1">
-              <h2 className="font-bold text-white text-sm mb-2">💳 Pago</h2>
+              <h2 className="font-bold text-white text-sm mb-2 flex items-center gap-2"><CreditCard className="h-4 w-4" />Pago</h2>
               <p className="text-sm text-white">{paymentInfo?.label}</p>
               <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">
                 {order.payment.status === "COMPLETED" ? "✅ Pagado" : "⏳ Pendiente"}

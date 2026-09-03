@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
-import { PackageSearch } from "lucide-react";
+import { PackageSearch, Wine } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { Badge } from "@/components/ui/badge";
@@ -28,7 +28,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   return (
     <div className="section-padding container-max">
       <div className="mb-8">
-        <h1 className="text-4xl font-black text-white mb-2">Todos los <span className="gradient-text">Productos</span> 🍾</h1>
+        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Todos los <span className="gradient-text">Productos</span> <Wine className="h-8 w-8 text-gold-500" /></h1>
         <p className="text-muted-foreground">{total} productos disponibles</p>
       </div>
       <div className="flex flex-wrap gap-2 mb-8">
