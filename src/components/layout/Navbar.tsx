@@ -90,12 +90,15 @@ export function Navbar() {
 
           {/* Acciones desktop */}
           <div className="hidden lg:flex items-center gap-2">
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            {/* Ya estan siempre disponibles como FAB flotante en toda la app - se ocultan
+                en el rango 1024-1279px porque ahi la fila completa (logo + nav + acciones
+                + CTA) no entra en el ancho y desborda el body. */}
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex">
               <Button variant="ghost" size="icon" className="h-11 w-11 text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-transform hover:scale-110 active:scale-95">
                 <FaWhatsapp className="h-6 w-6" />
               </Button>
             </a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex">
               <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
                 <FaInstagram className="h-6 w-6" />
               </Button>
