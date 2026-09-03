@@ -27,7 +27,7 @@ export default async function OrdersPage() {
   return (
     <div className="section-padding container-max max-w-3xl">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-black text-white">Mis <span className="gradient-text">Pedidos</span> 📦</h1>
+        <h1 className="text-3xl font-black text-white inline-flex items-center gap-3">Mis <span className="gradient-text">Pedidos</span> <Package className="h-7 w-7 text-gold-500" /></h1>
         <Link href="/tracking"><Button variant="outline" size="sm" className="gap-2"><Package className="h-4 w-4" />Rastrear</Button></Link>
       </div>
       {orders.length === 0 ? (

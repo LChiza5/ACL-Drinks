@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { PackageSearch } from "lucide-react";
+import { BrandGlassIcon } from "@/components/ui/brand-glass-icon";
 import { ProductCard } from "./ProductCard";
 import { EmptyState } from "@/components/ui/empty-state";
 import type { Product } from "@/types";
@@ -42,8 +43,8 @@ export function CatalogSection({ categories, allProducts }: Props) {
           <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F2A900" }}>
             Catálogo
           </span>
-          <h2 className="text-4xl font-display font-semibold" style={{ color: "#F5F2EC" }}>
-            Nuestra <span className="italic gradient-text-primary">Selección</span> 🥃
+          <h2 className="text-4xl font-display font-semibold inline-flex items-center gap-3" style={{ color: "#F5F2EC" }}>
+            Nuestra <span className="italic gradient-text-primary">Selección</span> <BrandGlassIcon className="h-8 w-8 text-gold-500" />
           </h2>
         </div>
 
