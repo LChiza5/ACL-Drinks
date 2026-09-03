@@ -5,14 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingCart, User, Menu, X, LogOut, LayoutDashboard, Package } from "lucide-react";
-import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useCartStore, useCartTotals } from "@/store/cart.store";
 import { useUIStore } from "@/store/ui.store";
-import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL } from "@/constants";
 import { getInitials } from "@/lib/utils";
 import { springs } from "@/lib/motion";
 import { Logo } from "./Logo";
@@ -32,7 +30,6 @@ export function Navbar() {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useUIStore();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -89,22 +86,12 @@ export function Navbar() {
           </nav>
 
           {/* Acciones desktop */}
-          <div className="hidden lg:flex items-center gap-2">
-            {/* Ya estan siempre disponibles como FAB flotante en toda la app - se ocultan
-                en el rango 1024-1279px porque ahi la fila completa (logo + nav + acciones
-                + CTA) no entra en el ancho y desborda el body. */}
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex">
-              <Button variant="ghost" size="icon" className="h-11 w-11 text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-transform hover:scale-110 active:scale-95">
-                <FaWhatsapp className="h-6 w-6" />
-              </Button>
-            </a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex">
-              <Button variant="ghost" size="icon" className="h-11 w-11 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
-                <FaInstagram className="h-6 w-6" />
-              </Button>
-            </a>
-            <Button variant="ghost" size="icon" className="h-11 w-11 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
-              <ShoppingCart className="h-6 w-6" />
+          <div className="hidden lg:flex items-center gap-3">
+            {/* WhatsApp/Instagram viven solo como FAB flotante ahora - tenerlos
+                tambien aca era redundante y forzaba a esconderlos entre
+                1024-1279px para no desbordar la fila (logo + nav + acciones + CTA). */}
+            <Button variant="ghost" size="icon" className="h-14 w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
+              <ShoppingCart className="h-8 w-8" />
               <AnimatePresence>
                 {totalItems > 0 && (
                   <motion.span
@@ -124,8 +111,8 @@ export function Navbar() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-11 w-11" aria-label="Abrir menú de cuenta">
-                    <Avatar className="h-9 w-9">
+                  <Button variant="ghost" size="icon" className="h-14 w-14" aria-label="Abrir menú de cuenta">
+                    <Avatar className="h-11 w-11">
                       <AvatarImage src={session.user?.image || ""} />
                       <AvatarFallback className="text-xs font-bold" style={{ background: "#F2A900", color: "#2A1F0C" }}>
                         {getInitials(session.user?.name || "U")}
@@ -155,13 +142,13 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button variant="ghost" size="icon" className="h-11 w-11" style={{ color: "#F5F2EC" }} aria-label="Iniciar sesión">
-                  <User className="h-6 w-6" />
+                <Button variant="ghost" size="icon" className="h-14 w-14" style={{ color: "#F5F2EC" }} aria-label="Iniciar sesión">
+                  <User className="h-8 w-8" />
                 </Button>
               </Link>
             )}
             <Link href="/products">
-              <Button size="sm" className="btn-primary font-bold text-sm px-5 text-white rounded-lg">
+              <Button size="lg" className="btn-primary font-bold text-base px-6 text-white rounded-lg">
                 COMPRAR AHORA
               </Button>
             </Link>
