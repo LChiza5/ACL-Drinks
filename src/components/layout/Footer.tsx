@@ -60,17 +60,17 @@ export function Footer() {
               Tu licorería online de confianza en Costa Rica. Entrega rápida, precios justos y la mejor selección.
             </p>
             <div className="flex gap-3">
-              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={whatsappUrl} target="_blank" rel="noopener noreferrer"
+              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
                 className="p-2 rounded-lg transition-colors"
                 style={{ background: "rgba(34,197,94,0.1)", color: "#4ade80" }}>
                 <FaWhatsapp className="h-5 w-5" />
               </motion.a>
-              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
+              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram"
                 className="p-2 rounded-lg transition-colors"
                 style={{ background: "rgba(255,61,138,0.1)", color: "#FF3D8A" }}>
                 <FaInstagram className="h-5 w-5" />
               </motion.a>
-              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href="#"
+              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href="#" aria-label="Seguinos en Facebook"
                 className="p-2 rounded-lg transition-colors"
                 style={{ background: "rgba(34,177,76,0.1)", color: "#22B14C" }}>
                 <FaFacebook className="h-5 w-5" />
