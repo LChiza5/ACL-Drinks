@@ -8,10 +8,10 @@ import { IconBadge } from "@/components/ui/icon-badge";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 const benefits = [
-  { icon: Gift, title: "₡1.000 de Bienvenida", desc: "Crédito gratis en tu primera compra al registrarte.", tone: "gold" as const },
+  { icon: Gift, title: "₡1.000 de Bienvenida", desc: "Crédito gratis en tu primera compra al registrarte.", tone: "sky" as const },
   { icon: Star, title: "Descuentos Exclusivos", desc: "Rebajas especiales solo para miembros registrados.", tone: "hibiscus" as const },
   { icon: ClockCounterClockwise, title: "Historial de Compras", desc: "Accede fácilmente a todos tus pedidos anteriores.", tone: "emerald" as const },
-  { icon: Tag, title: "Cupones Especiales", desc: "Códigos de descuento exclusivos para suscriptores.", tone: "gold" as const },
+  { icon: Tag, title: "Cupones Especiales", desc: "Códigos de descuento exclusivos para suscriptores.", tone: "sky" as const },
   { icon: ShieldCheck, title: "Compra Segura", desc: "Todos tus pagos encriptados y protegidos.", tone: "emerald" as const },
   { icon: Truck, title: "Entrega Garantizada", desc: "Si no llega en el tiempo prometido, te compensamos.", tone: "hibiscus" as const },
 ];
@@ -26,7 +26,7 @@ export function BenefitsSection() {
         <SectionHeading
           align="center"
           eyebrow="¿Por qué elegirnos?"
-          eyebrowColor="#FFC94D"
+          eyebrowColor="#3AB0E0"
           title="Beneficios"
           accent="Exclusivos"
           accentColor="#4CD671"

@@ -13,6 +13,7 @@ const TONES = {
   gold: "#F2A900",
   emerald: "#22B14C",
   hibiscus: "#FF3D8A",
+  sky: "#3AB0E0",
 } as const;
 
 const SIZES = { sm: 30, md: 42, lg: 54 } as const;

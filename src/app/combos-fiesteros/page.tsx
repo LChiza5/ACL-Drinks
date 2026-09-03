@@ -50,11 +50,11 @@ export default function CombosFiesterosPage() {
   return (
     <div className="section-padding container-max">
       <div className="text-center mb-10">
-        <span className="text-sm font-semibold uppercase tracking-widest text-neon-amber">
+        <span className="text-sm font-semibold uppercase tracking-widest text-hibiscus-400">
           Todo en uno
         </span>
         <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
-          Combos <span className="gradient-text">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
+          Combos <span className="gradient-text-vivid">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
         </h1>
         <p className="mt-2 max-w-xl mx-auto text-muted-foreground">
           Combos armados para que solo pienses en pasarla bien.
