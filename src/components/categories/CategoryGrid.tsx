@@ -1,5 +1,5 @@
-import { Tag } from "lucide-react";
 import { CategoryCard } from "./CategoryCard";
+import { SectionHeading } from "@/components/ui/section-heading";
 import type { Category } from "@/types";
 
 export function CategoryGrid({ categories }: { categories: Category[] }) {
@@ -7,10 +7,15 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
   return (
     <section className="section-padding">
       <div className="container-max">
-        <div className="text-center space-y-3 mb-10">
-          <span className="text-sm font-semibold text-emerald-500 uppercase tracking-widest">Navega por</span>
-          <h2 className="text-4xl font-display font-semibold text-white inline-flex items-center gap-3">Nuestras <span className="italic gradient-text-primary">Categorías</span> <Tag className="h-8 w-8 text-emerald-500" /></h2>
-        </div>
+        <SectionHeading
+          align="center"
+          eyebrow="Navega por"
+          eyebrowColor="#4CD671"
+          title="Nuestras"
+          accent="Categorías"
+          accentColor="#4CD671"
+          className="mb-10"
+        />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {categories.map((cat, i) => <CategoryCard key={cat.id} category={cat} index={i} />)}
         </div>

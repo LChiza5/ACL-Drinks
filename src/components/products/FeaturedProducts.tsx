@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
+import { SectionHeading } from "@/components/ui/section-heading";
 import type { Product } from "@/types";
 
 export function FeaturedProducts({ products }: { products: Product[] }) {
@@ -9,12 +10,9 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
   return (
     <section className="section-padding" style={{ background: "#12110F" }}>
       <div className="container-max">
-        <div className="flex items-end justify-between mb-10">
-          <div className="space-y-2">
-            <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F2A900" }}>Lo más pedido</span>
-            <h2 className="text-4xl font-display font-semibold inline-flex items-center gap-3" style={{ color: "#F5F2EC" }}>Productos <span className="italic gradient-text-primary">Destacados</span> <Star className="h-8 w-8 text-gold-500" fill="currentColor" /></h2>
-          </div>
-          <Link href="/products"><Button variant="outline" className="gap-2 hidden sm:flex">Ver todos <ArrowRight className="h-4 w-4" /></Button></Link>
+        <div className="flex items-end justify-between mb-10 gap-4">
+          <SectionHeading eyebrow="Lo más pedido" eyebrowColor="#FFC94D" title="Productos" accent="Destacados" accentColor="#4CD671" />
+          <Link href="/products"><Button variant="outline" className="gap-2 hidden sm:flex shrink-0">Ver todos <ArrowRight className="h-4 w-4" /></Button></Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {products.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}

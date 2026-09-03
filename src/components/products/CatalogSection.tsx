@@ -2,9 +2,9 @@
 
 import { useState, useMemo } from "react";
 import { PackageSearch } from "lucide-react";
-import { BrandGlassIcon } from "@/components/ui/brand-glass-icon";
 import { ProductCard } from "./ProductCard";
 import { EmptyState } from "@/components/ui/empty-state";
+import { SectionHeading } from "@/components/ui/section-heading";
 import type { Product } from "@/types";
 
 type Category = {
@@ -39,14 +39,15 @@ export function CatalogSection({ categories, allProducts }: Props) {
   return (
     <section id="catalogo" className="section-padding">
       <div className="container-max">
-        <div className="text-center space-y-2 mb-8">
-          <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#F2A900" }}>
-            Catálogo
-          </span>
-          <h2 className="text-4xl font-display font-semibold inline-flex items-center gap-3" style={{ color: "#F5F2EC" }}>
-            Nuestra <span className="italic gradient-text-primary">Selección</span> <BrandGlassIcon className="h-8 w-8 text-gold-500" />
-          </h2>
-        </div>
+        <SectionHeading
+          align="center"
+          eyebrow="Catálogo"
+          eyebrowColor="#FFC94D"
+          title="Nuestra"
+          accent="Selección"
+          accentColor="#4CD671"
+          className="mb-10"
+        />
 
         {/* Barra de filtros horizontal */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8" style={{ scrollbarWidth: "none" }}>
