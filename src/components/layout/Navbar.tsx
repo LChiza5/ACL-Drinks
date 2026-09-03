@@ -100,7 +100,7 @@ export function Navbar() {
                 <FaInstagram className="h-6 w-6" />
               </Button>
             </a>
-            <Button variant="ghost" size="icon" className="h-11 w-11 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart}>
+            <Button variant="ghost" size="icon" className="h-11 w-11 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
               <ShoppingCart className="h-6 w-6" />
               <AnimatePresence>
                 {totalItems > 0 && (
@@ -121,7 +121,7 @@ export function Navbar() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-11 w-11">
+                  <Button variant="ghost" size="icon" className="h-11 w-11" aria-label="Abrir menú de cuenta">
                     <Avatar className="h-9 w-9">
                       <AvatarImage src={session.user?.image || ""} />
                       <AvatarFallback className="text-xs font-bold" style={{ background: "#F2A900", color: "#2A1F0C" }}>
@@ -152,7 +152,7 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button variant="ghost" size="icon" className="h-11 w-11" style={{ color: "#F5F2EC" }}>
+                <Button variant="ghost" size="icon" className="h-11 w-11" style={{ color: "#F5F2EC" }} aria-label="Iniciar sesión">
                   <User className="h-6 w-6" />
                 </Button>
               </Link>
@@ -166,7 +166,7 @@ export function Navbar() {
 
           {/* Mobile: carrito + hamburgesa */}
           <div className="flex lg:hidden items-center gap-2">
-            <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart}>
+            <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#FF3D8A" }}>
@@ -174,7 +174,15 @@ export function Navbar() {
                 </span>
               )}
             </Button>
-            <Button variant="ghost" size="icon" style={{ color: "#F5F2EC" }} onClick={toggleMobileMenu}>
+            <Button
+              variant="ghost"
+              size="icon"
+              style={{ color: "#F5F2EC" }}
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav-menu"
+            >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -184,6 +192,7 @@ export function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
+              id="mobile-nav-menu"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
