@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
+import { Gift } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { KitCard } from "@/components/kits/KitCard";
+import { EmptyState } from "@/components/ui/empty-state";
 
 export const metadata: Metadata = { title: "Combos Fiesteros | ACL Drinks" };
 export const revalidate = 60;
@@ -27,10 +29,13 @@ export default async function CombosFiesterosPage() {
         </p>
       </div>
       {kits.length === 0 ? (
-        <div className="text-center py-20">
-          <div className="text-6xl mb-4">🎁</div>
-          <h3 className="text-xl font-bold text-white">Próximamente nuevos combos</h3>
-        </div>
+        <EmptyState
+          icon={Gift}
+          title="Todavía no hay combos armados"
+          description="Estamos preparando nuevas combinaciones para vos."
+          actionLabel="Ver productos"
+          actionHref="/products"
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {kits.map((kit, i) => <KitCard key={kit.id} kit={kit as never} index={i} />)}

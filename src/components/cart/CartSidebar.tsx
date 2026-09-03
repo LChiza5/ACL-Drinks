@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { ShoppingCart, X, ShoppingBag } from "lucide-react";
+import { ShoppingCart, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { EmptyState } from "@/components/ui/empty-state";
 import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
 import { useCartStore, useCartTotals } from "@/store/cart.store";
@@ -52,15 +52,15 @@ export function CartSidebar() {
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-4 p-8 text-center">
-            <motion.div initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-8xl animate-float">🛒</motion.div>
-            <div>
-              <h3 className="font-bold text-white text-lg">Tu carrito está vacío</h3>
-              <p className="text-muted-foreground text-sm mt-1">¡Agrega algo para empezar la fiesta!</p>
-            </div>
-            <Link href="/products" onClick={closeCart}>
-              <Button className="btn-neon gap-2 mt-2"><ShoppingBag className="h-4 w-4" />Ver Productos</Button>
-            </Link>
+          <div className="flex-1 flex items-center justify-center">
+            <EmptyState
+              icon={ShoppingCart}
+              title="Tu carrito está vacío"
+              description="Agregá productos para empezar la fiesta."
+              actionLabel="Ver productos"
+              actionHref="/products"
+              onActionClick={closeCart}
+            />
           </div>
         ) : (
           <>

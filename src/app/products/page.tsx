@@ -1,8 +1,10 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
+import { PackageSearch } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { Badge } from "@/components/ui/badge";
+import { EmptyState } from "@/components/ui/empty-state";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "Productos" };
@@ -40,7 +42,11 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         ))}
       </div>
       {products.length === 0 ? (
-        <div className="text-center py-20"><div className="text-6xl mb-4">😕</div><h3 className="text-xl font-bold text-white">No encontramos productos</h3></div>
+        <EmptyState
+          icon={PackageSearch}
+          title="No encontramos productos"
+          description="Probá con otra categoría o término de búsqueda."
+        />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {products.map((p, i) => <ProductCard key={p.id} product={p as never} index={i} />)}
