@@ -1,24 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { PizoteMascot } from "@/components/ui/pizote-mascot";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { springs } from "@/lib/motion";
 
 /**
- * Real wildlife photography, not icons/illustrations - sourced from Wikimedia
- * Commons (CC BY-SA 3.0/4.0), credited below. Same species fundaca.vercel.app
- * uses for their own species showcase (frog + toucan match exactly).
+ * NOTE: this section is intentionally minimal right now. It previously used
+ * emoji-style icon art and, before that, stock wildlife photos - neither
+ * matched the reference (fundaca.vercel.app's custom illustrated species
+ * badges: cohesive style, muted earthy palette, circular cream frame).
+ * Building more critters here needs real illustration work, not another
+ * guessed icon set - see the project brief for next steps.
  */
-const critters = [
-  { kind: "mascot" as const, name: "El Pizote", blurb: "Curioso, atrevido y el primero en llegar a la fiesta.", ring: "#F2A900" },
-  { kind: "img" as const, src: "/tropical/sloth.jpg", name: "El Perezoso", blurb: "Tranquilo... pero tu pedido no tarda como él.", ring: "#22B14C" },
-  { kind: "img" as const, src: "/tropical/toucan.jpg", name: "El Tucán", blurb: "El más colorido del vecindario, sin esforzarse.", ring: "#FFC94D" },
-  { kind: "img" as const, src: "/tropical/macaw.jpg", name: "La Lapa Roja", blurb: "Llama la atención en cualquier fiesta, literal.", ring: "#FF3D8A" },
-  { kind: "img" as const, src: "/tropical/frog.jpg", name: "La Rana", blurb: "Chiquita, pero con un color que no pasa desapercibido.", ring: "#22B14C" },
-];
-
 export function TropicalStrip() {
   return (
     <section
@@ -33,44 +27,32 @@ export function TropicalStrip() {
           title="Pura Vida,"
           accent="Full Sabor"
           accentColor="#4CD671"
-          description="Somos de Costa Rica y se nos nota: acá va la fauna que le pone sabor a cada pedido."
-          className="mb-14"
+          description="Somos de Costa Rica y se nos nota."
+          className="mb-10"
         />
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
-          {critters.map((c, i) => (
-            <motion.div
-              key={c.name}
-              initial={{ opacity: 0, y: 28, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              whileHover={{ y: -8 }}
-              transition={{ ...springs.bouncy, delay: i * 0.08 }}
-              className="flex flex-col items-center text-center gap-4"
-            >
-              <div
-                className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full overflow-hidden transition-shadow duration-300"
-                style={{ boxShadow: `0 0 0 3px ${c.ring}, 0 8px 28px -8px ${c.ring}99` }}
-              >
-                {c.kind === "mascot" ? (
-                  <div className="h-full w-full flex items-center justify-center p-4" style={{ background: "radial-gradient(circle at 35% 30%, #1E1A17, #12110F 75%)" }}>
-                    <PizoteMascot covering={false} className="h-full w-full" />
-                  </div>
-                ) : (
-                  <Image src={c.src} alt={c.name} fill sizes="128px" className="object-cover" />
-                )}
-              </div>
-              <div>
-                <p className="font-bold text-base" style={{ color: "#F5F2EC" }}>{c.name}</p>
-                <p className="text-xs mt-1 leading-snug max-w-[10rem] mx-auto" style={{ color: "#8A8377" }}>{c.blurb}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <p className="text-center text-[11px] mt-10" style={{ color: "#5C564C" }}>
-          Fotos: Wikimedia Commons (CC BY-SA 3.0/4.0) — Agalychnis callidryas, Ramphastos sulfuratus, Bradypus variegatus, Ara macao.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={springs.bouncy}
+          className="flex flex-col items-center text-center gap-4"
+        >
+          <div
+            className="relative h-32 w-32 sm:h-36 sm:w-36 rounded-full overflow-hidden flex items-center justify-center p-4"
+            style={{
+              background: "radial-gradient(circle at 35% 30%, #1E1A17, #12110F 75%)",
+              boxShadow: "0 0 0 3px #F2A900, 0 8px 28px -8px #F2A90099",
+            }}
+          >
+            <PizoteMascot covering={false} className="h-full w-full" />
+          </div>
+          <div>
+            <p className="font-bold text-base" style={{ color: "#F5F2EC" }}>El Pizote</p>
+            <p className="text-xs mt-1 leading-snug max-w-[14rem] mx-auto" style={{ color: "#8A8377" }}>
+              Curioso, atrevido y el primero en llegar a la fiesta.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

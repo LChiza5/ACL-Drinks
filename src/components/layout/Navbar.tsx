@@ -5,12 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingCart, User, Menu, X, LogOut, LayoutDashboard, Package } from "lucide-react";
+import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useCartStore, useCartTotals } from "@/store/cart.store";
 import { useUIStore } from "@/store/ui.store";
+import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL } from "@/constants";
 import { getInitials } from "@/lib/utils";
 import { springs } from "@/lib/motion";
 import { Logo } from "./Logo";
@@ -30,6 +32,7 @@ export function Navbar() {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useUIStore();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -55,9 +58,9 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeMobileMenu}>
             <motion.div whileHover={{ scale: 1.08, rotate: -3 }} whileTap={{ scale: 0.94 }} transition={springs.snappy}>
-              <Logo className="h-8 w-8 sm:h-9 sm:w-9 shrink-0" />
+              <Logo className="h-12 w-12 sm:h-14 sm:w-14 shrink-0" />
             </motion.div>
-            <span className="text-lg sm:text-2xl font-display font-semibold gradient-text tracking-tight">ACL DRINKS</span>
+            <span className="text-xl sm:text-2xl font-display font-semibold gradient-text tracking-tight">ACL DRINKS</span>
           </Link>
 
           {/* Nav desktop */}
@@ -86,10 +89,17 @@ export function Navbar() {
           </nav>
 
           {/* Acciones desktop */}
-          <div className="hidden lg:flex items-center gap-3">
-            {/* WhatsApp/Instagram viven solo como FAB flotante ahora - tenerlos
-                tambien aca era redundante y forzaba a esconderlos entre
-                1024-1279px para no desbordar la fila (logo + nav + acciones + CTA). */}
+          <div className="hidden lg:flex items-center gap-2">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+              <Button variant="ghost" size="icon" className="h-14 w-14 text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-transform hover:scale-110 active:scale-95">
+                <FaWhatsapp className="h-8 w-8" />
+              </Button>
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram">
+              <Button variant="ghost" size="icon" className="h-14 w-14 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
+                <FaInstagram className="h-8 w-8" />
+              </Button>
+            </a>
             <Button variant="ghost" size="icon" className="h-14 w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
               <ShoppingCart className="h-8 w-8" />
               <AnimatePresence>
