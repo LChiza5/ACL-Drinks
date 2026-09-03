@@ -60,7 +60,7 @@ export function Navbar() {
             <motion.div whileHover={{ scale: 1.08, rotate: -3 }} whileTap={{ scale: 0.94 }} transition={springs.snappy}>
               <Logo className="h-12 w-12 sm:h-14 sm:w-14 shrink-0" />
             </motion.div>
-            <span className="text-xl sm:text-2xl font-display font-semibold gradient-text tracking-tight">ACL DRINKS</span>
+            <span className="text-xl sm:text-2xl lg:text-lg xl:text-2xl font-display font-semibold gradient-text tracking-tight whitespace-nowrap">ACL DRINKS</span>
           </Link>
 
           {/* Nav desktop */}
@@ -71,7 +71,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="nav-pill relative px-4 py-2.5 text-sm font-semibold rounded-lg transition-colors duration-200 hover:text-white"
+                  className="nav-pill relative px-2 py-2.5 text-xs xl:px-4 xl:text-sm font-semibold rounded-lg transition-colors duration-200 hover:text-white whitespace-nowrap"
                   style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                 >
                   {link.label}
@@ -89,19 +89,19 @@ export function Navbar() {
           </nav>
 
           {/* Acciones desktop */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-2">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-              <Button variant="ghost" size="icon" className="h-14 w-14 text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-transform hover:scale-110 active:scale-95">
-                <FaWhatsapp className="h-8 w-8" />
+              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 text-green-400 hover:text-green-300 hover:bg-green-500/10 transition-transform hover:scale-110 active:scale-95">
+                <FaWhatsapp className="h-6 w-6 xl:h-8 xl:w-8" />
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram">
-              <Button variant="ghost" size="icon" className="h-14 w-14 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
-                <FaInstagram className="h-8 w-8" />
+              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
+                <FaInstagram className="h-6 w-6 xl:h-8 xl:w-8" />
               </Button>
             </a>
-            <Button variant="ghost" size="icon" className="h-14 w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
-              <ShoppingCart className="h-8 w-8" />
+            <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
+              <ShoppingCart className="h-6 w-6 xl:h-8 xl:w-8" />
               <AnimatePresence>
                 {totalItems > 0 && (
                   <motion.span
@@ -121,8 +121,8 @@ export function Navbar() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-14 w-14" aria-label="Abrir menú de cuenta">
-                    <Avatar className="h-11 w-11">
+                  <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14" aria-label="Abrir menú de cuenta">
+                    <Avatar className="h-8 w-8 xl:h-11 xl:w-11">
                       <AvatarImage src={session.user?.image || ""} />
                       <AvatarFallback className="text-xs font-bold" style={{ background: "#F2A900", color: "#2A1F0C" }}>
                         {getInitials(session.user?.name || "U")}
@@ -152,13 +152,13 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                <Button variant="ghost" size="icon" className="h-14 w-14" style={{ color: "#F5F2EC" }} aria-label="Iniciar sesión">
-                  <User className="h-8 w-8" />
+                <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14" style={{ color: "#F5F2EC" }} aria-label="Iniciar sesión">
+                  <User className="h-6 w-6 xl:h-8 xl:w-8" />
                 </Button>
               </Link>
             )}
             <Link href="/products">
-              <Button size="lg" className="btn-primary font-bold text-base px-6 text-white rounded-lg">
+              <Button size="lg" className="btn-primary font-bold text-sm px-4 xl:text-base xl:px-6 text-white rounded-lg whitespace-nowrap">
                 COMPRAR AHORA
               </Button>
             </Link>
