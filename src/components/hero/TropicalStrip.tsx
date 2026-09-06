@@ -55,7 +55,7 @@ export function TropicalStrip() {
         <SectionHeading
           align="center"
           eyebrow="100% Tico"
-          eyebrowColor="#4CD671"
+          eyebrowColor="#F2A900"
           title="Pura Vida,"
           accent="Full Sabor"
           accentColor="#4CD671"

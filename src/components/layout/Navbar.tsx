@@ -52,13 +52,13 @@ export function Navbar() {
       <div className="container-max">
         <div
           className="flex items-center justify-between px-4 lg:px-6 transition-[height] duration-300"
-          style={{ height: scrolled ? "3.5rem" : "4rem" }}
+          style={{ height: scrolled ? "4.5rem" : "5.5rem" }}
         >
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0" onClick={closeMobileMenu}>
             <motion.div whileHover={{ scale: 1.08, rotate: -3 }} whileTap={{ scale: 0.94 }} transition={springs.snappy}>
-              <Logo className="h-12 w-12 sm:h-14 sm:w-14 shrink-0" />
+              <Logo className="h-14 w-14 sm:h-16 sm:w-16 shrink-0" />
             </motion.div>
             <span className="text-xl sm:text-2xl lg:text-lg xl:text-2xl font-display font-semibold gradient-text tracking-tight whitespace-nowrap">ACL DRINKS</span>
           </Link>
