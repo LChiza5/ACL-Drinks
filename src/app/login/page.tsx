@@ -55,8 +55,8 @@ function LoginForm() {
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>
           <p className="mt-1" style={{ color: "#B8B1A7" }}>¡Bienvenido de vuelta!</p>
         </div>
-        <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
-        <div className="glass-card rounded-sm p-8">
+        <PizoteMascot covering={covering} peeking={showPass} className="h-32 w-32 mx-auto mb-3" />
+        <div className="glass-card rounded-2xl p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-2">
               <Label>Email</Label>

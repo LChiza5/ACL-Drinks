@@ -61,14 +61,14 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
-                className="p-2 rounded-sm transition-colors"
-                style={{ background: "rgba(74,222,128,0.1)", color: "#4ade80" }}>
-                <FaWhatsapp className="h-5 w-5" />
+                className="p-3 rounded-2xl transition-colors"
+                style={{ background: "rgba(37,211,102,0.12)", color: "#25D366" }}>
+                <FaWhatsapp className="h-6 w-6" />
               </motion.a>
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram"
-                className="p-2 rounded-sm transition-colors"
-                style={{ background: "rgba(245,242,236,0.06)", color: "#F5F2EC" }}>
-                <FaInstagram className="h-5 w-5" />
+                className="p-3 rounded-2xl transition-colors"
+                style={{ background: "rgba(225,48,108,0.12)", color: "#E1306C" }}>
+                <FaInstagram className="h-6 w-6" />
               </motion.a>
             </div>
           </motion.div>
@@ -108,7 +108,7 @@ export function Footer() {
           style={{ borderTop: "1px solid rgba(242,169,0,0.12)" }}>
           <span className="text-xs font-semibold" style={{ color: "#F5F2EC" }}>Aceptamos:</span>
           {Object.values(PAYMENT_METHODS).map((m) => (
-            <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs"
+            <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs"
               style={{ background: "rgba(245,242,236,0.06)", border: "1px solid rgba(245,242,236,0.1)", color: "#B8B1A7" }}>
               <span>{m.icon}</span>{m.label}
             </span>

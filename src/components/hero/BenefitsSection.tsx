@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Gift, Star, ClockCounterClockwise, Tag, ShieldCheck, Truck } from "@phosphor-icons/react/dist/ssr";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -40,13 +41,13 @@ export function BenefitsSection() {
               className="group cursor-pointer"
             >
               <TiltCard rotateAmplitude={6}>
-                <div className="glass-card-hover rounded-sm p-6 space-y-4">
+                <SpotlightCard className="glass-card-hover rounded-2xl p-6 space-y-4" color="rgba(242,169,0,0.16)">
                   <IconBadge icon={b.icon} tone={b.tone} size="lg" />
                   <div>
                     <h3 className="font-bold text-lg" style={{ color: "#F5F2EC" }}>{b.title}</h3>
                     <p className="text-sm mt-1" style={{ color: "#B8B1A7" }}>{b.desc}</p>
                   </div>
-                </div>
+                </SpotlightCard>
               </TiltCard>
             </motion.div>
           ))}

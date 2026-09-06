@@ -14,7 +14,7 @@ const TONES = {
   hibiscus: "#FF3D8A",
 } as const;
 
-const SIZES = { sm: 30, md: 42, lg: 54 } as const;
+const SIZES = { sm: 40, md: 54, lg: 68 } as const;
 
 interface IconBadgeProps {
   icon: PhosphorIcon;
@@ -28,6 +28,7 @@ export function IconBadge({ icon: Icon, tone = "emerald", size = "md", className
   return (
     <motion.div
       className={`inline-flex ${className}`}
+      style={{ filter: `drop-shadow(0 6px 16px ${color}55)` }}
       whileHover={{ scale: 1.12, rotate: -6 }}
       whileTap={{ scale: 0.92 }}
       transition={springs.snappy}

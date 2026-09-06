@@ -25,7 +25,7 @@
     --border: 30 10% 20%;
     --input: 30 10% 18%;
     --ring: 138 68% 41%;
-    --radius: 0.25rem;
+    --radius: 0.9rem;
   }
 
   * {
@@ -95,24 +95,67 @@
   }
 
   .glass-card-hover {
-    @apply glass-card transition-colors duration-300;
+    @apply glass-card transition-all duration-300;
   }
   .glass-card-hover:hover {
-    border-color: rgba(34, 177, 76, 0.4);
+    border-color: rgba(34, 177, 76, 0.45);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(34, 177, 76, 0.18);
+    transform: translateY(-3px);
   }
 
   .btn-primary, .btn-neon {
-    background: #22B14C;
-    border: 1.5px solid #8FE8A8;
-    transition: background-color 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #22B14C, #178A38);
+    border: 1.5px solid rgba(143, 232, 168, 0.55);
+    box-shadow: 0 6px 20px rgba(34, 177, 76, 0.28);
+    transition: box-shadow 0.25s ease, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s ease;
   }
   .btn-primary:hover, .btn-neon:hover {
-    background: #178A38;
-    border-color: #F5F2EC;
+    border-color: #8FE8A8;
+    box-shadow: 0 10px 28px rgba(34, 177, 76, 0.45);
     transform: translateY(-2px);
   }
   .btn-primary:active, .btn-neon:active {
     transform: scale(0.97);
+  }
+  /* light sweep across the button on hover */
+  .btn-primary::before, .btn-neon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .btn-primary:hover::before, .btn-neon:hover::before { left: 100%; }
+
+  .glare-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .glare-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: linear-gradient(
+      var(--gh-angle),
+      hsla(0, 0%, 0%, 0) 60%,
+      var(--gh-rgba) 70%,
+      hsla(0, 0%, 0%, 0),
+      hsla(0, 0%, 0%, 0) 100%
+    );
+    transition: var(--gh-duration) ease;
+    background-size: var(--gh-size) var(--gh-size), 100% 100%;
+    background-repeat: no-repeat;
+    background-position: -100% -100%, 0 0;
+  }
+  .glare-hover:hover::before {
+    background-position: 100% 100%, 0 0;
   }
 
   .shimmer {
