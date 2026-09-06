@@ -53,7 +53,7 @@ export default function CombosFiesterosPage() {
         <span className="text-sm font-semibold uppercase tracking-widest text-hibiscus-400">
           Todo en uno
         </span>
-        <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
+        <h1 className="text-4xl font-black mt-2 text-white flex items-center justify-center gap-3">
           Combos <span className="text-hibiscus-500">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
         </h1>
         <p className="mt-2 max-w-xl mx-auto text-muted-foreground">

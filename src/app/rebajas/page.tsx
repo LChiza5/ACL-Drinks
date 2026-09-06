@@ -56,7 +56,7 @@ export default function RebajasPage() {
         <span className="text-sm font-semibold uppercase tracking-widest text-hibiscus-400">
           ¡No te las pierdas!
         </span>
-        <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
+        <h1 className="text-4xl font-black mt-2 text-white flex items-center justify-center gap-3">
           <span className="text-hibiscus-500">Rebajas</span> Especiales <Tag className="h-8 w-8 text-hibiscus-500" />
         </h1>
       </div>

@@ -36,7 +36,7 @@ export default function CategoriesPage() {
   return (
     <div className="section-padding container-max">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Nuestras <span className="text-emerald-500">Categorías</span> <Tag className="h-8 w-8 text-emerald-500" /></h1>
+        <h1 className="text-4xl font-black text-white mb-2 flex items-center justify-center gap-3">Nuestras <span className="text-emerald-500">Categorías</span> <Tag className="h-8 w-8 text-emerald-500" /></h1>
         <p className="text-muted-foreground">Encuentra exactamente lo que buscas</p>
       </div>
       <Suspense fallback={<CategoriesGridSkeleton />}>
