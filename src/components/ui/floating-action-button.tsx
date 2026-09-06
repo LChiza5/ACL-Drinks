@@ -29,7 +29,7 @@ export function FloatingActionButton({ href, icon: Icon, label, ariaLabel, iconB
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ariaLabel}
-      className={`fixed ${bottomClass} right-5 z-50 group flex h-[60px] items-center justify-end rounded-full pr-[6px] pl-[6px] hover:pl-6 transition-[padding] duration-300 ease-out`}
+      className={`fixed ${bottomClass} right-4 sm:right-5 z-50 group flex h-[52px] sm:h-[60px] items-center justify-end rounded-full pr-[5px] pl-[5px] sm:pr-[6px] sm:pl-[6px] hover:pl-6 transition-[padding] duration-300 ease-out`}
       style={{ background: iconBg, boxShadow: iconGlow }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
@@ -40,8 +40,8 @@ export function FloatingActionButton({ href, icon: Icon, label, ariaLabel, iconB
       <span className="max-w-0 overflow-hidden whitespace-nowrap text-[15px] font-bold text-white transition-all duration-300 ease-out group-hover:max-w-[10rem] group-hover:pr-3">
         {label}
       </span>
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center">
-        <Icon className="h-8 w-8 text-white drop-shadow-sm" />
+      <span className="flex h-[42px] w-[42px] sm:h-12 sm:w-12 shrink-0 items-center justify-center">
+        <Icon className="h-7 w-7 sm:h-8 sm:w-8 text-white drop-shadow-sm" />
       </span>
     </motion.a>
   );

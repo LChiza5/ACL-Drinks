@@ -39,9 +39,9 @@ export default function TrackingPage() {
         <span className="text-sm font-semibold uppercase tracking-widest text-gold-500">
           ¿Dónde viene mi pedido?
         </span>
-        <h1 className="text-4xl font-black mt-2 text-white flex items-center justify-center gap-3">
-          Rastrear <span className="text-gold-500">Pedido</span>
-          <Package size={36} weight="duotone" color="#F2A900" />
+        <h1 className="text-4xl font-black mt-2 text-white">
+          Rastrear <span className="text-gold-500">Pedido</span>{" "}
+          <Package size={36} weight="duotone" color="#F2A900" className="inline-block align-middle" />
         </h1>
         <p className="mt-2 text-muted-foreground">Ingresá tu número de pedido o código de rastreo</p>
       </div>
