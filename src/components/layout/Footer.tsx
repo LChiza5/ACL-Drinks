@@ -52,7 +52,7 @@ export function Footer() {
           <motion.div {...fadeUp(0)} className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <motion.div whileHover={{ scale: 1.08, rotate: -3 }} transition={{ type: "spring", stiffness: 320, damping: 28 }}>
-                <Logo className="h-8 w-8 shrink-0" />
+                <Logo className="h-11 w-11 shrink-0" />
               </motion.div>
               <span className="text-2xl font-display font-semibold gradient-text">ACL DRINKS</span>
             </Link>

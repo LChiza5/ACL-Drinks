@@ -7,7 +7,7 @@ import { IconBadge } from "@/components/ui/icon-badge";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 const benefits = [
-  { icon: Gift, title: "₡1.000 de Bienvenida", desc: "Crédito gratis en tu primera compra al registrarte.", tone: "emerald" as const },
+  { icon: Gift, title: "₡1.000 de Bienvenida", desc: "Crédito gratis en tu primera compra al registrarte.", tone: "gold" as const },
   { icon: Star, title: "Descuentos Exclusivos", desc: "Rebajas especiales solo para miembros registrados.", tone: "hibiscus" as const },
   { icon: ClockCounterClockwise, title: "Historial de Compras", desc: "Accede fácilmente a todos tus pedidos anteriores.", tone: "emerald" as const },
   { icon: Tag, title: "Cupones Especiales", desc: "Códigos de descuento exclusivos para suscriptores.", tone: "hibiscus" as const },

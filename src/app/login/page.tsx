@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, LogIn, ShieldAlert } from "lucide-react";
+import { Eye, EyeSlash as EyeOff, SignIn as LogIn, ShieldWarning as ShieldAlert } from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,7 +35,7 @@ function LoginForm() {
       if (result?.error) {
         toast.error("Email o contraseña incorrectos");
       } else {
-        toast.success("¡Bienvenido de vuelta! 🎉");
+        toast.success("¡Bienvenido de vuelta!");
         router.push(from === "dashboard" ? "/dashboard" : "/");
         router.refresh();
       }
@@ -49,7 +49,7 @@ function LoginForm() {
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-2">
-            <Logo className="h-10 w-10" />
+            <Logo className="h-14 w-14" />
             <span className="text-3xl font-black gradient-text">ACL Drinks</span>
           </Link>
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Iniciar Sesión</h1>

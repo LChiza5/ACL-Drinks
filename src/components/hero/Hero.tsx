@@ -16,7 +16,7 @@ import { springs } from "@/lib/motion";
 const Aurora = dynamic(() => import("@/components/ui/aurora").then((m) => m.Aurora), { ssr: false });
 
 const stats = [
-  { icon: Lightning, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "emerald" as const },
+  { icon: Lightning, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "gold" as const },
   { icon: Package, label: "Envíos Nacionales", value: "2-4 días", tone: "emerald" as const },
   { icon: MapPin, label: "Productos disponibles", value: "25+", tone: "emerald" as const },
   { icon: Headset, label: "Soporte", value: "24/7", tone: "emerald" as const },

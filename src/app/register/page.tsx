@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, UserPlus, Gift } from "lucide-react";
+import { Eye, EyeSlash as EyeOff, UserPlus, Gift } from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +32,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/users/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       const result = await res.json();
       if (!result.success) { toast.error(result.error); return; }
-      toast.success("¡Cuenta creada! ₡1.000 de bienvenida 🎉");
+      toast.success("¡Cuenta creada! ₡1.000 de bienvenida");
       await signIn("credentials", { email: data.email, password: data.password, redirect: false });
       router.push("/");
       router.refresh();
@@ -46,7 +46,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
           <Link href="/" className="inline-flex items-center gap-2">
-            <Logo className="h-10 w-10" />
+            <Logo className="h-14 w-14" />
             <span className="text-3xl font-black gradient-text">ACL Drinks</span>
           </Link>
           <h1 className="text-2xl font-bold mt-4" style={{ color: "#F5F2EC" }}>Crear Cuenta</h1>
