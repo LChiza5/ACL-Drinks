@@ -23,11 +23,20 @@ export function CountUpNumber({
   suffix?: string;
   className?: string;
 }) {
-  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "-40px" });
+  // threshold 0 + no negative margin: stats that sit right at the fold (the
+  // Hero row) were never registering as "in view" and stayed frozen at 0.
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0 });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (inView) setDisplay(value);
+    if (inView) {
+      setDisplay(value);
+      return;
+    }
+    // Safety net: if the observer never fires (element already painted at the
+    // fold, reduced-motion shims, older Safari), still show the real number.
+    const t = setTimeout(() => setDisplay(value), 1200);
+    return () => clearTimeout(t);
   }, [inView, value]);
 
   return (
