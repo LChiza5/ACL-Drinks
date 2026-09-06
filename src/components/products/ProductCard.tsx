@@ -3,14 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCartSimple, Wine } from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
-import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { GlareHover } from "@/components/ui/glare-hover";
 import { ClickSpark } from "@/components/ui/click-spark";
 import { springs } from "@/lib/motion";
 import type { Product } from "@/types";
@@ -37,29 +35,31 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       className="group"
     >
       <Link href={`/products/${product.slug}`}>
-        <SpotlightCard
-          className="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-card-hover"
-          style={{ border: "1px solid rgba(34,177,76,0.14)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,177,76,0.45)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,177,76,0.14)"; }}
+        <div
+          className="rounded-sm overflow-hidden transition-colors duration-200"
+          style={{ background: "#1E1A17", border: "1px solid rgba(245,242,236,0.08)" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,177,76,0.5)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(245,242,236,0.08)"; }}
         >
-          <GlareHover className="relative aspect-square overflow-hidden block" style={{ background: "#1E1A17" }}>
+          <div className="relative aspect-square overflow-hidden block" style={{ background: "#1E1A17" }}>
             {product.images[0] ? (
-              <Image src={product.images[0]} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 50vw, 25vw" />
+              <Image src={product.images[0]} alt={product.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 50vw, 25vw" />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-6xl">🥃</div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Wine size={48} weight="duotone" color="#4A4038" />
+              </div>
             )}
             <div className="absolute top-2 left-2 flex flex-col gap-1">
-              {product.isNew && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#F2A900" }}>NUEVO</Badge>}
-              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0" style={{ background: "#FF3D8A" }}>-{discount}%</Badge>}
-              {isOutOfStock && <Badge variant="destructive" className="text-xs">AGOTADO</Badge>}
+              {product.isNew && <Badge className="text-xs font-bold text-white border-0 rounded-sm" style={{ background: "#F2A900" }}>NUEVO</Badge>}
+              {product.isOnSale && discount > 0 && <Badge className="text-xs font-bold text-white border-0 rounded-sm" style={{ background: "#FF3D8A" }}>-{discount}%</Badge>}
+              {isOutOfStock && <Badge variant="destructive" className="text-xs rounded-sm">AGOTADO</Badge>}
             </div>
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <Button size="sm" className="btn-primary gap-2 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" onClick={handleAddToCart} disabled={!!isOutOfStock}>
-                <ShoppingCart className="h-4 w-4" />Agregar
+              <Button size="sm" className="btn-primary gap-2 text-white rounded-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" onClick={handleAddToCart} disabled={!!isOutOfStock}>
+                <ShoppingCartSimple size={16} weight="bold" />Agregar
               </Button>
             </div>
-          </GlareHover>
+          </div>
           <div className="p-4 space-y-2">
             {product.category && <span className="text-xs font-semibold" style={{ color: "#F2A900" }}>{product.category.name}</span>}
             <h3 className="font-bold text-sm leading-tight line-clamp-2 transition-colors group-hover:text-[#22B14C]" style={{ color: "#F5F2EC" }}>
@@ -71,13 +71,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               {product.comparePrice && <span className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(product.comparePrice)}</span>}
             </div>
             <ClickSpark className="block">
-              <Button size="sm" className="w-full btn-primary gap-2 text-xs text-white" onClick={handleAddToCart} disabled={!!isOutOfStock}>
-                <ShoppingCart className="h-3.5 w-3.5" />
+              <Button size="sm" className="w-full btn-primary gap-2 text-xs text-white rounded-sm" onClick={handleAddToCart} disabled={!!isOutOfStock}>
+                <ShoppingCartSimple size={14} weight="bold" />
                 {isOutOfStock ? "Sin Stock" : "Agregar al Carrito"}
               </Button>
             </ClickSpark>
           </div>
-        </SpotlightCard>
+        </div>
       </Link>
     </motion.div>
   );

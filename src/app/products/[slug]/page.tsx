@@ -7,7 +7,7 @@ import { formatPrice, getDiscountPercentage } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ProductCard } from "@/components/products/ProductCard";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
-import { Wine, Globe, Droplets, Package } from "lucide-react";
+import { Wine, Globe, Drop as Droplets, Package } from "@phosphor-icons/react/dist/ssr";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -40,18 +40,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <div className="grid md:grid-cols-2 gap-10 mb-16">
         {/* Image */}
         <div className="space-y-3">
-          <div className="relative aspect-square rounded-2xl overflow-hidden glass-card">
+          <div className="relative aspect-square rounded-sm overflow-hidden glass-card">
             {product.images[0] ? (
               <Image src={product.images[0]} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-9xl">🍾</div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Wine size={72} weight="duotone" color="#4A4038" />
+              </div>
             )}
             {discount > 0 && <div className="absolute top-4 left-4"><Badge variant="sale" className="text-sm font-black px-3 py-1">-{discount}% OFF</Badge></div>}
           </div>
           {product.images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {product.images.slice(1, 5).map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-xl overflow-hidden glass-card">
+                <div key={i} className="relative aspect-square rounded-sm overflow-hidden glass-card">
                   <Image src={img} alt={`${product.name} ${i + 2}`} fill className="object-cover" sizes="20vw" />
                 </div>
               ))}
@@ -81,15 +83,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {product.isNew && <Badge variant="new">NUEVO</Badge>}
             {!inStock && <Badge variant="destructive">SIN STOCK</Badge>}
             {inStock && product.inventory && product.inventory.stock <= product.inventory.lowStock && (
-              <Badge variant="neon-amber">⚠️ Últimas {product.inventory.stock - product.inventory.reserved} unidades</Badge>
+              <Badge variant="neon-amber">Últimas {product.inventory.stock - product.inventory.reserved} unidades</Badge>
             )}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {product.volume && <div className="glass-card rounded-xl p-3 flex items-center gap-2"><Package className="h-4 w-4 text-neon-purple shrink-0" /><div><p className="text-xs text-muted-foreground">Contenido</p><p className="text-sm font-bold text-white">{product.volume}</p></div></div>}
-            {product.alcoholContent && <div className="glass-card rounded-xl p-3 flex items-center gap-2"><Droplets className="h-4 w-4 text-neon-blue shrink-0" /><div><p className="text-xs text-muted-foreground">Alcohol</p><p className="text-sm font-bold text-white">{product.alcoholContent}%</p></div></div>}
-            {product.country && <div className="glass-card rounded-xl p-3 flex items-center gap-2"><Globe className="h-4 w-4 text-neon-green shrink-0" /><div><p className="text-xs text-muted-foreground">Origen</p><p className="text-sm font-bold text-white">{product.country}</p></div></div>}
-            {product.brand && <div className="glass-card rounded-xl p-3 flex items-center gap-2"><Wine className="h-4 w-4 text-neon-amber shrink-0" /><div><p className="text-xs text-muted-foreground">Marca</p><p className="text-sm font-bold text-white">{product.brand}</p></div></div>}
+            {product.volume && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Package className="h-4 w-4 text-neon-purple shrink-0" /><div><p className="text-xs text-muted-foreground">Contenido</p><p className="text-sm font-bold text-white">{product.volume}</p></div></div>}
+            {product.alcoholContent && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Droplets className="h-4 w-4 text-neon-blue shrink-0" /><div><p className="text-xs text-muted-foreground">Alcohol</p><p className="text-sm font-bold text-white">{product.alcoholContent}%</p></div></div>}
+            {product.country && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Globe className="h-4 w-4 text-neon-green shrink-0" /><div><p className="text-xs text-muted-foreground">Origen</p><p className="text-sm font-bold text-white">{product.country}</p></div></div>}
+            {product.brand && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Wine className="h-4 w-4 text-emerald-500 shrink-0" /><div><p className="text-xs text-muted-foreground">Marca</p><p className="text-sm font-bold text-white">{product.brand}</p></div></div>}
           </div>
 
           {product.description && <div className="space-y-2"><h3 className="font-bold text-white">Descripción</h3><p className="text-muted-foreground leading-relaxed text-sm">{product.description}</p></div>}

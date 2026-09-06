@@ -55,7 +55,7 @@ export default function RegisterPage() {
           </div>
         </div>
         <PizoteMascot covering={covering} peeking={showPass} className="h-20 w-20 mx-auto mb-2" />
-        <div className="glass-card rounded-2xl p-8">
+        <div className="glass-card rounded-sm p-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2"><Label>Nombre completo</Label><Input placeholder="Tu nombre" {...register("name")} />{errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}</div>
             <div className="space-y-2"><Label>Email</Label><Input type="email" placeholder="tu@email.com" {...register("email")} />{errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}</div>

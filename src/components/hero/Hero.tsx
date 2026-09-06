@@ -16,9 +16,9 @@ import { springs } from "@/lib/motion";
 const Aurora = dynamic(() => import("@/components/ui/aurora").then((m) => m.Aurora), { ssr: false });
 
 const stats = [
-  { icon: Lightning, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "sky" as const },
+  { icon: Lightning, label: `Entrega en ${DELIVERY_ZONE}`, value: "1-2 horas", tone: "emerald" as const },
   { icon: Package, label: "Envíos Nacionales", value: "2-4 días", tone: "emerald" as const },
-  { icon: MapPin, label: "Productos disponibles", value: "25+", tone: "hibiscus" as const },
+  { icon: MapPin, label: "Productos disponibles", value: "25+", tone: "emerald" as const },
   { icon: Headset, label: "Soporte", value: "24/7", tone: "emerald" as const },
 ];
 
@@ -34,7 +34,7 @@ export function Hero() {
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
-      <Aurora colorStops={["#0B4D24", "#22B14C", "#3AB0E0"]} amplitude={0.8} blend={0.45} className="opacity-60" />
+      <Aurora colorStops={["#12110F", "#1E3D2A", "#22B14C"]} amplitude={0.6} blend={0.5} className="opacity-40" />
 
       <div className="container-max section-padding relative z-10 w-full">
         <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -43,11 +43,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 16 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-            style={{ border: "1px solid rgba(58,176,224,0.35)", background: "rgba(58,176,224,0.1)" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-medium"
+            style={{ border: "1px solid rgba(34,177,76,0.35)", background: "rgba(34,177,76,0.1)" }}
           >
-            <BrandGlassIcon className="h-4 w-4 text-[#3AB0E0]" />
-            <span className="font-semibold" style={{ color: "#B7E4F5" }}>Entrega Rápida en Costa Rica</span>
+            <BrandGlassIcon className="h-4 w-4 text-emerald-500" />
+            <span className="font-semibold" style={{ color: "#B8E8C4" }}>Entrega Rápida en Costa Rica</span>
           </motion.div>
 
           <motion.h1
@@ -56,10 +56,10 @@ export function Hero() {
             transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.1 }}
             className="text-5xl md:text-7xl font-display font-semibold tracking-tight leading-[0.95]"
           >
-            <span className="italic gradient-text-primary glow-primary">Lo Mejor</span>
+            <span className="italic gradient-text-primary">Lo Mejor</span>
             <br />
             <span style={{ color: "#F5F2EC" }}>para tu Fiesta</span>{" "}
-            <BrandGlassIcon className="inline-block h-10 w-10 md:h-14 md:w-14 align-middle text-hibiscus-400" />
+            <BrandGlassIcon className="inline-block h-10 w-10 md:h-14 md:w-14 align-middle text-emerald-400" />
           </motion.h1>
 
           <motion.p
@@ -81,7 +81,7 @@ export function Hero() {
           >
             <Button
               size="lg"
-              className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-xl"
+              className="btn-primary font-black text-lg gap-3 w-full sm:w-auto text-white px-10 py-4 rounded-sm"
               onClick={handleScrollToCatalog}
             >
               <ShoppingCartSimple size={20} weight="bold" />COMPRAR AHORA
@@ -89,7 +89,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="gap-3 w-full sm:w-auto font-semibold px-8 py-4 rounded-xl"
+              className="gap-3 w-full sm:w-auto font-semibold px-8 py-4 rounded-sm"
               style={{ borderColor: "rgba(245,242,236,0.3)", color: "#F5F2EC" }}
               onClick={() => { window.location.href = "/tracking"; }}
             >
@@ -110,7 +110,7 @@ export function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ y: -3 }}
                 transition={{ ...springs.gentle, delay: 0.5 + i * 0.1 }}
-                className="glass-card-hover group rounded-xl p-4 text-center space-y-2"
+                className="glass-card-hover group rounded-sm p-4 text-center space-y-2"
               >
                 <IconBadge icon={stat.icon} tone={stat.tone} size="sm" className="mx-auto" />
                 <p className="text-lg font-bold" style={{ color: "#F5F2EC" }}>{stat.value}</p>

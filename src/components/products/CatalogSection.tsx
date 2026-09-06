@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { PackageSearch } from "lucide-react";
+import { MagnifyingGlass as PackageSearch } from "@phosphor-icons/react/dist/ssr";
 import { ProductCard } from "./ProductCard";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SectionHeading } from "@/components/ui/section-heading";

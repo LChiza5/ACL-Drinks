@@ -25,7 +25,7 @@
     --border: 30 10% 20%;
     --input: 30 10% 18%;
     --ring: 138 68% 41%;
-    --radius: 0.75rem;
+    --radius: 0.25rem;
   }
 
   * {
@@ -73,82 +73,44 @@
 }
 
 @layer components {
-  .glow-amber { text-shadow: 0 0 12px rgba(242,169,0,0.6), 0 0 24px rgba(242,169,0,0.3); }
-  .glow-primary { text-shadow: 0 0 12px rgba(34,177,76,0.55), 0 0 24px rgba(34,177,76,0.28); }
-  .glow-pop { text-shadow: 0 0 12px rgba(255,61,138,0.55), 0 0 24px rgba(255,61,138,0.28); }
-
-  /* Gold is reserved for the logo/wordmark only - kept narrow on purpose. */
+  /* Gold is reserved for the logo/wordmark only - flat color, not a gradient. */
   .gradient-text {
-    background: linear-gradient(135deg, #FFE29A 0%, #F2A900 45%, #C98700 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #F2A900;
   }
 
+  /* Kept for the one existing caller (login/register wordmark share this markup);
+     flat now, same rule as .gradient-text. */
   .gradient-text-warm {
-    background: linear-gradient(135deg, #F5F2EC 0%, #F2A900 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #F5F2EC;
   }
 
-  /* Emerald is the new primary/interactive color; used for the main CTA emphasis. */
+  /* Emerald is the free-use primary/interactive color. */
   .gradient-text-primary {
-    background: linear-gradient(135deg, #8FE8A8 0%, #22B14C 55%, #178A38 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Storefront page-title emphasis outside the wordmark - hibiscus into sky, not gold. */
-  .gradient-text-vivid {
-    background: linear-gradient(135deg, #FF75AC 0%, #FF3D8A 50%, #3AB0E0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #22B14C;
   }
 
   .glass-card {
-    background: rgba(30, 26, 23, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(166, 124, 82, 0.12);
+    background: #1E1A17;
+    border: 1px solid rgba(245, 242, 236, 0.08);
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300;
+    @apply glass-card transition-colors duration-300;
   }
   .glass-card-hover:hover {
-    background: rgba(30, 26, 23, 0.9);
-    border-color: rgba(201, 152, 74, 0.35);
-    box-shadow: 0 8px 32px rgba(166, 124, 82, 0.15);
-    transform: translateY(-2px);
+    border-color: rgba(34, 177, 76, 0.4);
   }
 
   .btn-primary, .btn-neon {
-    @apply relative overflow-hidden;
-    background: linear-gradient(135deg, #178A38, #22B14C);
-    box-shadow: 0 4px 20px rgba(34,177,76, 0.35);
-    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #22B14C;
+    transition: background-color 0.2s ease, transform 0.15s ease;
   }
   .btn-primary:hover, .btn-neon:hover {
-    box-shadow: 0 6px 28px rgba(47, 190, 135, 0.55);
-    transform: scale(1.02);
+    background: #178A38;
   }
   .btn-primary:active, .btn-neon:active {
     transform: scale(0.97);
   }
-  .btn-primary::before, .btn-neon::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    transition: 0.5s;
-  }
-  .btn-primary:hover::before, .btn-neon:hover::before { left: 100%; }
 
   .shimmer {
     background: linear-gradient(90deg, rgba(30,26,23,0.4) 25%, rgba(166,124,82,0.08) 50%, rgba(30,26,23,0.4) 75%);
@@ -156,35 +118,7 @@
     animation: shimmer 1.5s infinite;
   }
 
-  .shadow-card-hover { box-shadow: 0 8px 32px rgba(166, 124, 82, 0.2); }
-
-  .glare-hover {
-    position: relative;
-    overflow: hidden;
-  }
-  .glare-hover::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 5;
-    background: linear-gradient(
-      var(--gh-angle),
-      hsla(0, 0%, 0%, 0) 60%,
-      var(--gh-rgba) 70%,
-      hsla(0, 0%, 0%, 0),
-      hsla(0, 0%, 0%, 0) 100%
-    );
-    transition: var(--gh-duration) ease;
-    background-size: var(--gh-size) var(--gh-size), 100% 100%;
-    background-repeat: no-repeat;
-    background-position: -100% -100%, 0 0;
-  }
-  .glare-hover:hover::before {
-    background-position: 100% 100%, 0 0;
-  }
-
-  /* pill-style hover fill for nav links, inspired by react-bits' PillNav */
+  /* pill-style hover fill for nav links */
   .nav-pill {
     position: relative;
     overflow: hidden;
@@ -194,7 +128,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #178A38, #22B14C);
+    background: #22B14C;
     border-radius: inherit;
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);

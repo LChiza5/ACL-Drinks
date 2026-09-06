@@ -1,9 +1,9 @@
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 interface EmptyStateProps {
-  icon: LucideIcon;
+  icon: PhosphorIcon;
   title: string;
   description?: string;
   actionLabel?: string;
@@ -16,8 +16,8 @@ interface EmptyStateProps {
 export function EmptyState({ icon: Icon, title, description, actionLabel, actionHref, onActionClick, className = "" }: EmptyStateProps) {
   return (
     <div className={`flex flex-col items-center justify-center gap-4 py-20 px-4 text-center ${className}`}>
-      <div className="flex items-center justify-center h-16 w-16 rounded-full" style={{ background: "#132A20" }}>
-        <Icon className="h-8 w-8" style={{ color: "#4CC95F" }} strokeWidth={1.75} />
+      <div className="flex items-center justify-center h-16 w-16 rounded-sm" style={{ background: "#132A20" }}>
+        <Icon size={32} weight="duotone" color="#4CC95F" />
       </div>
       <div>
         <h3 className="text-xl font-bold" style={{ color: "#F5F2EC" }}>{title}</h3>

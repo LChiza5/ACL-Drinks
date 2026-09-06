@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Gift, PartyPopper } from "lucide-react";
+import { Gift, Confetti as PartyPopper } from "@phosphor-icons/react/dist/ssr";
 import { prisma } from "@/lib/prisma";
 import { KitCard } from "@/components/kits/KitCard";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -40,7 +40,7 @@ function KitsGridSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton key={i} className="aspect-square rounded-2xl" />
+        <Skeleton key={i} className="aspect-square rounded-sm" />
       ))}
     </div>
   );
@@ -54,7 +54,7 @@ export default function CombosFiesterosPage() {
           Todo en uno
         </span>
         <h1 className="text-4xl font-black mt-2 text-white inline-flex items-center gap-3">
-          Combos <span className="gradient-text-vivid">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
+          Combos <span className="text-hibiscus-500">Fiesteros</span> <PartyPopper className="h-8 w-8 text-hibiscus-500" />
         </h1>
         <p className="mt-2 max-w-xl mx-auto text-muted-foreground">
           Combos armados para que solo pienses en pasarla bien.
