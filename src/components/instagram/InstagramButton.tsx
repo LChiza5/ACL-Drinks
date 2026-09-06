@@ -11,10 +11,9 @@ export function InstagramButton() {
       icon={FaInstagram}
       label="Síguenos"
       ariaLabel="Seguinos en Instagram"
-      iconBg="linear-gradient(135deg, #f43f5e, #ec4899, #a855f7)"
-      labelBg="#9d174d"
-      iconGlow="0 4px 20px rgba(219,39,119,0.4)"
-      bottomClass="bottom-24"
+      iconBg="linear-gradient(135deg, #f09433 0%, #dc2743 45%, #bc1888 100%)"
+      iconGlow="0 6px 24px rgba(220,39,67,0.45)"
+      bottomClass="bottom-28"
       delay={1.2}
     />
   );

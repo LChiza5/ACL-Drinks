@@ -16,8 +16,8 @@ interface EmptyStateProps {
 export function EmptyState({ icon: Icon, title, description, actionLabel, actionHref, onActionClick, className = "" }: EmptyStateProps) {
   return (
     <div className={`flex flex-col items-center justify-center gap-4 py-20 px-4 text-center ${className}`}>
-      <div className="flex items-center justify-center h-16 w-16 rounded-sm" style={{ background: "#132A20" }}>
-        <Icon size={32} weight="duotone" color="#4CC95F" />
+      <div className="flex items-center justify-center h-24 w-24 rounded-full" style={{ background: "#132A20", border: "1px solid rgba(76,201,95,0.25)" }}>
+        <Icon size={48} weight="duotone" color="#4CC95F" />
       </div>
       <div>
         <h3 className="text-xl font-bold" style={{ color: "#F5F2EC" }}>{title}</h3>

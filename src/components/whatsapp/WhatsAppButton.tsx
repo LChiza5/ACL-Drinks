@@ -13,9 +13,8 @@ export function WhatsAppButton() {
       icon={FaWhatsapp}
       label="Soporte"
       ariaLabel="Contactar por WhatsApp"
-      iconBg="linear-gradient(135deg, #22c55e, #16a34a)"
-      labelBg="#166534"
-      iconGlow="0 4px 20px rgba(34,197,94,0.4)"
+      iconBg="linear-gradient(135deg, #25D366 0%, #128C7E 100%)"
+      iconGlow="0 6px 24px rgba(37,211,102,0.45)"
       bottomClass="bottom-6"
       delay={1}
     />

@@ -40,7 +40,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <div className="grid md:grid-cols-2 gap-10 mb-16">
         {/* Image */}
         <div className="space-y-3">
-          <div className="relative aspect-square rounded-sm overflow-hidden glass-card">
+          <div className="relative aspect-square rounded-2xl overflow-hidden glass-card">
             {product.images[0] ? (
               <Image src={product.images[0]} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
             ) : (
@@ -53,7 +53,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {product.images.slice(1, 5).map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-sm overflow-hidden glass-card">
+                <div key={i} className="relative aspect-square rounded-2xl overflow-hidden glass-card">
                   <Image src={img} alt={`${product.name} ${i + 2}`} fill className="object-cover" sizes="20vw" />
                 </div>
               ))}
@@ -88,10 +88,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {product.volume && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Package className="h-4 w-4 text-neon-purple shrink-0" /><div><p className="text-xs text-muted-foreground">Contenido</p><p className="text-sm font-bold text-white">{product.volume}</p></div></div>}
-            {product.alcoholContent && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Droplets className="h-4 w-4 text-neon-blue shrink-0" /><div><p className="text-xs text-muted-foreground">Alcohol</p><p className="text-sm font-bold text-white">{product.alcoholContent}%</p></div></div>}
-            {product.country && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Globe className="h-4 w-4 text-neon-green shrink-0" /><div><p className="text-xs text-muted-foreground">Origen</p><p className="text-sm font-bold text-white">{product.country}</p></div></div>}
-            {product.brand && <div className="glass-card rounded-sm p-3 flex items-center gap-2"><Wine className="h-4 w-4 text-emerald-500 shrink-0" /><div><p className="text-xs text-muted-foreground">Marca</p><p className="text-sm font-bold text-white">{product.brand}</p></div></div>}
+            {product.volume && <div className="glass-card rounded-2xl p-3 flex items-center gap-2"><Package className="h-4 w-4 text-neon-purple shrink-0" /><div><p className="text-xs text-muted-foreground">Contenido</p><p className="text-sm font-bold text-white">{product.volume}</p></div></div>}
+            {product.alcoholContent && <div className="glass-card rounded-2xl p-3 flex items-center gap-2"><Droplets className="h-4 w-4 text-neon-blue shrink-0" /><div><p className="text-xs text-muted-foreground">Alcohol</p><p className="text-sm font-bold text-white">{product.alcoholContent}%</p></div></div>}
+            {product.country && <div className="glass-card rounded-2xl p-3 flex items-center gap-2"><Globe className="h-4 w-4 text-neon-green shrink-0" /><div><p className="text-xs text-muted-foreground">Origen</p><p className="text-sm font-bold text-white">{product.country}</p></div></div>}
+            {product.brand && <div className="glass-card rounded-2xl p-3 flex items-center gap-2"><Wine className="h-4 w-4 text-emerald-500 shrink-0" /><div><p className="text-xs text-muted-foreground">Marca</p><p className="text-sm font-bold text-white">{product.brand}</p></div></div>}
           </div>
 
           {product.description && <div className="space-y-2"><h3 className="font-bold text-white">Descripción</h3><p className="text-muted-foreground leading-relaxed text-sm">{product.description}</p></div>}

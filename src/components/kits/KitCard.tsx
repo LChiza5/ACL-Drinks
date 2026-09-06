@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
 import { ClickSpark } from "@/components/ui/click-spark";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { GlareHover } from "@/components/ui/glare-hover";
 import { springs } from "@/lib/motion";
 import type { Kit } from "@/types";
 
@@ -33,13 +35,14 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
       className="group"
     >
       <Link href={`/combos-fiesteros/${kit.slug}`}>
-        <div
-          className="rounded-sm overflow-hidden transition-colors duration-200"
-          style={{ border: "1px solid rgba(255,61,138,0.25)" }}
+        <SpotlightCard
+          className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[0_16px_40px_rgba(255,61,138,0.22)]"
+          color="rgba(255,61,138,0.20)"
+          style={{ background: "#1E1A17", border: "1px solid rgba(255,61,138,0.25)" }}
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.6)"; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.25)"; }}
         >
-          <div className="relative aspect-[4/3] overflow-hidden block" style={{ background: "#1E1A17" }}>
+          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "#1E1A17" }}>
             {kit.image ? (
               <Image src={kit.image} alt={kit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
             ) : (
@@ -49,15 +52,15 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             )}
             {kit.badge && (
               <div className="absolute top-3 right-3">
-                <Badge className="font-black text-xs border-0 text-white rounded-sm" style={{ background: "#F2A900" }}>{kit.badge}</Badge>
+                <Badge className="font-black text-xs border-0 text-white rounded-full" style={{ background: "#F2A900" }}>{kit.badge}</Badge>
               </div>
             )}
             {discount > 0 && (
               <div className="absolute top-3 left-3">
-                <Badge className="font-black text-white border-0 rounded-sm" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
+                <Badge className="font-black text-white border-0 rounded-full" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
               </div>
             )}
-          </div>
+          </GlareHover>
           <div className="p-5 space-y-3">
             <div className="flex items-start gap-2">
               <Package size={20} weight="duotone" className="shrink-0 mt-0.5" color="#FF3D8A" />
@@ -69,7 +72,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             {kit.kitProducts && kit.kitProducts.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {kit.kitProducts.slice(0, 3).map((kp) => (
-                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-sm" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
+                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
                     {kp.quantity}x {kp.product?.name?.split(" ").slice(0, 2).join(" ")}
                   </span>
                 ))}
@@ -81,13 +84,13 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
                 {kit.comparePrice && <p className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(kit.comparePrice)}</p>}
               </div>
               <ClickSpark className="shrink-0">
-                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white rounded-sm" onClick={handleAddToCart}>
+                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white rounded-2xl" onClick={handleAddToCart}>
                   <ShoppingCartSimple size={16} weight="bold" />Agregar
                 </Button>
               </ClickSpark>
             </div>
           </div>
-        </div>
+        </SpotlightCard>
       </Link>
     </motion.div>
   );

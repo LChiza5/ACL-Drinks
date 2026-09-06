@@ -71,7 +71,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="nav-pill relative px-2 py-2.5 text-xs xl:px-4 xl:text-sm font-semibold rounded-sm transition-colors duration-200 hover:text-white whitespace-nowrap"
+                  className="nav-pill relative px-2 py-2.5 text-xs xl:px-4 xl:text-sm font-semibold rounded-2xl transition-colors duration-200 hover:text-white whitespace-nowrap"
                   style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                 >
                   {link.label}
@@ -96,8 +96,8 @@ export function Navbar() {
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram">
-              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }}>
-                <FaInstagram className="h-6 w-6 xl:h-8 xl:w-8" />
+              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 transition-transform hover:scale-110 active:scale-95 hover:bg-hibiscus-500/10">
+                <FaInstagram className="h-6 w-6 xl:h-8 xl:w-8" style={{ color: "#E1306C" }} />
               </Button>
             </a>
             <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
@@ -158,7 +158,7 @@ export function Navbar() {
               </Link>
             )}
             <Link href="/products">
-              <Button size="lg" className="btn-primary font-bold text-sm px-4 xl:text-base xl:px-6 text-white rounded-sm whitespace-nowrap">
+              <Button size="lg" className="btn-primary font-bold text-sm px-4 xl:text-base xl:px-6 text-white rounded-2xl whitespace-nowrap">
                 COMPRAR AHORA
               </Button>
             </Link>
@@ -213,7 +213,7 @@ export function Navbar() {
                       <Link
                         href={link.href}
                         onClick={closeMobileMenu}
-                        className="block px-4 py-3 text-sm font-semibold rounded-sm transition-all hover:text-white hover:bg-white/5"
+                        className="block px-4 py-3 text-sm font-semibold rounded-2xl transition-all hover:text-white hover:bg-white/5"
                         style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                       >
                         {link.label}
