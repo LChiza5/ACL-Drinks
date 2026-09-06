@@ -22,7 +22,11 @@ export function CategoryCard({ category, index = 0 }: { category: Category; inde
           <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center">
             {category.emoji && <span className="text-4xl mb-2 group-hover:scale-105 transition-transform duration-300">{category.emoji}</span>}
             <h3 className="font-black text-white text-lg leading-tight">{category.name}</h3>
-            {category._count && <p className="text-xs text-white/70 mt-1">{category._count.products} productos</p>}
+            {category._count && (
+              <p className="text-xs text-white/70 mt-1">
+                {category._count.products} {category._count.products === 1 ? "producto" : "productos"}
+              </p>
+            )}
           </div>
         </div>
       </Link>
