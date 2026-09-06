@@ -78,7 +78,10 @@ export default function ProductsPage({ searchParams }: { searchParams: Promise<P
   return (
     <div className="section-padding container-max">
       <div className="mb-8">
-        <h1 className="text-4xl font-black text-white mb-2 flex items-center gap-3">Todos los <span className="text-emerald-500">Productos</span> <Wine className="h-8 w-8 text-emerald-500" /></h1>
+        <h1 className="text-4xl font-black text-white mb-2">
+          Todos los <span className="text-emerald-500">Productos</span>{" "}
+          <Wine className="inline-block h-8 w-8 align-middle text-emerald-500" />
+        </h1>
       </div>
       <Suspense fallback={<ProductsResultsSkeleton />}>
         <ProductsResults searchParams={searchParams} />
