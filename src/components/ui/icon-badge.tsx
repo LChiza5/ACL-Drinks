@@ -7,13 +7,11 @@ import { springs } from "@/lib/motion";
 // Phosphor's duotone weight bakes a two-tone fill into the glyph itself, so
 // unlike the old lucide icons this doesn't need a container to look designed
 // rather than borrowed off a component library's default export. No badge
-// shape, no gradient, no shine sweep — just a bold icon with a soft color
-// glow under it.
+// shape, no gradient, no synthetic glow — just a bold, flat-colored icon.
 const TONES = {
   gold: "#F2A900",
   emerald: "#22B14C",
   hibiscus: "#FF3D8A",
-  sky: "#3AB0E0",
 } as const;
 
 const SIZES = { sm: 30, md: 42, lg: 54 } as const;
@@ -30,7 +28,6 @@ export function IconBadge({ icon: Icon, tone = "emerald", size = "md", className
   return (
     <motion.div
       className={`inline-flex ${className}`}
-      style={{ filter: `drop-shadow(0 6px 14px ${color}4D)` }}
       whileHover={{ scale: 1.12, rotate: -6 }}
       whileTap={{ scale: 0.92 }}
       transition={springs.snappy}

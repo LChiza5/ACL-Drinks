@@ -3,14 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ShoppingCart, Package } from "lucide-react";
+import { ShoppingCartSimple, Package, Gift } from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
-import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { GlareHover } from "@/components/ui/glare-hover";
 import { ClickSpark } from "@/components/ui/click-spark";
 import { springs } from "@/lib/motion";
 import type { Kit } from "@/types";
@@ -35,32 +33,34 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
       className="group"
     >
       <Link href={`/combos-fiesteros/${kit.slug}`}>
-        <SpotlightCard
-          className="glass-card rounded-2xl overflow-hidden transition-all duration-300"
-          style={{ border: "2px solid rgba(255,61,138,0.2)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.6)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(255,61,138,0.25)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.2)"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+        <div
+          className="rounded-sm overflow-hidden transition-colors duration-200"
+          style={{ border: "1px solid rgba(255,61,138,0.25)" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.6)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.25)"; }}
         >
-          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "linear-gradient(135deg, #1E1A17, rgba(34,177,76,0.18))" }}>
+          <div className="relative aspect-[4/3] overflow-hidden block" style={{ background: "#1E1A17" }}>
             {kit.image ? (
               <Image src={kit.image} alt={kit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">🎁</div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Gift size={64} weight="duotone" color="#FF3D8A" />
+              </div>
             )}
             {kit.badge && (
               <div className="absolute top-3 right-3">
-                <Badge className="font-black text-xs border-0 text-white" style={{ background: "linear-gradient(135deg, #F2A900, #C98700)" }}>{kit.badge}</Badge>
+                <Badge className="font-black text-xs border-0 text-white rounded-sm" style={{ background: "#F2A900" }}>{kit.badge}</Badge>
               </div>
             )}
             {discount > 0 && (
               <div className="absolute top-3 left-3">
-                <Badge className="font-black text-white border-0" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
+                <Badge className="font-black text-white border-0 rounded-sm" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
               </div>
             )}
-          </GlareHover>
+          </div>
           <div className="p-5 space-y-3">
             <div className="flex items-start gap-2">
-              <Package className="h-5 w-5 shrink-0 mt-0.5" style={{ color: "#FF3D8A" }} />
+              <Package size={20} weight="duotone" className="shrink-0 mt-0.5" color="#FF3D8A" />
               <div>
                 <h3 className="font-black text-lg leading-tight" style={{ color: "#F5F2EC" }}>{kit.name}</h3>
                 {kit.description && <p className="text-xs mt-1 line-clamp-2" style={{ color: "#B8B1A7" }}>{kit.description}</p>}
@@ -69,7 +69,7 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
             {kit.kitProducts && kit.kitProducts.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {kit.kitProducts.slice(0, 3).map((kp) => (
-                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
+                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-sm" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
                     {kp.quantity}x {kp.product?.name?.split(" ").slice(0, 2).join(" ")}
                   </span>
                 ))}
@@ -81,13 +81,13 @@ export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
                 {kit.comparePrice && <p className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(kit.comparePrice)}</p>}
               </div>
               <ClickSpark className="shrink-0">
-                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white" onClick={handleAddToCart}>
-                  <ShoppingCart className="h-4 w-4" />Agregar
+                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white rounded-sm" onClick={handleAddToCart}>
+                  <ShoppingCartSimple size={16} weight="bold" />Agregar
                 </Button>
               </ClickSpark>
             </div>
           </div>
-        </SpotlightCard>
+        </div>
       </Link>
     </motion.div>
   );

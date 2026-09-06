@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, Minus, Plus, Check } from "lucide-react";
+import { ShoppingCartSimple as ShoppingCart, Minus, Plus, Check } from "@phosphor-icons/react/dist/ssr";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart.store";
@@ -17,7 +17,7 @@ export function AddToCartButton({ product, inStock }: { product: Product; inStoc
     if (!inStock) return;
     addItem({ id: product.id, name: product.name, price: product.price, image: product.images[0] || "", type: "product", sku: product.sku || undefined, slug: product.slug, quantity: qty });
     setAdded(true);
-    toast.success(`¡${product.name} agregado! 🍾`, { action: { label: "Ver carrito", onClick: openCart } });
+    toast.success(`¡${product.name} agregado!`, { action: { label: "Ver carrito", onClick: openCart } });
     setTimeout(() => setAdded(false), 2000);
   };
 

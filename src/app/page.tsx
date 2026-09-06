@@ -59,7 +59,7 @@ function SectionSkeleton({ rows = 4 }: { rows?: number }) {
       <Skeleton className="h-8 w-56 mb-8" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {Array.from({ length: rows }).map((_, i) => (
-          <Skeleton key={i} className="aspect-square rounded-2xl" />
+          <Skeleton key={i} className="aspect-square rounded-sm" />
         ))}
       </div>
     </div>

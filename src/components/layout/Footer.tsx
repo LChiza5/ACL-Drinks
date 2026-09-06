@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { MapPin, Phone, EnvelopeSimple, Clock } from "@phosphor-icons/react/dist/ssr";
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL, DELIVERY_ZONE, PAYMENT_METHODS } from "@/constants";
 import { fadeUp } from "@/lib/motion";
 import { Logo } from "./Logo";
 
 const contactItems = [
-  { icon: MapPin, text: `${DELIVERY_ZONE}, Costa Rica`, color: "#F2A900" },
-  { icon: Phone, text: WHATSAPP_NUMBER, href: `tel:${WHATSAPP_NUMBER}`, color: "#22B14C" },
-  { icon: Mail, text: "info@acldrinks.cr", href: "mailto:info@acldrinks.cr", color: "#FF3D8A" },
-  { icon: Clock, text: "Lun–Dom: 8am–11pm", color: "#F2A900" },
+  { icon: MapPin, text: `${DELIVERY_ZONE}, Costa Rica` },
+  { icon: Phone, text: WHATSAPP_NUMBER, href: `tel:${WHATSAPP_NUMBER}` },
+  { icon: EnvelopeSimple, text: "info@acldrinks.cr", href: "mailto:info@acldrinks.cr" },
+  { icon: Clock, text: "Lun–Dom: 8am–11pm" },
 ];
 
 const shopLinks = [
@@ -61,19 +61,14 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
-                className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(34,197,94,0.1)", color: "#4ade80" }}>
+                className="p-2 rounded-sm transition-colors"
+                style={{ background: "rgba(74,222,128,0.1)", color: "#4ade80" }}>
                 <FaWhatsapp className="h-5 w-5" />
               </motion.a>
               <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram"
-                className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(255,61,138,0.1)", color: "#FF3D8A" }}>
+                className="p-2 rounded-sm transition-colors"
+                style={{ background: "rgba(245,242,236,0.06)", color: "#F5F2EC" }}>
                 <FaInstagram className="h-5 w-5" />
-              </motion.a>
-              <motion.a whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} href="#" aria-label="Seguinos en Facebook"
-                className="p-2 rounded-lg transition-colors"
-                style={{ background: "rgba(34,177,76,0.1)", color: "#22B14C" }}>
-                <FaFacebook className="h-5 w-5" />
               </motion.a>
             </div>
           </motion.div>
@@ -97,7 +92,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm" style={{ color: "#B8B1A7" }}>
               {contactItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <item.icon className="h-4 w-4 mt-0.5 shrink-0" style={{ color: item.color }} />
+                  <item.icon className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#8A8377" }} />
                   {item.href ? (
                     <a href={item.href} className="hover:text-white transition-colors">{item.text}</a>
                   ) : (
@@ -113,8 +108,8 @@ export function Footer() {
           style={{ borderTop: "1px solid rgba(242,169,0,0.12)" }}>
           <span className="text-xs font-semibold" style={{ color: "#F5F2EC" }}>Aceptamos:</span>
           {Object.values(PAYMENT_METHODS).map((m) => (
-            <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs"
-              style={{ background: "rgba(242,169,0,0.1)", color: "#B8B1A7" }}>
+            <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs"
+              style={{ background: "rgba(245,242,236,0.06)", border: "1px solid rgba(245,242,236,0.1)", color: "#B8B1A7" }}>
               <span>{m.icon}</span>{m.label}
             </span>
           ))}
@@ -129,7 +124,7 @@ export function Footer() {
             <Link href="/privacy" className="hover:text-white transition-colors">Privacidad</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Términos</Link>
           </div>
-          <p>🔞 Prohibida la venta de licor a menores de 18 años.</p>
+          <p>Prohibida la venta de licor a menores de 18 años.</p>
         </div>
       </div>
     </footer>

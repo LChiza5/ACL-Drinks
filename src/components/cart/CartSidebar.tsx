@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, X } from "lucide-react";
+import { ShoppingCartSimple as ShoppingCart, X } from "@phosphor-icons/react/dist/ssr";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";

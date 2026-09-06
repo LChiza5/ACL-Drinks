@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -11,7 +11,7 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
     <section className="section-padding" style={{ background: "#12110F" }}>
       <div className="container-max">
         <div className="flex items-end justify-between mb-10 gap-4">
-          <SectionHeading eyebrow="Lo más pedido" eyebrowColor="#FFC94D" title="Productos" accent="Destacados" accentColor="#4CD671" />
+          <SectionHeading eyebrow="Lo más pedido" eyebrowColor="#4CD671" title="Productos" accent="Destacados" accentColor="#4CD671" />
           <Link href="/products"><Button variant="outline" className="gap-2 hidden sm:flex shrink-0">Ver todos <ArrowRight className="h-4 w-4" /></Button></Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">

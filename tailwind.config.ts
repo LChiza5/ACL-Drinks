@@ -158,12 +158,9 @@ const config: Config = {
         "bounce-subtle": "bounce-subtle 1.5s ease-in-out infinite",
       },
       boxShadow: {
-        "glow-gold": "0 0 20px rgba(242, 169, 0, 0.5), 0 0 40px rgba(242, 169, 0, 0.25)",
-        "glow-emerald": "0 0 20px rgba(34, 177, 76, 0.5), 0 0 40px rgba(34, 177, 76, 0.25)",
-        "glow-hibiscus": "0 0 20px rgba(255, 61, 138, 0.5), 0 0 40px rgba(255, 61, 138, 0.25)",
-        "card-hover": "0 8px 32px rgba(242, 169, 0, 0.2)",
-        "card-glow": "0 0 40px rgba(242, 169, 0, 0.15)",
-        // Compat aliases for pre-redesign code, mirrors the `neon.*` color map above.
+        // Compat aliases for pre-redesign code (dashboard/checkout/cart), mirrors
+        // the `neon.*` color map above. Not used by the storefront anymore -
+        // depth there comes from a 1px border + color contrast, not glow.
         "neon-purple": "0 0 20px rgba(34, 177, 76, 0.5), 0 0 40px rgba(34, 177, 76, 0.25)",
         "neon-pink": "0 0 20px rgba(255, 61, 138, 0.5), 0 0 40px rgba(255, 61, 138, 0.25)",
         "neon-amber": "0 0 20px rgba(242, 169, 0, 0.5), 0 0 40px rgba(242, 169, 0, 0.25)",

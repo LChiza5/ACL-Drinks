@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { PackageSearch, Wine } from "lucide-react";
+import { MagnifyingGlass as PackageSearch, Wine } from "@phosphor-icons/react/dist/ssr";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { Badge } from "@/components/ui/badge";
@@ -67,7 +67,7 @@ function ProductsResultsSkeleton() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton key={i} className="aspect-square rounded-2xl" />
+          <Skeleton key={i} className="aspect-square rounded-sm" />
         ))}
       </div>
     </>
@@ -78,7 +78,7 @@ export default function ProductsPage({ searchParams }: { searchParams: Promise<P
   return (
     <div className="section-padding container-max">
       <div className="mb-8">
-        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Todos los <span className="gradient-text-vivid">Productos</span> <Wine className="h-8 w-8 text-emerald-500" /></h1>
+        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Todos los <span className="text-emerald-500">Productos</span> <Wine className="h-8 w-8 text-emerald-500" /></h1>
       </div>
       <Suspense fallback={<ProductsResultsSkeleton />}>
         <ProductsResults searchParams={searchParams} />

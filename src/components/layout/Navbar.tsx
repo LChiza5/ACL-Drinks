@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { ShoppingCart, User, Menu, X, LogOut, LayoutDashboard, Package } from "lucide-react";
+import { ShoppingCartSimple, User, List, X, SignOut, SquaresFour, Package } from "@phosphor-icons/react/dist/ssr";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="nav-pill relative px-2 py-2.5 text-xs xl:px-4 xl:text-sm font-semibold rounded-lg transition-colors duration-200 hover:text-white whitespace-nowrap"
+                  className="nav-pill relative px-2 py-2.5 text-xs xl:px-4 xl:text-sm font-semibold rounded-sm transition-colors duration-200 hover:text-white whitespace-nowrap"
                   style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                 >
                   {link.label}
@@ -96,12 +96,12 @@ export function Navbar() {
               </Button>
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Seguinos en Instagram">
-              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 hover:bg-hibiscus-500/10 transition-transform hover:scale-110 active:scale-95" style={{ color: "#FF3D8A" }}>
+              <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }}>
                 <FaInstagram className="h-6 w-6 xl:h-8 xl:w-8" />
               </Button>
             </a>
             <Button variant="ghost" size="icon" className="h-10 w-10 xl:h-14 xl:w-14 relative transition-transform hover:scale-110 active:scale-95" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
-              <ShoppingCart className="h-6 w-6 xl:h-8 xl:w-8" />
+              <ShoppingCartSimple className="h-6 w-6 xl:h-8 xl:w-8" />
               <AnimatePresence>
                 {totalItems > 0 && (
                   <motion.span
@@ -141,12 +141,12 @@ export function Navbar() {
                   </DropdownMenuItem>
                   {(session.user?.role === "ADMIN" || session.user?.role === "MANAGER") && (
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard" className="flex items-center gap-2"><LayoutDashboard className="h-4 w-4" />Dashboard</Link>
+                      <Link href="/dashboard" className="flex items-center gap-2"><SquaresFour className="h-4 w-4" />Dashboard</Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive flex items-center gap-2">
-                    <LogOut className="h-4 w-4" />Cerrar Sesión
+                    <SignOut className="h-4 w-4" />Cerrar Sesión
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -158,7 +158,7 @@ export function Navbar() {
               </Link>
             )}
             <Link href="/products">
-              <Button size="lg" className="btn-primary font-bold text-sm px-4 xl:text-base xl:px-6 text-white rounded-lg whitespace-nowrap">
+              <Button size="lg" className="btn-primary font-bold text-sm px-4 xl:text-base xl:px-6 text-white rounded-sm whitespace-nowrap">
                 COMPRAR AHORA
               </Button>
             </Link>
@@ -167,7 +167,7 @@ export function Navbar() {
           {/* Mobile: carrito + hamburgesa */}
           <div className="flex lg:hidden items-center gap-2">
             <Button variant="ghost" size="icon" className="relative" style={{ color: "#F5F2EC" }} onClick={openCart} aria-label={`Abrir carrito${totalItems > 0 ? ` (${totalItems} productos)` : ""}`}>
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCartSimple className="h-5 w-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full text-white text-xs font-bold flex items-center justify-center" style={{ background: "#FF3D8A" }}>
                   {totalItems}
@@ -183,7 +183,7 @@ export function Navbar() {
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-nav-menu"
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <List className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -213,7 +213,7 @@ export function Navbar() {
                       <Link
                         href={link.href}
                         onClick={closeMobileMenu}
-                        className="block px-4 py-3 text-sm font-semibold rounded-lg transition-all hover:text-white hover:bg-white/5"
+                        className="block px-4 py-3 text-sm font-semibold rounded-sm transition-all hover:text-white hover:bg-white/5"
                         style={{ color: isActive ? "#8FE8A8" : "#B8B1A7" }}
                       >
                         {link.label}
@@ -239,18 +239,18 @@ export function Navbar() {
                       </Link>
                       {(session.user?.role === "ADMIN" || session.user?.role === "MANAGER") && (
                         <Link href="/dashboard" onClick={closeMobileMenu}>
-                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#F2A900" }}>
-                            <LayoutDashboard className="h-4 w-4" />Dashboard
+                          <Button variant="ghost" className="w-full justify-start gap-2" style={{ color: "#4CD671" }}>
+                            <SquaresFour className="h-4 w-4" />Dashboard
                           </Button>
                         </Link>
                       )}
                       <Button variant="ghost" className="w-full justify-start gap-2 text-destructive" onClick={() => { signOut(); closeMobileMenu(); }}>
-                        <LogOut className="h-4 w-4" />Cerrar Sesión
+                        <SignOut className="h-4 w-4" />Cerrar Sesión
                       </Button>
                     </>
                   ) : (
                     <Link href="/login" onClick={closeMobileMenu}>
-                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(242,169,0,0.5)", color: "#F5F2EC" }}>
+                      <Button variant="outline" className="w-full justify-center gap-2 font-semibold" style={{ borderColor: "rgba(245,242,236,0.3)", color: "#F5F2EC" }}>
                         <User className="h-4 w-4" />Iniciar Sesión
                       </Button>
                     </Link>

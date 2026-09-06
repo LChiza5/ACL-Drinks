@@ -26,7 +26,7 @@ function CategoriesGridSkeleton() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       {Array.from({ length: 10 }).map((_, i) => (
-        <Skeleton key={i} className="aspect-square rounded-2xl" />
+        <Skeleton key={i} className="aspect-square rounded-sm" />
       ))}
     </div>
   );
@@ -36,7 +36,7 @@ export default function CategoriesPage() {
   return (
     <div className="section-padding container-max">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Nuestras <span className="gradient-text-vivid">Categorías</span> <Tag className="h-8 w-8 text-emerald-500" /></h1>
+        <h1 className="text-4xl font-black text-white mb-2 inline-flex items-center gap-3">Nuestras <span className="text-emerald-500">Categorías</span> <Tag className="h-8 w-8 text-emerald-500" /></h1>
         <p className="text-muted-foreground">Encuentra exactamente lo que buscas</p>
       </div>
       <Suspense fallback={<CategoriesGridSkeleton />}>
