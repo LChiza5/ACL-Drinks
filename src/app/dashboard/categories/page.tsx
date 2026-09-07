@@ -27,7 +27,7 @@ export default async function DashboardCategoriesPage() {
         {categories.map((cat) => (
           <div key={cat.id} className="glass-card-hover rounded-xl p-5 flex items-center justify-between group">
             <div className="flex items-center gap-3">
-              <span className="text-3xl">{cat.emoji || "🏷️"}</span>
+              <Tag className="h-5 w-5" style={{ color: "#8A8377" }} aria-hidden="true" />
               <div><p className="font-bold text-white">{cat.name}</p><p className="text-sm text-muted-foreground">{cat._count.products} productos</p></div>
             </div>
             <div className="flex items-center gap-2">

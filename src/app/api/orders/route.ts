@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
         shipment: {
           create: {
             trackingCode: generateTrackingCode(),
-            trackings: { create: { status: "CONFIRMED", description: "Pedido confirmado y en proceso de preparación 🍾" } },
+            trackings: { create: { status: "CONFIRMED", description: "Pedido confirmado y en proceso de preparación" } },
           },
         },
       },

@@ -171,7 +171,7 @@ export function KitForm({ kit }: { kit?: Kit }) {
                 <button key={p.id} type="button" onClick={() => addProduct(p)}
                   className="w-full flex items-center gap-3 px-3 py-2 hover:bg-white/5 transition-colors text-left">
                   <div className="h-8 w-8 rounded bg-brand-mid shrink-0 overflow-hidden flex items-center justify-center">
-                    {p.images[0] ? <Image src={p.images[0]} alt="" width={32} height={32} className="object-cover" /> : <span className="text-sm">🍾</span>}
+                    {p.images[0] ? <Image src={p.images[0]} alt="" width={32} height={32} className="object-contain" /> : null}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm text-white truncate">{p.name}</p>
@@ -189,7 +189,7 @@ export function KitForm({ kit }: { kit?: Kit }) {
             {kitProducts.map(kp => (
               <div key={kp.productId} className="flex items-center gap-3 p-3 rounded-lg bg-white/5">
                 <div className="h-9 w-9 rounded bg-brand-mid shrink-0 overflow-hidden flex items-center justify-center">
-                  {kp.image ? <Image src={kp.image} alt="" width={36} height={36} className="object-cover" /> : <span>🍾</span>}
+                  {kp.image ? <Image src={kp.image} alt="" width={36} height={36} className="object-contain" /> : null}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{kp.name}</p>

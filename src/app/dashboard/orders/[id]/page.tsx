@@ -11,6 +11,8 @@ import { formatPrice, formatDateTime } from "@/lib/utils";
 import { ORDER_STATUSES, PAYMENT_METHODS } from "@/constants";
 import { OrderStatusSelect, MarkPaidButton } from "@/components/dashboard/OrderStatusSelect";
 import { AddTrackingForm } from "@/components/dashboard/AddTrackingForm";
+import { StatusGlyph } from "@/components/ui/status-icon";
+import { Wine } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = { title: "Detalle Pedido - Dashboard" };
 
@@ -39,7 +41,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <h1 className="text-xl font-black text-white font-mono">{order.orderNumber}</h1>
-        <Badge className="bg-neon-purple/20 border-neon-purple/50 text-neon-purple">{status?.emoji} {status?.label}</Badge>
+        <Badge className="bg-neon-purple/20 border-neon-purple/50 text-neon-purple"><span className="inline-flex items-center gap-1.5"><StatusGlyph name={status?.icon ?? ""} size={16} />{status?.label}</span></Badge>
       </div>
 
       {/* Controls */}
@@ -52,7 +54,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
           <MarkPaidButton orderId={order.id} />
         )}
         {order.payment?.status === "COMPLETED" && (
-          <span className="text-xs text-green-400 font-bold">✅ Pagado</span>
+          <span className="text-xs font-bold text-green-400">Pagado</span>
         )}
         <div className="ml-auto text-right">
           <p className="text-2xl font-black text-neon-purple">{formatPrice(order.total)}</p>
@@ -67,7 +69,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
           {order.orderItems.map((item) => (
             <div key={item.id} className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-lg overflow-hidden bg-brand-mid shrink-0 flex items-center justify-center text-xl">
-                {item.image ? <Image src={item.image} alt={item.name} width={48} height={48} className="object-cover" /> : "🍾"}
+                {item.image ? <Image src={item.image} alt={item.name} width={48} height={48} className="object-contain" /> : <Wine size={20} weight="duotone" color="#4A4038" />}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-white line-clamp-1">{item.name}</p>
@@ -110,7 +112,7 @@ export default async function DashboardOrderDetailPage({ params }: { params: Pro
               <h2 className="font-bold text-white text-sm mb-2 flex items-center gap-2"><CreditCard className="h-4 w-4" />Pago</h2>
               <p className="text-sm text-white">{paymentInfo?.label}</p>
               <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">
-                {order.payment.status === "COMPLETED" ? "✅ Pagado" : "⏳ Pendiente"}
+                {order.payment.status === "COMPLETED" ? "Pagado" : "Pendiente"}
               </Badge>
             </div>
           )}

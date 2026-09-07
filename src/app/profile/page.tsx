@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatPrice, formatDate, getInitials } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/constants";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 export const metadata: Metadata = { title: "Mi Perfil" };
 
@@ -66,7 +67,7 @@ export default async function ProfilePage() {
               <Link key={order.id} href={`/orders/${order.id}`}>
                 <div className="flex items-center justify-between py-2.5 hover:bg-white/5 rounded-lg px-2 transition-colors cursor-pointer">
                   <div><p className="font-mono text-sm font-bold text-white">{order.orderNumber}</p><p className="text-xs text-muted-foreground">{formatDate(order.createdAt)}</p></div>
-                  <div className="text-right"><p className="font-bold text-white">{formatPrice(order.total)}</p><Badge variant="outline" className="text-xs">{status?.emoji} {status?.label}</Badge></div>
+                  <div className="text-right"><p className="font-bold text-white">{formatPrice(order.total)}</p><Badge variant="outline" className="text-xs"><span className="inline-flex items-center gap-1"><StatusGlyph name={status?.icon ?? ""} />{status?.label}</span></Badge></div>
                 </div>
               </Link>
             );

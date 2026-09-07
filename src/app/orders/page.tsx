@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/constants";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 export const metadata: Metadata = { title: "Mis Pedidos" };
 
@@ -50,7 +51,7 @@ export default async function OrdersPage() {
                   <div className="space-y-1">
                     <p className="font-mono font-bold text-white">{order.orderNumber}</p>
                     <p className="text-sm text-muted-foreground">{formatDate(order.createdAt)} · {order.orderItems.length} producto(s)</p>
-                    <Badge variant="outline" className="text-xs">{status?.emoji} {status?.label}</Badge>
+                    <Badge variant="outline" className="text-xs"><span className="inline-flex items-center gap-1"><StatusGlyph name={status?.icon ?? ""} />{status?.label}</span></Badge>
                   </div>
                   <div className="text-right flex items-center gap-3">
                     <div>

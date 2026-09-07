@@ -16,6 +16,7 @@ import { useCartStore, useCartTotals } from "@/store/cart.store";
 import { formatPrice } from "@/lib/utils";
 import { PAYMENT_METHODS, PROVINCES_CR, DELIVERY_FEE_NATIONAL, FREE_DELIVERY_THRESHOLD, SINPE_PHONE, SINPE_NAME } from "@/constants";
 import { checkoutSchema, type CheckoutInput } from "@/validations/order";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function CheckoutPage() {
       const result = await res.json();
       if (!result.success) { toast.error(result.error); return; }
       clearCart();
-      toast.success("¡Pedido creado! 🎉");
+      toast.success("¡Pedido creado!");
       router.push(`/orders/${result.data.id}`);
     } catch { toast.error("Error al procesar el pedido"); }
     finally { setIsLoading(false); }
@@ -67,7 +68,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="section-padding container-max">
-      <h1 className="text-3xl font-black text-white mb-8">Finalizar <span className="gradient-text">Compra</span> 🛍️</h1>
+      <h1 className="text-3xl font-black text-white mb-8">Finalizar <span className="gradient-text">Compra</span></h1>
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -104,7 +105,7 @@ export default function CheckoutPage() {
                 {(Object.entries(PAYMENT_METHODS) as [string, typeof PAYMENT_METHODS[keyof typeof PAYMENT_METHODS]][]).map(([key, m]) => (
                   <button key={key} type="button" onClick={() => { setPaymentMethod(key); setValue("paymentMethod", key as never); }}
                     className={`p-4 rounded-xl border-2 text-left transition-all ${paymentMethod === key ? "border-neon-purple bg-neon-purple/10" : "border-border hover:border-neon-purple/40"}`}>
-                    <div className="text-2xl mb-1">{m.icon}</div>
+                    <div className="mb-1 flex justify-center"><StatusGlyph name={m.icon} size={22} weight="duotone" /></div>
                     <div className="font-semibold text-white text-sm">{m.label}</div>
                     <div className="text-xs text-muted-foreground">{m.description}</div>
                   </button>
@@ -112,7 +113,7 @@ export default function CheckoutPage() {
               </div>
               {paymentMethod === "SINPE" && (
                 <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 space-y-1">
-                  <p className="text-sm font-semibold text-green-400">📱 SINPE Móvil</p>
+                  <p className="text-sm font-semibold text-green-400">SINPE Móvil</p>
                   <p className="text-white font-mono font-bold">{sinpe.phone}</p>
                   <p className="text-muted-foreground text-sm">{sinpe.name} — Monto: <strong className="text-white">{formatPrice(finalTotal)}</strong></p>
                 </div>

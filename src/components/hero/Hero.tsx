@@ -1,8 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Lightning, Package, Headset, MapPin, ShoppingCartSimple } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "@/components/ui/button";
 import { DELIVERY_ZONE } from "@/constants";
@@ -12,30 +14,34 @@ import { CountUpNumber } from "@/components/ui/count-up-number";
 import { springs } from "@/lib/motion";
 
 /**
- * Hero product composition. Real bottle photography carries the visual weight
- * here instead of another abstract gradient blob — the thing every premium
- * spirits site does and the thing this hero was missing.
+ * Hero product composition. These are bottles ACL Drinks actually sells, shot
+ * from the same files the catalogue uses — the previous version showed a Jack
+ * Daniel's Honey and a tequila that are not in the catalogue at all, which is
+ * an advert for stock the customer cannot buy.
+ *
+ * `object-contain` on a plate, never `cover`: a hero that crops the label off a
+ * bottle is worse than no hero.
  */
 const SHOWCASE = [
   {
-    src: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=800",
-    alt: "Botella de whisky sobre barra",
-    className: "right-0 top-2 w-[58%] aspect-[3/4]",
-    float: 14,
+    src: "/catalog/products/johnnie-walker-black-label.webp",
+    alt: "Johnnie Walker Black Label, 750ml",
+    className: "right-0 top-2 w-[54%] aspect-[3/4]",
+    float: 12,
     delay: 0,
   },
   {
-    src: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800",
-    alt: "Cerveza fría servida",
-    className: "left-0 top-28 w-[44%] aspect-square",
-    float: -10,
+    src: "/catalog/products/absolut-vodka-original.webp",
+    alt: "Absolut Vodka Original, 750ml",
+    className: "left-0 top-24 w-[42%] aspect-[4/5]",
+    float: -9,
     delay: 0.6,
   },
   {
-    src: "https://images.unsplash.com/photo-1516535794938-6063878f08cc?w=800",
-    alt: "Tequila y agave",
-    className: "left-[20%] bottom-0 w-[38%] aspect-[4/5]",
-    float: 9,
+    src: "/catalog/products/cacique-ron-anejo.webp",
+    alt: "Cacique Ron Añejo, 750ml",
+    className: "left-[22%] bottom-0 w-[36%] aspect-[4/5]",
+    float: 8,
     delay: 1.1,
   },
 ];
@@ -55,9 +61,24 @@ const stats = [
 ];
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  // ogl ships a WebGL renderer for a purely decorative backdrop. On a phone
+  // that is main-thread and GPU budget spent on something nobody asked for,
+  // right where LCP is measured - so it only mounts on a wide viewport, and
+  // never when the visitor asked for reduced motion.
+  const [showAurora, setShowAurora] = useState(false);
+  useEffect(() => {
+    if (reduceMotion) return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setShowAurora(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, [reduceMotion]);
+
   const handleScrollToCatalog = () => {
     const el = document.getElementById("catalogo");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    el?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
   };
 
   return (
@@ -66,7 +87,9 @@ export function Hero() {
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{ background: "radial-gradient(ellipse at top, #2A1F14 0%, #12110F 65%)" }}
     >
-      <Aurora colorStops={["#12110F", "#1E3D2A", "#22B14C"]} amplitude={0.6} blend={0.5} className="opacity-40" />
+      {showAurora && (
+        <Aurora colorStops={["#12110F", "#1E3D2A", "#22B14C"]} amplitude={0.6} blend={0.5} className="opacity-40" />
+      )}
 
       <div className="container-max section-padding relative z-10 w-full">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-10 xl:gap-16 items-center">
@@ -121,13 +144,15 @@ export function Hero() {
                 <ShoppingCartSimple size={20} weight="bold" />COMPRAR AHORA
               </Button>
               <Button
+                asChild
                 size="lg"
                 variant="outline"
                 className="gap-3 w-full sm:w-auto font-semibold px-8 py-4 rounded-2xl"
                 style={{ borderColor: "rgba(245,242,236,0.3)", color: "#F5F2EC" }}
-                onClick={() => { window.location.href = "/tracking"; }}
               >
-                <MapPin size={20} weight="bold" /> Rastrear Pedido
+                <Link href="/tracking">
+                  <MapPin size={20} weight="bold" /> Rastrear Pedido
+                </Link>
               </Button>
             </motion.div>
           </div>
@@ -139,6 +164,10 @@ export function Hero() {
                 key={shot.src}
                 className={`absolute overflow-hidden rounded-3xl ${shot.className}`}
                 style={{
+                  // A dark plate under every shot. The source photographs were
+                  // taken on different surfaces, so without a shared ground the
+                  // three read as three loose snapshots instead of one display.
+                  background: "#1E1A17",
                   border: "1px solid rgba(245,242,236,0.12)",
                   boxShadow: "0 24px 60px rgba(0,0,0,0.55)",
                 }}
@@ -147,20 +176,26 @@ export function Hero() {
                 transition={{ ...springs.gentle, delay: 0.25 + i * 0.12 }}
               >
                 <motion.div
-                  className="absolute inset-0"
-                  animate={{ y: [0, shot.float, 0] }}
-                  transition={{ duration: 7 + i, repeat: Infinity, ease: "easeInOut", delay: shot.delay }}
+                  className="absolute inset-0 p-3"
+                  animate={reduceMotion ? undefined : { y: [0, shot.float, 0] }}
+                  transition={reduceMotion ? undefined : { duration: 7 + i, repeat: Infinity, ease: "easeInOut", delay: shot.delay }}
                 >
                   <Image
                     src={shot.src}
                     alt={shot.alt}
                     fill
-                    className="object-cover"
-                    style={{ filter: "brightness(1.12) contrast(1.06) saturate(1.05)" }}
-                    sizes="(max-width: 1024px) 40vw, 25vw"
+                    className="object-contain"
+                    // The composition is `hidden md:block`, so below 768px this
+                    // image is never painted. Asking for a 1px candidate there
+                    // keeps `priority`'s preload from costing a phone a full
+                    // hero-sized download it will never use.
+                    sizes="(max-width: 767px) 1px, (max-width: 1024px) 40vw, 25vw"
                     priority={i === 0}
                   />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(18,17,15,0.55), transparent 55%)" }} />
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "linear-gradient(to top, rgba(18,17,15,0.45), transparent 45%)" }}
+                  />
                 </motion.div>
               </motion.div>
             ))}

@@ -6,6 +6,7 @@ import { Plus, Edit, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/utils";
+import { Wine } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = { title: "Productos - Dashboard" };
 export const dynamic = "force-dynamic";
@@ -46,7 +47,7 @@ export default async function DashboardProductsPage() {
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <div className="h-10 w-10 rounded-lg overflow-hidden bg-brand-mid shrink-0 flex items-center justify-center">
-                          {product.images[0] ? <Image src={product.images[0]} alt={product.name} width={40} height={40} className="object-cover" /> : <span className="text-lg">🍾</span>}
+                          {product.images[0] ? <Image src={product.images[0]} alt={product.name} width={40} height={40} className="object-contain" /> : <Wine size={18} weight="duotone" color="#4A4038" />}
                         </div>
                         <div className="min-w-0">
                           <p className="font-semibold text-white truncate max-w-[160px]">{product.name}</p>
@@ -61,7 +62,7 @@ export default async function DashboardProductsPage() {
                     </td>
                     <td className="p-4 text-center hidden sm:table-cell">
                       <span className={`font-bold ${isLow ? "text-neon-amber" : "text-white"}`}>{stock}</span>
-                      {isLow && <p className="text-xs text-neon-amber">⚠️ Bajo</p>}
+                      {isLow && <p className="text-xs text-neon-amber">Stock bajo</p>}
                     </td>
                     <td className="p-4 text-center">
                       <Badge variant={product.isActive ? "neon-green" : "destructive"} className="text-xs">{product.isActive ? "Activo" : "Inactivo"}</Badge>

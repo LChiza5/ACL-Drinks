@@ -58,7 +58,7 @@ export function CategoryForm({ category }: { category?: Category }) {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>Emoji</Label>
-            <Input {...register("emoji")} maxLength={4} placeholder="🍷" />
+            <Input {...register("emoji")} maxLength={4} placeholder="opcional" />
           </div>
           <div className="space-y-2">
             <Label>Color (hex)</Label>

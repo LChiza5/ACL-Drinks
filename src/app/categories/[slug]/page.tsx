@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
@@ -6,7 +5,7 @@ import { MagnifyingGlass as PackageSearch, Wine } from "@phosphor-icons/react/di
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ProductGridSkeleton } from "@/components/products/CardSkeletons";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -36,19 +35,15 @@ async function CategoryProducts({ categoryId }: { categoryId: string }) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-      {products.map((p, i) => <ProductCard key={p.id} product={p as never} index={i} />)}
+      {products.map((p, i) => (
+        <ProductCard key={p.id} product={p as never} index={i} priority={i < 4} />
+      ))}
     </div>
   );
 }
 
 function CategoryProductsSkeleton() {
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <Skeleton key={i} className="aspect-square rounded-2xl" />
-      ))}
-    </div>
-  );
+  return <ProductGridSkeleton count={8} />;
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -62,11 +57,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   return (
     <div className="section-padding container-max">
       <div className="flex items-center gap-4 mb-8">
-        {category.emoji ? (
-          <span className="text-5xl">{category.emoji}</span>
-        ) : (
-          <Wine size={40} weight="duotone" color="#22B14C" />
-        )}
+        <Wine size={36} weight="duotone" color="#22B14C" aria-hidden="true" />
         <div>
           <h1 className="text-4xl font-black text-white">{category.name}</h1>
           {category.description && <p className="text-muted-foreground mt-1">{category.description}</p>}

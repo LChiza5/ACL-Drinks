@@ -1,35 +1,61 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Wine } from "@phosphor-icons/react/dist/ssr";
 import type { Category } from "@/types";
 
+/**
+ * Category tile. Two changes from the previous version:
+ *  - the 4xl emoji that sat on top of the photo is gone; the category is named
+ *    in type, the way a catalogue names a section.
+ *  - a bottle photo is letterboxed (`contain`) instead of cropped, while an
+ *    ambient shot still fills the frame. Same tile, right treatment per source.
+ *
+ * No framer-motion and no client directive: the hover is CSS, so a page of
+ * category tiles ships no JavaScript at all.
+ */
 export function CategoryCard({ category, index = 0 }: { category: Category; index?: number }) {
+  const isProductShot = category.image?.startsWith("/catalog/products/");
+
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} whileHover={{ scale: 1.03, y: -4 }}>
-      <Link href={`/categories/${category.slug}`} className="group block">
-        <div className="relative overflow-hidden rounded-2xl border border-transparent hover:border-emerald-500/50 transition-colors duration-300 aspect-[4/3]" style={{ background: "#1E1A17" }}>
-          {category.image ? (
-            <Image src={category.image} alt={category.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 50vw, 20vw" />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Wine size={40} weight="duotone" color="#4A4038" />
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center">
-            {category.emoji && <span className="text-4xl mb-2 group-hover:scale-105 transition-transform duration-300">{category.emoji}</span>}
-            <h3 className="font-black text-white text-lg leading-tight">{category.name}</h3>
-            {category._count && (
-              <p className="text-xs text-white/70 mt-1">
-                {category._count.products} {category._count.products === 1 ? "producto" : "productos"}
-              </p>
-            )}
+    <Link
+      href={`/categories/${category.slug}`}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border transition-[border-color,transform,box-shadow] duration-300 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-[0_14px_32px_rgba(0,0,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+      style={{
+        background: "#1E1A17",
+        borderColor: "rgba(245,242,236,0.08)",
+        animationDuration: "400ms",
+        animationDelay: `${Math.min(index, 7) * 45}ms`,
+      }}
+    >
+      <div
+        className={`relative aspect-[4/3] w-full overflow-hidden ${isProductShot ? "p-3" : ""}`}
+        style={{ background: "#191512" }}
+      >
+        {category.image ? (
+          <Image
+            src={category.image}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 18vw"
+            className={`transition-transform duration-500 group-hover:scale-105 ${isProductShot ? "object-contain p-3" : "object-cover"}`}
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center">
+            <Wine size={36} weight="duotone" color="#4A4038" aria-hidden="true" />
           </div>
-        </div>
-      </Link>
-    </motion.div>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col justify-center gap-0.5 px-4 py-3">
+        <h3 className="font-display text-base font-semibold leading-tight" style={{ color: "#F5F2EC" }}>
+          {category.name}
+        </h3>
+        {category._count && (
+          <p className="text-xs" style={{ color: "#8A8377" }}>
+            {category._count.products} {category._count.products === 1 ? "producto" : "productos"}
+          </p>
+        )}
+      </div>
+    </Link>
   );
 }

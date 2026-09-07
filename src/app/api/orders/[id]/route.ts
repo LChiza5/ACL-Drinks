@@ -11,12 +11,12 @@ const updateOrderSchema = z.object({
 });
 
 const STATUS_MESSAGES: Partial<Record<string, string>> = {
-  CONFIRMED: "Pedido confirmado ✅",
-  PREPARING: "Preparando tu pedido 🍾",
-  SHIPPED: "Pedido enviado 🚚",
-  OUT_FOR_DELIVERY: "Tu pedido está en camino 🛵",
-  DELIVERED: "Pedido entregado 🎉",
-  CANCELLED: "Pedido cancelado ❌",
+  CONFIRMED: "Pedido confirmado",
+  PREPARING: "Preparando tu pedido",
+  SHIPPED: "Pedido enviado",
+  OUT_FOR_DELIVERY: "Tu pedido está en camino",
+  DELIVERED: "Pedido entregado",
+  CANCELLED: "Pedido cancelado",
 };
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {

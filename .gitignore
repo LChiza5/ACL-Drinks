@@ -51,3 +51,6 @@ coverage/
 # Turbopack
 .turbo/
 *.stackdump
+
+# Config local de editores/agentes: no va al repo
+.claude/

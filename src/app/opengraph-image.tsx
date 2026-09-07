@@ -19,7 +19,7 @@ export default function OgImage() {
         gap: 20,
       }}
     >
-      <div style={{ fontSize: 100 }}>🍾</div>
+      <div style={{ fontSize: 84, letterSpacing: 8, fontWeight: 700 }}>ACL</div>
       <div style={{ color: "#C9984A", fontSize: 72, fontWeight: 900, letterSpacing: -2 }}>
         ACL Drinks
       </div>

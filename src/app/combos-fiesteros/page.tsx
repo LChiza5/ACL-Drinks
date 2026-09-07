@@ -1,13 +1,12 @@
-export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Gift, Confetti as PartyPopper } from "@phosphor-icons/react/dist/ssr";
 import { prisma } from "@/lib/prisma";
 import { KitCard } from "@/components/kits/KitCard";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Skeleton } from "@/components/ui/skeleton";
+import { KitCardSkeleton } from "@/components/products/CardSkeletons";
 
-export const metadata: Metadata = { title: "Combos Fiesteros | ACL Drinks" };
+export const metadata: Metadata = { title: "Combos Fiesteros" };
 export const revalidate = 60;
 
 async function KitsGrid() {
@@ -40,7 +39,7 @@ function KitsGridSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton key={i} className="aspect-square rounded-2xl" />
+        <KitCardSkeleton key={i} />
       ))}
     </div>
   );

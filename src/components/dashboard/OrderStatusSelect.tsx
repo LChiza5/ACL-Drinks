@@ -30,7 +30,7 @@ export function OrderStatusSelect({ orderId, current }: { orderId: string; curre
       className="bg-brand-mid border border-border rounded-lg px-3 py-2 text-sm text-white font-medium focus:outline-none focus:border-neon-purple disabled:opacity-50"
     >
       {Object.entries(ORDER_STATUSES).map(([key, s]) => (
-        <option key={key} value={key}>{s.emoji} {s.label}</option>
+        <option key={key} value={key}>{s.label}</option>
       ))}
     </select>
   );
@@ -56,7 +56,7 @@ export function MarkPaidButton({ orderId }: { orderId: string }) {
   return (
     <button onClick={onClick} disabled={loading}
       className="px-3 py-1.5 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 text-xs font-bold hover:bg-green-500/30 transition-colors disabled:opacity-50">
-      {loading ? "..." : "✅ Marcar pagado"}
+      {loading ? "..." : "Marcar pagado"}
     </button>
   );
 }

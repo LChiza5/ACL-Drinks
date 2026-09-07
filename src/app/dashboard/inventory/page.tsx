@@ -5,6 +5,7 @@ import { Archive, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { RestockInput } from "@/components/dashboard/RestockInput";
+import { Wine } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = { title: "Inventario - Dashboard" };
 export const dynamic = "force-dynamic";
@@ -67,7 +68,7 @@ export default async function DashboardInventoryPage() {
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <div className="h-9 w-9 rounded-lg overflow-hidden bg-brand-mid shrink-0 flex items-center justify-center">
-                          {product.images[0] ? <Image src={product.images[0]} alt={product.name} width={36} height={36} className="object-cover" /> : <span className="text-base">🍾</span>}
+                          {product.images[0] ? <Image src={product.images[0]} alt={product.name} width={36} height={36} className="object-contain" /> : <Wine size={16} weight="duotone" color="#4A4038" />}
                         </div>
                         <div className="min-w-0"><p className="font-semibold text-white truncate max-w-[160px]">{product.name}</p><p className="text-xs text-muted-foreground">{product.category?.name}</p></div>
                       </div>
@@ -83,7 +84,7 @@ export default async function DashboardInventoryPage() {
                     </td>
                     <td className="p-4 text-center">
                       {isOut ? <Badge variant="destructive" className="text-xs">Sin Stock</Badge> :
-                       isLow ? <Badge variant="neon-amber" className="text-xs">⚠️ Bajo</Badge> :
+                       isLow ? <Badge variant="neon-amber" className="text-xs">Bajo</Badge> :
                        <Badge variant="neon-green" className="text-xs">OK</Badge>}
                     </td>
                     <td className="p-4">

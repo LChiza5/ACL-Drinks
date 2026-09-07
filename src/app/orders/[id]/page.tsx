@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { formatPrice, formatDateTime } from "@/lib/utils";
 import { ORDER_STATUSES, PAYMENT_METHODS } from "@/constants";
+import { StatusGlyph } from "@/components/ui/status-icon";
+import { Wine } from "@phosphor-icons/react/dist/ssr";
 
 interface Props { params: Promise<{ id: string }> }
 export const metadata: Metadata = { title: "Detalle de Pedido" };
@@ -43,7 +45,7 @@ export default async function OrderDetailPage({ params }: Props) {
             <h1 className="text-xl font-black text-white font-mono">{order.orderNumber}</h1>
             <p className="text-sm text-muted-foreground mt-1">{formatDateTime(order.createdAt)}</p>
           </div>
-          <Badge className="bg-neon-purple/20 border-neon-purple/50 text-neon-purple font-bold px-3 py-1.5">{status?.emoji} {status?.label}</Badge>
+          <Badge className="bg-neon-purple/20 border-neon-purple/50 text-neon-purple font-bold px-3 py-1.5"><span className="inline-flex items-center gap-1.5"><StatusGlyph name={status?.icon ?? ""} size={16} />{status?.label}</span></Badge>
         </div>
         {order.shipment?.trackingCode && (
           <div className="mt-3 flex items-center gap-2 text-sm">
@@ -58,7 +60,7 @@ export default async function OrderDetailPage({ params }: Props) {
         {order.orderItems.map((item) => (
           <div key={item.id} className="flex items-center gap-3">
             <div className="h-14 w-14 rounded-lg overflow-hidden bg-brand-mid shrink-0 flex items-center justify-center text-2xl">
-              {item.image ? <Image src={item.image} alt={item.name} width={56} height={56} className="object-cover" /> : "🍾"}
+              {item.image ? <Image src={item.image} alt={item.name} width={56} height={56} className="object-contain" /> : <Wine size={22} weight="duotone" color="#4A4038" />}
             </div>
             <div className="flex-1 min-w-0"><p className="text-sm font-semibold text-white line-clamp-1">{item.name}</p><p className="text-xs text-muted-foreground">×{item.quantity}</p></div>
             <p className="font-bold text-white shrink-0">{formatPrice(item.price * item.quantity)}</p>
@@ -86,10 +88,10 @@ export default async function OrderDetailPage({ params }: Props) {
         )}
         {order.payment && (
           <div className="glass-card rounded-2xl p-5 space-y-2">
-            <h3 className="font-bold text-white text-sm mb-2">💳 Pago</h3>
+            <h3 className="mb-2 text-sm font-bold text-white">Pago</h3>
             <p className="text-sm text-white font-medium">{paymentInfo?.label}</p>
             <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">
-              {order.payment.status === "COMPLETED" ? "✅ Pagado" : "⏳ Pendiente"}
+              {order.payment.status === "COMPLETED" ? "Pagado" : "Pendiente"}
             </Badge>
           </div>
         )}

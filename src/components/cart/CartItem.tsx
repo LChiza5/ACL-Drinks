@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart.store";
 import { formatPrice } from "@/lib/utils";
 import type { CartItem as CartItemType } from "@/types";
+import { Wine, Gift } from "@phosphor-icons/react/dist/ssr";
 
 export function CartItem({ item }: { item: CartItemType }) {
   const { removeItem, updateQuantity } = useCartStore();
@@ -17,7 +18,7 @@ export function CartItem({ item }: { item: CartItemType }) {
         {item.image ? (
           <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-2xl">{item.type === "kit" ? "🎁" : "🍾"}</div>
+          <div className="absolute inset-0 flex items-center justify-center">{item.type === "kit" ? <Gift size={22} weight="duotone" color="#4A4038" /> : <Wine size={22} weight="duotone" color="#4A4038" />}</div>
         )}
       </div>
       <div className="flex-1 min-w-0">

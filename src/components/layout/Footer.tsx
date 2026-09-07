@@ -7,6 +7,7 @@ import { MapPin, Phone, EnvelopeSimple, Clock } from "@phosphor-icons/react/dist
 import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, INSTAGRAM_URL, DELIVERY_ZONE, PAYMENT_METHODS } from "@/constants";
 import { fadeUp } from "@/lib/motion";
 import { Logo } from "./Logo";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 const contactItems = [
   { icon: MapPin, text: `${DELIVERY_ZONE}, Costa Rica` },
@@ -110,7 +111,7 @@ export function Footer() {
           {Object.values(PAYMENT_METHODS).map((m) => (
             <span key={m.label} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs"
               style={{ background: "rgba(245,242,236,0.06)", border: "1px solid rgba(245,242,236,0.1)", color: "#B8B1A7" }}>
-              <span>{m.icon}</span>{m.label}
+              <StatusGlyph name={m.icon} size={13} />{m.label}
             </span>
           ))}
         </div>

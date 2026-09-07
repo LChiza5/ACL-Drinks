@@ -28,7 +28,7 @@ export async function sendOrderConfirmation({
   await transporter.sendMail({
     from: process.env.SMTP_FROM || "ACL Drinks <no-reply@acldrinks.cr>",
     to,
-    subject: `Pedido ${orderNumber} confirmado 🍾`,
+    subject: `Pedido ${orderNumber} confirmado`,
     html: `
       <div style="font-family:sans-serif;max-width:520px;margin:auto;background:#FFF8E7;color:#F5F2EC;padding:32px;border-radius:12px">
         <h2 style="color:#A67C52;margin-top:0">¡Tu pedido está confirmado!</h2>
@@ -40,7 +40,7 @@ export async function sendOrderConfirmation({
             <td style="padding:10px 0;text-align:right;font-weight:700;color:#A67C52">${formatPrice(total)}</td>
           </tr>
         </table>
-        <p style="color:#B8B1A7;font-size:14px">Te avisaremos cuando tu pedido esté en camino. ¡Salud! 🥂</p>
+        <p style="color:#B8B1A7;font-size:14px">Te avisaremos cuando tu pedido esté en camino. ¡Salud!</p>
         <p style="color:#B8B1A7;font-size:12px">— ACL Drinks · Tilarán, Guanacaste</p>
       </div>
     `,

@@ -67,7 +67,7 @@ export function CartSummary({ onCheckout }: { onCheckout?: () => void }) {
         {discount > 0 && <div className="flex justify-between text-green-400"><span>Descuento</span><span>-{formatPrice(discount)}</span></div>}
         <div className="flex justify-between text-muted-foreground">
           <span>Envío</span>
-          <span>{deliveryFee === 0 ? <span className="text-green-400 font-medium">GRATIS 🚚</span> : formatPrice(deliveryFee)}</span>
+          <span>{deliveryFee === 0 ? <span className="text-green-400 font-medium">GRATIS</span> : formatPrice(deliveryFee)}</span>
         </div>
         {subtotal < FREE_DELIVERY_THRESHOLD && (
           <p className="text-xs text-muted-foreground">Agrega {formatPrice(FREE_DELIVERY_THRESHOLD - subtotal)} más para envío gratis</p>

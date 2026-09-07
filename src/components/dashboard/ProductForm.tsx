@@ -122,7 +122,7 @@ export function ProductForm({ product }: { product?: Product }) {
             <Select defaultValue={product?.categoryId} onValueChange={v => setValue("categoryId", v)}>
               <SelectTrigger><SelectValue placeholder="Selecciona..." /></SelectTrigger>
               <SelectContent>
-                {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.emoji} {c.name}</SelectItem>)}
+                {categories.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
               </SelectContent>
             </Select>
             {errors.categoryId && <p className="text-xs text-destructive">{errors.categoryId.message}</p>}

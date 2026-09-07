@@ -34,7 +34,7 @@ export default async function DashboardKitsPage() {
             <div className="h-40 bg-brand-mid relative">
               {kit.image
                 ? <Image src={kit.image} alt={kit.name} fill className="object-cover" />
-                : <div className="flex items-center justify-center h-full text-5xl">🎉</div>}
+                : <div className="flex h-full items-center justify-center"><Gift className="h-8 w-8" style={{ color: "#4A4038" }} /></div>}
               {kit.badge && (
                 <span className="absolute top-2 left-2 bg-neon-purple text-white text-xs font-bold px-2 py-0.5 rounded-full">{kit.badge}</span>
               )}

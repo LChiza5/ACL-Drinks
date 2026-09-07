@@ -1,12 +1,12 @@
-export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { Hero } from "@/components/hero/Hero";
-import { TropicalStrip } from "@/components/hero/TropicalStrip";
+import { CostaRicaBand } from "@/components/hero/CostaRicaBand";
 import { TrustMarquee } from "@/components/hero/TrustMarquee";
 import { FeaturedProducts } from "@/components/products/FeaturedProducts";
 import { KitsPreview } from "@/components/kits/KitsPreview";
 import { BenefitsSection } from "@/components/hero/BenefitsSection";
 import { CatalogSection } from "@/components/products/CatalogSection";
+import { ProductCardSkeleton } from "@/components/products/CardSkeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { prisma } from "@/lib/prisma";
 
@@ -59,7 +59,7 @@ function SectionSkeleton({ rows = 4 }: { rows?: number }) {
       <Skeleton className="h-8 w-56 mb-8" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {Array.from({ length: rows }).map((_, i) => (
-          <Skeleton key={i} className="aspect-square rounded-2xl" />
+          <ProductCardSkeleton key={i} />
         ))}
       </div>
     </div>
@@ -70,7 +70,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TropicalStrip />
+      <CostaRicaBand />
       <TrustMarquee />
       <Suspense fallback={<SectionSkeleton rows={5} />}>
         <CatalogSectionData />

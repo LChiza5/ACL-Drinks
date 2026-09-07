@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MagnifyingGlass as PackageSearch, Wine } from "@phosphor-icons/react/dist/ssr";
@@ -6,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
+import { ProductGridSkeleton } from "@/components/products/CardSkeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 
@@ -37,7 +37,7 @@ async function ProductsResults({ searchParams }: { searchParams: Promise<Product
         {categories.map((cat) => (
           <Link key={cat.id} href={`/products?categoryId=${cat.id}`}>
             <Badge variant={categoryId === cat.id ? "neon" : "outline"} className="cursor-pointer px-4 py-2 text-sm gap-1">
-              <span>{cat.emoji}</span>{cat.name}
+              {cat.name}
             </Badge>
           </Link>
         ))}
@@ -50,7 +50,9 @@ async function ProductsResults({ searchParams }: { searchParams: Promise<Product
         />
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {products.map((p, i) => <ProductCard key={p.id} product={p as never} index={i} />)}
+          {products.map((p, i) => (
+            <ProductCard key={p.id} product={p as never} index={i} priority={i < 4} />
+          ))}
         </div>
       )}
     </>
@@ -65,11 +67,7 @@ function ProductsResultsSkeleton() {
           <Skeleton key={i} className="h-9 w-24 rounded-full" />
         ))}
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton key={i} className="aspect-square rounded-2xl" />
-        ))}
-      </div>
+      <ProductGridSkeleton count={8} />
     </>
   );
 }

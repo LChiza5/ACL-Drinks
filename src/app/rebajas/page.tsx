@@ -1,13 +1,12 @@
-export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Tag } from "@phosphor-icons/react/dist/ssr";
 import { prisma } from "@/lib/prisma";
 import { ProductCard } from "@/components/products/ProductCard";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ProductGridSkeleton } from "@/components/products/CardSkeletons";
 
-export const metadata: Metadata = { title: "Rebajas | ACL Drinks" };
+export const metadata: Metadata = { title: "Rebajas" };
 export const revalidate = 60;
 
 async function RebajasGrid() {
@@ -33,20 +32,16 @@ async function RebajasGrid() {
     <>
       <p className="text-muted-foreground text-center mb-8">{products.length} productos con descuento</p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {products.map((p, i) => <ProductCard key={p.id} product={p as never} index={i} />)}
+        {products.map((p, i) => (
+          <ProductCard key={p.id} product={p as never} index={i} priority={i < 4} />
+        ))}
       </div>
     </>
   );
 }
 
 function RebajasGridSkeleton() {
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <Skeleton key={i} className="aspect-square rounded-2xl" />
-      ))}
-    </div>
-  );
+  return <ProductGridSkeleton count={8} />;
 }
 
 export default function RebajasPage() {

@@ -41,12 +41,19 @@ export function ClickSpark({
     return () => ro.disconnect();
   }, []);
 
+  // The draw loop is started by a click and stops itself once the last spark
+  // has faded. It used to call requestAnimationFrame unconditionally, which
+  // meant every mounted ClickSpark held a 60fps canvas clear forever - with one
+  // per product card that was dozens of idle loops competing with scrolling.
+  const runningRef = useRef(false);
+
+  const drawRef = useRef<() => void>(() => {});
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    let animationId: number;
+    let animationId = 0;
 
     const draw = (timestamp: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -69,10 +76,23 @@ export function ClickSpark({
         ctx.stroke();
         return true;
       });
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        runningRef.current = false;
+      }
+    };
+
+    drawRef.current = () => {
+      if (runningRef.current) return;
+      runningRef.current = true;
       animationId = requestAnimationFrame(draw);
     };
-    animationId = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(animationId);
+
+    return () => {
+      runningRef.current = false;
+      cancelAnimationFrame(animationId);
+    };
   }, [sparkColor, sparkSize, sparkRadius, duration]);
 
   const handleClick = useCallback(
@@ -91,6 +111,7 @@ export function ClickSpark({
           startTime: now,
         }))
       );
+      drawRef.current();
     },
     [sparkCount]
   );

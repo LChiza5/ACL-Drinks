@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -7,13 +6,14 @@ import { formatPrice, getDiscountPercentage } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ProductCard } from "@/components/products/ProductCard";
 import { AddToCartButton } from "@/components/products/AddToCartButton";
+import { ProductImage } from "@/components/products/ProductImage";
 import { Wine, Globe, Drop as Droplets, Package } from "@phosphor-icons/react/dist/ssr";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const product = await prisma.product.findUnique({ where: { slug } });
   if (!product) return { title: "Producto no encontrado" };
-  return { title: product.name, description: product.description || `Compra ${product.name} en BrandName.`, openGraph: { images: product.images[0] ? [product.images[0]] : [] } };
+  return { title: product.name, description: product.description || `Compra ${product.name} en ACL Drinks.`, openGraph: { images: product.images[0] ? [product.images[0]] : [] } };
 }
 
 export const revalidate = 60;
@@ -40,21 +40,24 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <div className="grid md:grid-cols-2 gap-10 mb-16">
         {/* Image */}
         <div className="space-y-3">
-          <div className="relative aspect-square rounded-2xl overflow-hidden glass-card">
-            {product.images[0] ? (
-              <Image src={product.images[0]} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Wine size={72} weight="duotone" color="#4A4038" />
-              </div>
-            )}
+          <div className="relative aspect-square rounded-2xl overflow-hidden glass-card p-6">
+            <div className="relative h-full w-full">
+              <ProductImage
+                src={product.images[0]}
+                name={product.name}
+                brand={product.brand}
+                volume={product.volume}
+                sizes="(max-width: 768px) 92vw, 46vw"
+                priority
+              />
+            </div>
             {discount > 0 && <div className="absolute top-4 left-4"><Badge variant="sale" className="text-sm font-black px-3 py-1">-{discount}% OFF</Badge></div>}
           </div>
           {product.images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {product.images.slice(1, 5).map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-2xl overflow-hidden glass-card">
-                  <Image src={img} alt={`${product.name} ${i + 2}`} fill className="object-cover" sizes="20vw" />
+                <div key={i} className="relative aspect-square overflow-hidden rounded-2xl glass-card p-2">
+                  <Image src={img} alt={`${product.name}, vista ${i + 2}`} fill className="object-contain" sizes="20vw" />
                 </div>
               ))}
             </div>

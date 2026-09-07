@@ -1,97 +1,116 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ShoppingCartSimple, Package, Gift } from "@phosphor-icons/react/dist/ssr";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useCartStore } from "@/store/cart.store";
 import { formatPrice, getDiscountPercentage } from "@/lib/utils";
-import { ClickSpark } from "@/components/ui/click-spark";
-import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { GlareHover } from "@/components/ui/glare-hover";
-import { springs } from "@/lib/motion";
+import { AddToCartControl } from "@/components/products/AddToCartControl";
+import { KitComposite } from "./KitComposite";
 import type { Kit } from "@/types";
 
-export function KitCard({ kit, index = 0 }: { kit: Kit; index?: number }) {
-  const { addItem, openCart } = useCartStore();
+/**
+ * Same frame, type scale and CTA as ProductCard — a combo is a product with a
+ * different image strategy, not a different design language. Also client-free
+ * apart from the shared add-to-cart island.
+ */
+export function KitCard({
+  kit,
+  index = 0,
+  sizes = "(max-width: 768px) 92vw, (max-width: 1024px) 46vw, 31vw",
+}: {
+  kit: Kit;
+  index?: number;
+  sizes?: string;
+}) {
   const discount = getDiscountPercentage(kit.price, kit.comparePrice ?? 0);
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addItem({ id: kit.id, name: kit.name, price: kit.price, image: kit.image || "", type: "kit", slug: kit.slug });
-    toast.success(`¡${kit.name} agregado!`, { action: { label: "Ver carrito", onClick: openCart } });
-  };
+  const items = kit.kitProducts ?? [];
+  const unitCount = items.reduce((n, kp) => n + kp.quantity, 0);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ ...springs.gentle, delay: index * 0.1 }}
-      whileHover={{ y: -8, scale: 1.015 }}
-      className="group"
+    <article
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-[border-color,box-shadow,transform] duration-300 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-3 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] focus-within:border-hibiscus-500/60"
+      style={{
+        background: "#1E1A17",
+        borderColor: "rgba(255,61,138,0.22)",
+        animationDuration: "420ms",
+        animationDelay: `${Math.min(index, 5) * 60}ms`,
+      }}
     >
-      <Link href={`/combos-fiesteros/${kit.slug}`}>
-        <SpotlightCard
-          className="rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[0_16px_40px_rgba(255,61,138,0.22)]"
-          color="rgba(255,61,138,0.20)"
-          style={{ background: "#1E1A17", border: "1px solid rgba(255,61,138,0.25)" }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.6)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,61,138,0.25)"; }}
-        >
-          <GlareHover className="relative aspect-[4/3] overflow-hidden block" style={{ background: "#1E1A17" }}>
-            {kit.image ? (
-              <Image src={kit.image} alt={kit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Gift size={64} weight="duotone" color="#FF3D8A" />
-              </div>
-            )}
-            {kit.badge && (
-              <div className="absolute top-3 right-3">
-                <Badge className="font-black text-xs border-0 text-white rounded-full" style={{ background: "#F2A900" }}>{kit.badge}</Badge>
-              </div>
-            )}
-            {discount > 0 && (
-              <div className="absolute top-3 left-3">
-                <Badge className="font-black text-white border-0 rounded-full" style={{ background: "#FF3D8A" }}>AHORRÁ {discount}%</Badge>
-              </div>
-            )}
-          </GlareHover>
-          <div className="p-5 space-y-3">
-            <div className="flex items-start gap-2">
-              <Package size={20} weight="duotone" className="shrink-0 mt-0.5" color="#FF3D8A" />
-              <div>
-                <h3 className="font-black text-lg leading-tight" style={{ color: "#F5F2EC" }}>{kit.name}</h3>
-                {kit.description && <p className="text-xs mt-1 line-clamp-2" style={{ color: "#B8B1A7" }}>{kit.description}</p>}
-              </div>
-            </div>
-            {kit.kitProducts && kit.kitProducts.length > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {kit.kitProducts.slice(0, 3).map((kp) => (
-                  <span key={kp.id} className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(34,177,76,0.12)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.25)" }}>
-                    {kp.quantity}x {kp.product?.name?.split(" ").slice(0, 2).join(" ")}
-                  </span>
-                ))}
-              </div>
-            )}
-            <div className="flex items-end justify-between gap-2">
-              <div>
-                <p className="text-2xl font-black" style={{ color: "#4CD671" }}>{formatPrice(kit.price)}</p>
-                {kit.comparePrice && <p className="text-sm line-through" style={{ color: "#B8B1A7" }}>{formatPrice(kit.comparePrice)}</p>}
-              </div>
-              <ClickSpark className="shrink-0">
-                <Button size="sm" className="btn-primary gap-2 shrink-0 text-white rounded-2xl" onClick={handleAddToCart}>
-                  <ShoppingCartSimple size={16} weight="bold" />Agregar
-                </Button>
-              </ClickSpark>
-            </div>
-          </div>
-        </SpotlightCard>
-      </Link>
-    </motion.div>
+      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden" style={{ background: "#191512" }}>
+        <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-[1.03]">
+          <KitComposite kit={kit} sizes={sizes} />
+        </div>
+
+        <div className="absolute left-3 top-3 flex flex-col items-start gap-1.5">
+          {discount > 0 && (
+            <span
+              className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white"
+              style={{ background: "#FF3D8A" }}
+            >
+              Ahorrá {discount}%
+            </span>
+          )}
+        </div>
+        {kit.badge && (
+          <span
+            className="absolute right-3 top-3 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+            style={{ background: "#F2A900", color: "#241a05" }}
+          >
+            {kit.badge}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-2 p-5">
+        <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "#FF75AC" }}>
+          Combo Fiestero{unitCount > 0 ? ` · ${unitCount} unidades` : ""}
+        </span>
+
+        <h3 className="font-display text-lg font-semibold leading-tight">
+          <Link
+            href={`/combos-fiesteros/${kit.slug}`}
+            className="rounded-sm outline-none transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-hibiscus-400 focus-visible:ring-2 focus-visible:ring-hibiscus-500"
+            style={{ color: "#F5F2EC" }}
+          >
+            {kit.name}
+          </Link>
+        </h3>
+
+        {items.length > 0 && (
+          <ul className="flex flex-wrap gap-1.5">
+            {items.slice(0, 4).map((kp) => (
+              <li
+                key={kp.id}
+                className="rounded-full px-2 py-0.5 text-[11px]"
+                style={{ background: "rgba(34,177,76,0.1)", color: "#4CD671", border: "1px solid rgba(34,177,76,0.22)" }}
+              >
+                {kp.quantity}× {kp.product?.name ?? "Producto"}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-auto flex flex-wrap items-baseline gap-x-2 pt-2">
+          <span className="text-2xl font-black tracking-tight" style={{ color: "#4CD671" }}>
+            {formatPrice(kit.price)}
+          </span>
+          {kit.comparePrice ? (
+            <span className="text-sm line-through" style={{ color: "#8A8377" }}>
+              {formatPrice(kit.comparePrice)}
+            </span>
+          ) : null}
+        </div>
+
+        <div className="relative z-10 pt-1">
+          <AddToCartControl
+            item={{
+              id: kit.id,
+              name: kit.name,
+              price: kit.price,
+              image: kit.image || "",
+              type: "kit",
+              slug: kit.slug,
+            }}
+            label="Agregar combo"
+          />
+        </div>
+      </div>
+    </article>
   );
 }

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatDateTime } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/constants";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 export const metadata: Metadata = { title: "Pedidos - Dashboard" };
 export const dynamic = "force-dynamic";
@@ -29,7 +30,7 @@ export default async function DashboardOrdersPage({ searchParams }: { searchPara
           <Link href="/dashboard/orders"><Badge variant={!status ? "neon" : "outline"} className="cursor-pointer px-3 py-1">Todos</Badge></Link>
           {(Object.entries(ORDER_STATUSES) as [string, typeof ORDER_STATUSES[keyof typeof ORDER_STATUSES]][]).map(([key, s]) => (
             <Link key={key} href={`/dashboard/orders?status=${key}`}>
-              <Badge variant={status === key ? "neon" : "outline"} className="cursor-pointer px-3 py-1">{s.emoji} {s.label}</Badge>
+              <Badge variant={status === key ? "neon" : "outline"} className="cursor-pointer px-3 py-1"><span className="inline-flex items-center gap-1"><StatusGlyph name={s.icon} />{s.label}</span></Badge>
             </Link>
           ))}
         </div>
@@ -54,9 +55,9 @@ export default async function DashboardOrdersPage({ searchParams }: { searchPara
                     <td className="p-4"><p className="font-mono font-bold text-white">{order.orderNumber}</p><p className="text-xs text-muted-foreground">{formatDateTime(order.createdAt)}</p></td>
                     <td className="p-4 hidden md:table-cell"><p className="text-white">{order.guestName || "Usuario registrado"}</p><p className="text-xs text-muted-foreground">{order.guestEmail || ""}</p></td>
                     <td className="p-4 text-right font-bold text-white">{formatPrice(order.total)}</td>
-                    <td className="p-4 text-center"><Badge variant="outline" className="text-xs">{status?.emoji} {status?.label}</Badge></td>
+                    <td className="p-4 text-center"><Badge variant="outline" className="text-xs"><span className="inline-flex items-center gap-1"><StatusGlyph name={status?.icon ?? ""} />{status?.label}</span></Badge></td>
                     <td className="p-4 text-center hidden sm:table-cell">
-                      {order.payment && <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">{order.payment.status === "COMPLETED" ? "✅ Pagado" : "⏳ Pend."}</Badge>}
+                      {order.payment && <Badge variant={order.payment.status === "COMPLETED" ? "neon-green" : "neon-amber"} className="text-xs">{order.payment.status === "COMPLETED" ? "Pagado" : "Pend."}</Badge>}
                     </td>
                     <td className="p-4 text-center">
                       <Link href={`/dashboard/orders/${order.id}`}><Button variant="ghost" size="icon" className="h-8 w-8"><Eye className="h-4 w-4" /></Button></Link>

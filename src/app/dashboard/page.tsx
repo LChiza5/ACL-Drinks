@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatDateTime } from "@/lib/utils";
 import { ORDER_STATUSES } from "@/constants";
+import { StatusGlyph } from "@/components/ui/status-icon";
 
 export const metadata = { title: "Dashboard" };
 
@@ -36,7 +37,7 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-black text-white flex items-center gap-2"><LayoutDashboard className="h-8 w-8 text-neon-purple" />Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Hola, {session.user.name} 👋</p>
+          <p className="text-muted-foreground mt-1">Hola, {session.user.name}</p>
         </div>
         {pendingOrders > 0 && <Badge className="gap-1 px-3 py-1.5 text-sm font-bold bg-neon-amber/20 text-neon-amber border-neon-amber/50"><Clock className="h-4 w-4" />{pendingOrders} pendientes</Badge>}
       </div>
@@ -61,7 +62,7 @@ export default async function DashboardPage() {
               return (
                 <div key={order.id} className="flex items-center justify-between py-3 border-b border-border last:border-0">
                   <div><p className="font-mono font-bold text-white text-sm">{order.orderNumber}</p><p className="text-xs text-muted-foreground">{formatDateTime(order.createdAt)}</p></div>
-                  <div className="text-right"><p className="font-bold text-neon-purple">{formatPrice(order.total)}</p><Badge variant="outline" className="text-xs">{status?.emoji} {status?.label}</Badge></div>
+                  <div className="text-right"><p className="font-bold text-neon-purple">{formatPrice(order.total)}</p><Badge variant="outline" className="text-xs"><span className="inline-flex items-center gap-1"><StatusGlyph name={status?.icon ?? ""} />{status?.label}</span></Badge></div>
                 </div>
               );
             })}

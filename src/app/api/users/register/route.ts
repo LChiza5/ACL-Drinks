@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       select: { id: true, name: true, email: true, role: true, loyaltyPoints: true },
     });
 
-    return NextResponse.json<ApiResponse>({ success: true, data: user, message: "¡Cuenta creada! ₡1.000 de bienvenida 🎉" }, { status: 201 });
+    return NextResponse.json<ApiResponse>({ success: true, data: user, message: "¡Cuenta creada! ₡1.000 de bienvenida" }, { status: 201 });
   } catch (error) {
     console.error("Register error:", error);
     return NextResponse.json<ApiResponse>({ success: false, error: "Error al crear cuenta" }, { status: 500 });
