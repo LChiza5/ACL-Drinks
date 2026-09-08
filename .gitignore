@@ -54,3 +54,6 @@ coverage/
 
 # Config local de editores/agentes: no va al repo
 .claude/
+
+# Variables generadas para importar en Vercel: contienen secretos
+.vercel-env/
